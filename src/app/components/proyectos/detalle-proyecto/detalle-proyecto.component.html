@@ -1,0 +1,127 @@
+<div *ngIf="proyecto" class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <div class="row mb-2">
+                <div class="col-lg-2">
+                    <!-- Botón de Volver -->
+                    <button class="btn btn-danger"  (click)="back()">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </button>
+                </div>
+                <div class="col-lg-10">
+                    <!-- Título -->
+                    <h1 class="h1-text">INFORMACIÓN DEL PROYECTO</h1>
+                </div>
+
+            <div class="container mt-4 pt-3 ps-5 pe-5 ">
+                <div class="row mb-2">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label class="labelSelect">Título de la propuesta</label>
+                            <div class="form-floating d-flex">
+                                <textarea class="form-control me-2 textareaGroup" disabled>{{proyecto.titulo}}</textarea>
+                            </div>
+                        </div>
+                          <!--Lineas de investigación-->
+                         <div class="row mt-2 ms-1">
+                            <label for="inv_line" class="form-control p-1 flex-grow-0 lblSpecific">Linea de
+                                Investigación:</label>
+                            <input type="text"  class="form-control flex-grow-1 border-secondary size"
+                                id="inv_line" disabled value="{{proyecto.lineaInvestigacion}}"> 
+                        </div>
+
+                        <div class="row mt-2 ms-1">
+                            <label for="sub_inv_line" class="form-control  p-1 flex-grow-0 lblSpecific">Sub-Linea de
+                                Investigación:</label>
+                            <input type="text" class="form-control flex-grow-1 border-secondary size"
+                                id="sub_inv_line" disabled value="{{proyecto.subLineaInvestigacion}}">
+
+                        </div>
+
+                        <div class="row mt-2 ms-1">
+                            <label for="tematicArea"
+                                class="form-control p-1 flex-grow-0 lblSpecific">Área Temática:</label>
+                            <input type="text"  class="form-control flex-grow-1 border-secondary size"
+                                id="tematicArea" disabled value="{{proyecto.areaTematica}}">
+                        </div>
+
+                        <div class="row mt-2 ms-1">
+                            <label for="inv_group" class="form-control p-1 flex-grow-0 lblSpecific">Grupo de
+                                Investigación:</label>
+                            <input type="text" class="form-control flex-grow-1 border-secondary size" id="inv_group"
+                            disabled value="{{proyecto.grupoInvestigacion}}">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 h-auto">
+                        <div class="form-group">
+                            <label class="labelSelect">Calificación: {{proyecto.calificacion}}</label>
+                            <div class="form-floating d-flex rounded" style="background-color: #e7e7e7c2">
+                                <p class="h-100 m-auto p-auto mt-1 mb-1">
+                                    <strong>Fecha de creación:</strong> {{proyecto.fechaCreacion | date:'dd/MM/yyyy'}}<br> 
+                                    <strong>Integrantes:</strong> {{proyecto.idIntegrante1}}, {{proyecto.idIntegrante2}}, {{proyecto.idIntegrante3}} <br>
+                                    <strong>Director:</strong> {{proyecto.idDirector}}<br>
+                                    <strong>Estado:</strong> {{proyecto.estadoProyecto}}<br>
+                                    <strong>Ipsum:</strong> Lorem Ipsum es simplemente el text con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>                 
+
+                   
+
+                    <div class="row mb-2 mt-4">
+                        <div class="col-lg-8">
+                            <!-- Planteamiento del Problema -->
+                            <div class="form-group">
+                                <label class="labelSelect">Planteamiento del Problema</label>
+                                <div class="form-floating d-flex">
+                                    <textarea class="form-control me-2 textareaGroup" disabled>{{proyecto.planteamientoProblema}}</textarea>
+                                </div>
+                            </div>
+                            <!-- Objetivo general -->
+                            <div class="form-group mt-4">
+                                <label class="labelSelect">Objetivo general</label>
+                                <div class="form-floating d-flex">
+                                    <textarea class="form-control me-2 textareaGroup" disabled>{{proyecto.objetivoGeneral}}</textarea>
+                                </div>
+                            </div>
+                            <!-- Comentarios -->
+                            <div class="form-group mt-4">
+                                <label class="labelSelect">Comentarios</label>
+                                <div class="form-floating d-flex">
+                                    <ul>
+                                        <li *ngFor="let comentario of proyecto.comentarios">
+                                          {{ comentario.descripcion }} - {{ comentario.fechaComentario | date: 'dd/MM/yyyy HH:mm' }} - {{ comentario.idPersona }}
+                                        </li>
+                                      </ul>
+                                </div>
+                                <p style="font-style: italic;">Calificado por: {{proyecto.idJurado}}  &  {{proyecto.idJurado2}} </p>
+                                
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 rounded mt-4" style="height: 300px; background-color: #e7e7e7c2">
+                            <!-- Anexos -->
+                            <div class="form-group">
+                                <label class="labelSelect">Anexos</label>
+                                <div class="form-floating d-flex">
+                                    {{proyecto.planteamientoProblema}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div *ngIf="!proyecto">
+    <p>No se encontraron detalles para este proyecto.</p>
+</div>

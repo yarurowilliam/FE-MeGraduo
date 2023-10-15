@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <h1 class="h1-text">PROGRAMA</h1>
+            <form [formGroup]="programForm" (ngSubmit)="setProgram()">
+                <div class="container pt-3 ps-5 pe-5 ">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="sedeItems" class="labelSelect">Sede</label>
+                                <select formControlName="sede" class="form-select form-control">
+                                    <option value="">Seleccione una sede</option>
+                                    <option *ngFor="let sede of sedeItems" [value]="sede.nombre">{{ sede.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="falcultadItems" class="labelSelect">Facultad</label>
+                                <select formControlName="facultad" class="form-select form-control">
+                                    <option value="">Seleccione una facultad</option>
+                                    <option *ngFor="let facultad of facultadItems" [value]="facultad.nombre">{{ facultad.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="programaItems" class="labelSelect">Programa</label>
+                                <select formControlName="programa" class="form-select form-control">
+                                    <option value="">Seleccione un programa</option>
+                                    <option *ngFor="let programa of programaItems" [value]="programa.nombre">{{ programa.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-4 text-end pt-5">
+                            <div class="contact-form mt-45 ">
+                                <button type="submit" class="btn btn-success main-btn btn-nextGroup" [disabled]="programForm.invalid">Siguiente</button>
+                            </div> <!-- contact-form -->
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+            </form>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <h1 class="h1-text">{{tittle8}}</h1>
+            <form [formGroup]="uploadForm" (ngSubmit)="uploadFormSave()">
+                <div class="container pt-3 ps-5 pe-5 ">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <div class="form-floating d-flex">
+                                    <div class="mb-3">
+                                        <label for="formFileSm" class="form-label"><strong>Formato de Presentación Propuesta de Proyecto como alternativa de Trabajo de  Grado</strong></label>
+                                        <input type="file" class="form-control form-control-sm" id="fileInput"  formControlName="fileInput" accept=".pdf">
+                                      </div>
+                                      <div id="response">{{ responseMessage }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12 ">         
+              <!--Next buttom-->
+              <div class="col-md-12  text-end pt-5">
+                <div class="contact-form mt-45 ">
+                    <button type="submit" class="btn btn-success btn-nextGroup"
+                        [disabled]="uploadForm.invalid">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

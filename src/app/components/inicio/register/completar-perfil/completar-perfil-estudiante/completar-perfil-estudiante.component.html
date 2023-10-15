@@ -1,0 +1,159 @@
+<div class="container-fluid">
+    <div class="row">
+        <h3>Completa tu perfil</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="rounded border border-secondary">
+                <ul class="nav flex-column menuStyle">
+                    <li class="nav-item">
+                        <a style="font-size: 20px; background-color: #0c7d45; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
+                            class="nav-link active-link selected-submenu" data-bs-toggle="collapse"
+                            href="#submenuEditarPerfil" role="button" aria-expanded="true"
+                            aria-controls="submenuEditarPerfil" [ngClass]="{'show': isSubMenuOpen}"
+                            (click)="isSubMenuOpen = !isSubMenuOpen">
+                            Mi cuenta <i class="fas fa-chevron-down ml-auto"
+                                [ngClass]="{'fa-rotate-180': isSubMenuOpen}"></i>
+                        </a>
+                        <div class="collapse show" id="submenuEditarPerfil">
+                            <ul class="nav flex-column submenu">
+                                <li class="nav-item">
+                                    <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
+                                        [ngStyle]="{ 'background-color': isSelectedOption === 'editarPerfil' ? '#e9e32c' : '' }"
+                                        [ngClass]="{'selected-link': isSelectedOption === 'editarPerfil'}"
+                                        (click)="isSelectedOption = 'editarPerfil'">Editar perfil</a>
+                                    <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
+                                        [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
+                                        [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
+                                        (click)="isSelectedOption = 'salir'">Salir</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+
+        <div class="col-md-9">
+            <div class="d-flex justify-content-center align-items-center">
+
+                <form [formGroup]="studentProfile" class="ms-3 mt-2" (ngSubmit)="saveProfileStudent()">
+                    <div class="row mb-3">
+                                                
+                        <div class="col-lg-3">
+                            <!--IdNumber-->
+                            <div class="form-group">
+                                <label for="identificacion" class="ms-1 mb-1 label-tag" class="labelSelect">N° Identificación</label>
+                                <input type="number" class="form-control" id="identificacion" readonly
+                                    formControlName="identificacion" [ngClass]="{'border-red': studentProfile.get('identificacion')?.hasError('required') && 
+                                                            studentProfile.get('identificacion')?.hasError('minLength') &&
+                                                            studentProfile.get('identificacion')?.hasError('maxLength')
+                                                            }">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <!--Firstname-->
+                            <div class="form-group">
+                                <label for="primerNombre" class="ms-1 mb-1 label-tag" class="labelSelect">Primer Nombre
+                                    <strong>*</strong></label>
+                                <input type="text" class="form-control" id="primerNombre" formControlName="primerNombre"
+                                    placeholder="Ej: José" [ngClass]="{'border-red': studentProfile.get('primerNombre')?.hasError('required') && 
+                                                            studentProfile.get('primerNombre')?.touched
+                                                            }">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <!--secondName-->
+                            <div class="form-group">
+                                <label for="segundoNombre" class="ms-1 label-tag labelSelect">Segundo Nombre</label>
+                                <input type="text" class="form-control" id="segundoNombre" formControlName="segundoNombre"
+                                    placeholder="Ej: David">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <!--LastName1-->
+                            <div class="form-group">
+                                <label for="primerApellido" class="ms-1  label-tag" class="labelSelect">Primer Apellido
+                                    <strong>*</strong></label>
+                                <input type="text" class="form-control" id="primerApellido"
+                                    formControlName="primerApellido" placeholder="Ej: Rodriguez" [ngClass]="{'border-red': studentProfile.get('primerApellido')?.hasError('required') && 
+                                                            studentProfile.get('primerApellido')?.touched
+                                                            }">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--SecondRow-->
+                    <div class="row mb-3">
+                        <div class="col-lg-3">
+                            <!--LastName2-->
+                            <div class="form-group">
+                                <label for="segundoApellido" class="ms-1 mb-1 label-tag" class="labelSelect">Segundo Apellido</label>
+                                <input type="text" class="form-control" id="segundoApellido"
+                                    formControlName="segundoApellido" placeholder="Ej: Ruiz">
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <!--Cel-->
+                            <div class="form-group">
+                                <label for="telefono" class="ms-1 mb-1 label-tag" class="labelSelect">Teléfono / Celular
+                                    <strong>*</strong></label>
+                                <input type="text" class="form-control" id="telefono" formControlName="telefono"
+                                    placeholder="Ej: 3013023034" [ngClass]="{'border-red': studentProfile.get('telefono')?.hasError('required') && 
+                                                        studentProfile.get('telefono')?.touched
+                                                                }">
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3">
+                            <!--E-mail-->
+                            <div class="form-group">
+                                <label for="email" class="ms-1 mb-1 label-tag" class="labelSelect">E-Mail</label>
+                                <input type="email"  class="form-control" id="email" formControlName="email" autocomplete="given-name"
+                                    [ngClass]="{'border-red': studentProfile.get('email')?.hasError('required') && studentProfile.get('email')?.touched}">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <!--direction-->
+                                <label for="segundoApellido" class="ms-1 mb-1 label-tag" class="labelSelect">Dirección
+                                    <strong>*</strong></label>
+                                <input type="text" class="form-control" id="direccion" formControlName="direccion"
+                                    placeholder="Ingrese direccion" [ngClass]="{'border-red': studentProfile.get('direccion')?.hasError('required') && 
+                                                        studentProfile.get('direccion')?.touched
+                                                                }">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--ThirdRow-->
+                    <div class="row mb-3">
+                        <!--Programa-->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="idProgramaLbl" class="ms-1 mb-1 label-tag" class="labelSelect">Seleccione su programa</label>
+                              <select formControlName="idPrograma" name="idPrograma" class="form-select form-control">
+                                <option value="">Seleccione un programa</option>
+                                <option *ngFor="let programa of programas" [value]="programa.id">{{ programa.nombrePrograma }}</option>
+                              </select>
+                            </div>
+                          </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg mx-auto btn-confirmar"
+                    [disabled]="studentProfile.invalid">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

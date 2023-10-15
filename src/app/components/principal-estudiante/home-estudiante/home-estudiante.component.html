@@ -1,0 +1,17 @@
+<section class="home-join-us">
+    <div class="home-content15" *ngIf="estudiante?.modalidad === 0;">
+      <div class="home-main4">
+        <div class="home-heading09">
+          <h2 class="home-header23">Inicia tu proceso de grado!</h2>
+          <p class="home-caption16">
+            Bienvenido {{estudiante?.primerNombre}}, aquí podrás gestionar tu proceso de grado.
+          </p>
+        </div>
+        <button class="home-view5 button" style="background-color: #70B620;" (click)="goToTheModalidades()">Ver modalidades disponibles</button>
+      </div>
+      <img alt="image" src="/assets/group%202273.svg" class="home-image29" />
+    </div>
+    
+    <div *ngElse>Hola mundo</div>
+
+</section>

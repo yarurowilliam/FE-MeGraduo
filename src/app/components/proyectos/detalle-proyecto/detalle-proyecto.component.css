@@ -1,0 +1,47 @@
+.container{
+    background-color: ghostwhite;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.textareaGroup{
+    width: 650px;
+    height: 100px;
+}
+
+.btn-secondary{
+    
+    font-size: 14px;
+}
+
+.btnThird{
+    font-size: 14px;
+}
+
+.lblSpecific{
+    border-radius: 0px;
+    margin-right: 3px;
+    width: fit-content;
+    background-color: #85bd6c;
+    color: white;
+    font-weight: bolder;
+}
+
+#validarTitulo{
+
+    font-size: 14px;
+    margin-left: -15px;
+}
+
+.size{
+    max-width: 410px;
+}
+
+
+
+
+
+

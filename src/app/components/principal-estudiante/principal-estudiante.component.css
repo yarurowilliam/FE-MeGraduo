@@ -1,0 +1,27 @@
+.home-navbar {
+    /* ... (Tu estilo actual de barra de navegación) ... */
+    position: fixed; /* Fija la barra de navegación en la parte superior de la página */
+    width: 100%; /* Opcional: Asegura que la barra de navegación ocupe todo el ancho */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Asegura que la barra de navegación esté por encima del contenido */
+    background-color: #fff; /* Opcional: Color de fondo de la barra de navegación */
+}
+
+.content {
+    margin-top: 60px; /* Asegura que el contenido comience debajo de la barra de navegación */
+    /* Puedes ajustar el valor según la altura de tu barra de navegación */
+}
+
+.content-container {
+    margin-top: 120px; /* Asegura que el contenido comience debajo de la barra de navegación */
+    padding: 20px; /* Espaciado alrededor del contenido, puedes ajustar según tus preferencias */
+    max-width: 1200px; /* Opcional: Limita el ancho del contenido según tus necesidades */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}

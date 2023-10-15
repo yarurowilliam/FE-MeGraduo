@@ -1,0 +1,107 @@
+<div class="container-fluid" style="margin-top: 50px;">
+  <div class="row">
+    <div class="col-md-6 d-flex justify-content-center align-items-center middle-screen">
+      <div class="container d-flex svg-container"> 
+        <img src="../../../../assets/img/ilustrations/Graduation-pana.svg" class="svg-img" alt="graduation">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-register">
+        <div class="card-body">
+          <h3 class="card-title">Registro de Usuario</h3>
+          <form [formGroup]="registrationForm" (ngSubmit)="registrarUsuario()" >
+
+            <!--identification-->
+            <div class="form-group">
+              <label class="ms-1 mb-1 label-tag">Numero Identificación</label>
+              <input type="number" maxlength="10" class="form-control" id="identificacion" formControlName="identificacion"
+                placeholder="Ej:112233456">
+              <span class="text-danger ms-2"
+                          *ngIf="registrationForm.get('identificacion')?.hasError('required') && registrationForm.get('identificacion')?.touched">
+                          Identificación <strong>requerida</strong>
+              </span>
+              
+            </div>
+            <!--username-->
+            <div class="form-group">
+              <label class="ms-1 mb-1 mt-3 label-tag">E-mail</label>
+              <input type="email" class="form-control" id="email" formControlName="email"
+                placeholder="megraduo@unicesar.edu.co">
+              <span class="text-danger ms-2"
+                          *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
+                          E-mail <strong>requerido</strong>
+              </span>
+              <span class="text-danger ms-2"
+                          *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
+                          E-mail <strong>inválido.</strong>
+              </span>
+            </div>
+            <!--password-->
+            <div class="form-group">
+              <label class="ms-1 mb-1 mt-3 label-tag">Contraseña</label>
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control input-group" id="password" formControlName="password"
+                placeholder="Ingrese su contraseña" >
+                <span class="text-danger ms-2"
+                          *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
+                          La contraseña <strong>es requerida.</strong>
+                </span>
+                <span class="text-danger ms-2"
+                        *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
+                            La contraseña debe tener como <strong>mínimo 8 caracteres.</strong>
+                        </span>
+            </div>
+            <!--confirm password-->
+            <div class="form-group">
+              <label class="ms-1 mb-1 mt-3 label-tag">Repetir contraseña</label>
+              <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"
+                placeholder="Ingrese su contraseña">
+                <span class="text-danger ms-2"
+                        *ngIf="registrationForm.hasError('notSame') && registrationForm.get('confirmPassword')?.touched">
+                            Las contraseñas <strong>deben coincidir.</strong>
+                </span>
+            </div>
+            <!--AQUÍ PARTE DE Roles-->
+            
+            <div class="user-type-icons mt-4 d-flex justify-content-center align-items-center">
+              <div class="text-center mx-3">
+                <i class="fas fa-graduation-cap user-type-icon" 
+                  [ngStyle]="{ color: selectedUserType === 'ESTUDIANTE' ? '#85bd6c' : '' }"></i>
+                <label class="form-label lbl-user-icons" (click)="changeUserType('ESTUDIANTE') "
+                  [ngStyle]="{ color: selectedUserType === 'ESTUDIANTE' ? '#85bd6c' : '' }"><strong>Estudiante</strong></label>
+              </div>
+
+              <div class="text-center mx-3">
+                <i class="fas fa-chalkboard-teacher user-type-icon" 
+                  [ngStyle]="{ color: selectedUserType === 'DOCENTE' ? '#85bd6c' : '' }"></i>
+                <label class="form-label lbl-user-icons" (click)="changeUserType('DOCENTE')"
+                  [ngStyle]="{ color: selectedUserType === 'DOCENTE' ? '#85bd6c' : '' }"><strong>Docente</strong></label>
+              </div>
+
+              <div class="text-center mx-3">
+                <i class="fas fa-user user-type-icon" 
+                  [ngStyle]="{ color: selectedUserType === 'INVITADO' ? '#85bd6c' : '' }"></i>
+                <label class="form-label lbl-user-icons" (click)="changeUserType('INVITADO')"
+                  [ngStyle]="{ color: selectedUserType === 'INVITADO' ? '#85bd6c' : '' }"><strong>Invitado</strong></label>
+              </div>
+            </div>
+
+            <app-loading *ngIf="loading"></app-loading>
+            <!--Btn registrar-->
+
+            <div class="form-group text-center">
+              <button class="btn btn-primary mt-5 btn-registrar" [disabled]="registrationForm.invalid"
+                      type="submit">Registrar</button>
+            </div>
+            
+            <hr>
+            <div class="form-group final" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 10vh;">
+              <p>¿Ya tienes cuenta?</p>
+              <a routerLink="/login"><strong style="color: black; background-color: #44a444">¡Inicia Sesión!</strong></a>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="https://storyset.com/education" style="display: none;">Education illustrations by Storyset</a>

@@ -1,0 +1,60 @@
+.container{
+    font-family: Arial, Helvetica, sans-serif; 
+    
+}
+
+form{
+    font-family: Arial, Helvetica, sans-serif; 
+    
+}
+
+.container-fluid{
+    background-color: #f3f3f3;
+    opacity: 0.9;
+    background-image: radial-gradient(#e9e32c 0.9px, #f3f3f3 0.9px);
+    background-size: 18px 18px; 
+    height: 100vh;
+
+}
+
+.border-red{
+    border: 2px solid rgba(255, 0, 0, 0.56);
+}
+
+h3{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+
+.menuStyle li a{
+    color: black;  
+}
+
+.btn-confirmar{
+    background-color: #0c7d45;
+    border-color: #0c7d45;
+    font-family: Arial, Helvetica, sans-serif;  
+    margin-top: 60px;
+    margin-bottom: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+  
+.btn-confirmar:hover{      
+    
+    padding: 5px 40px;
+    transform : translateY(-0px);
+    background-color: #44a444;
+    color: #ffffff;
+    border: solid 2px #44a444;
+    }
+
+strong{
+    color: red;
+}

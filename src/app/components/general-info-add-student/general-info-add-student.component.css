@@ -1,0 +1,36 @@
+.container{
+    background-color: ghostwhite;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.modal-dialog{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal-dialog h1{
+    font-size: 17px;
+    color: #0c7d45;
+    font-weight: bolder;
+    padding-left: 17px;
+}
+
+.table-responsive{
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 20px;
+    
+}
+
+.table th::content{
+    
+    background-color: #0c7d45;
+    color: white;
+    font-weight: bolder;
+}
+

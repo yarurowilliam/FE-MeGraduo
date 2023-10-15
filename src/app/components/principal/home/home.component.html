@@ -1,0 +1,509 @@
+<div class="home-container">
+  <app-navigation></app-navigation>
+  <section class="home-hero">
+    <div class="home-heading">
+      <h1 class="home-header">
+        <span class="home-text05">Bienvenido a</span>
+        <br />
+        <span>MeGraduo</span>
+        <br />
+      </h1>
+      <p class="home-caption">
+        Desarrollado por la Universidad Popular del Cesar
+      </p>
+    </div>
+    <div class="home-buttons">
+      <button style="background-color: #70B620;" class="button" (click)="goToLogin()">Iniciar Proceso</button>
+      <button class="home-learn button-clean button">Mas información de modalidades</button>
+    </div>
+  </section>
+  <section class="home-description">
+    <img
+      alt="image"
+      src="/assets/hero-divider-1500w.png"
+      class="home-divider-image"
+    />
+  </section>
+  <section class="home-collection">
+    <div class="home-content04">
+      <span class="home-caption01">collection</span>
+      <div class="home-heading01">
+        <h2 class="home-header04">All time best collections</h2>
+        <p class="home-header05">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore.
+        </p>
+      </div>
+    </div>
+    <div class="home-main3">
+      <div class="home-card03">
+        <div class="home-image06">
+          <img
+            alt="image"
+            src="/assets/Characters/character-1.svg"
+            class="home-image07"
+          />
+        </div>
+        <div class="home-content05">
+          <span class="home-caption02">Character #1</span>
+          <h3 class="home-title">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card04">
+        <div class="home-image08">
+          <img
+            alt="image"
+            src="/assets/Characters/character-2.svg"
+            class="home-image09"
+          />
+        </div>
+        <div class="home-content06">
+          <span class="home-caption03">Character #2</span>
+          <h3 class="home-title1">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card05">
+        <div class="home-image10">
+          <img
+            alt="image"
+            src="/assets/Characters/character-3.svg"
+            class="home-image11"
+          />
+        </div>
+        <div class="home-content07">
+          <span class="home-caption04">Character #3</span>
+          <h3 class="home-title2">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card06">
+        <div class="home-image12">
+          <img
+            alt="image"
+            src="/assets/Characters/character-4.svg"
+            class="home-image13"
+          />
+        </div>
+        <div class="home-content08">
+          <span class="home-caption05">
+            <span>Character #4</span>
+            <br />
+          </span>
+          <h3 class="home-title3">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card07">
+        <div class="home-image14">
+          <img
+            alt="image"
+            src="/assets/Characters/character-5.svg"
+            class="home-image15"
+          />
+        </div>
+        <div class="home-content09">
+          <span class="home-caption06">Character #5</span>
+          <h3 class="home-title4">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card08">
+        <div class="home-image16">
+          <img
+            alt="image"
+            src="/assets/Characters/character-6.svg"
+            class="home-image17"
+          />
+        </div>
+        <div class="home-content10">
+          <span class="home-caption07">Character #6</span>
+          <h3 class="home-title5">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card09">
+        <div class="home-image18">
+          <img
+            alt="image"
+            src="/assets/Characters/character-7.svg"
+            class="home-image19"
+          />
+        </div>
+        <div class="home-content11">
+          <span class="home-caption08">Character #7</span>
+          <h3 class="home-title6">0.05 ETH</h3>
+        </div>
+      </div>
+      <div class="home-card10">
+        <div class="home-image20">
+          <img
+            alt="image"
+            src="/assets/Characters/character-8.svg"
+            class="home-image21"
+          />
+        </div>
+        <div class="home-content12">
+          <span class="home-caption09">Character #8</span>
+          <h3 class="home-title7">0.05 ETH</h3>
+        </div>
+      </div>
+    </div>
+    <button class="home-view2 button-link button">View all</button>
+  </section>
+  <section class="home-roadmap">
+    <div class="home-heading04">
+      <h2 class="home-header10">Roadmap</h2>
+      <p class="home-header11">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore
+      </p>
+    </div>
+    <div class="home-list">
+      <div class="home-step">
+        <span class="home-caption12">01</span>
+        <div class="home-heading05">
+          <h2 class="home-header12">Project Launch</h2>
+          <p class="home-header13">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <button class="home-button6 button">View on Opensea</button>
+      </div>
+      <div class="home-step1">
+        <span class="home-caption13">02</span>
+        <div class="home-heading06">
+          <h2 class="home-header14">Metadata and Character</h2>
+          <p class="home-header15">
+            <span>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <span [innerHTML]="rawarby"></span>
+            </span>
+            <br />
+            <br />
+            <span>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </span>
+            <br />
+          </p>
+        </div>
+      </div>
+      <div class="home-step2">
+        <span class="home-caption14">03</span>
+        <div class="home-heading07">
+          <h2 class="home-header16">Get Physical</h2>
+          <p class="home-header17">
+            <span>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              <span [innerHTML]="rawknyr"></span>
+            </span>
+            <br />
+            <br />
+            <span>
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </span>
+            <br />
+          </p>
+        </div>
+      </div>
+      <div class="home-step3">
+        <span class="home-caption15">04</span>
+        <div class="home-heading08">
+          <h2 class="home-header18">Private club community</h2>
+          <p class="home-header19">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <span [innerHTML]="rawh3vx"></span>
+          </p>
+          <div class="home-benefits">
+            <div class="home-item">
+              <img
+                alt="image"
+                src="/assets/Icons/people.svg"
+                class="home-image26"
+              />
+              <p class="home-header20">Consectetur adipiscing elit</p>
+            </div>
+            <div class="home-item1">
+              <img
+                alt="image"
+                src="/assets/Icons/paper.svg"
+                class="home-image27"
+              />
+              <p class="home-header21">Consectetur adipiscing elit</p>
+            </div>
+            <div class="home-item2">
+              <img
+                alt="image"
+                src="/assets/Icons/checklist.svg"
+                class="home-image28"
+              />
+              <p class="home-header22">Consectetur adipiscing elit</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="home-faq">
+    <h2 class="home-header24">We have all the answers</h2>
+    <div class="home-accordion">
+      <div data-role="accordion-container" class="home-element accordion">
+        <div class="home-content16">
+          <span class="home-header25">
+            Lorem ipsum dolor sit ametetur elit?
+          </span>
+          <span data-role="accordion-content" class="home-description05">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+            <span [innerHTML]="rawxjzb"></span>
+          </span>
+        </div>
+        <div class="home-icon-container">
+          <svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-closed"
+            class="home-icon10"
+          >
+            <path
+              d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path></svg
+          ><svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-open"
+            class="home-icon12"
+          >
+            <path
+              d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div data-role="accordion-container" class="home-element1 accordion">
+        <div class="home-content17">
+          <span class="home-header26">
+            Excepteur sint occaecat cupidatat non sunt in culpa qui officia
+            deserunt mollit anim id est laborum?
+          </span>
+          <span data-role="accordion-content" class="home-description06">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+            <span [innerHTML]="rawous7"></span>
+          </span>
+        </div>
+        <div class="home-icon-container1">
+          <svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-closed"
+            class="home-icon14"
+          >
+            <path
+              d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path></svg
+          ><svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-open"
+            class="home-icon16"
+          >
+            <path
+              d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div data-role="accordion-container" class="home-element2 accordion">
+        <div class="home-content18">
+          <span class="home-header27">
+            Tempor incididunt ut labore et dolore magna aliquat enim ad minim?
+          </span>
+          <span data-role="accordion-content" class="home-description07">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+            <span [innerHTML]="rawr86o"></span>
+          </span>
+        </div>
+        <div class="home-icon-container2">
+          <svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-closed"
+            class="home-icon18"
+          >
+            <path
+              d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path></svg
+          ><svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-open"
+            class="home-icon20"
+          >
+            <path
+              d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div data-role="accordion-container" class="home-element3 accordion">
+        <div class="home-content19">
+          <span class="home-header28">
+            Lorem ipsum dolor sit ametetur elit?
+          </span>
+          <span data-role="accordion-content" class="home-description08">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+            <span [innerHTML]="rawtvza"></span>
+          </span>
+        </div>
+        <div class="home-icon-container3">
+          <svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-closed"
+            class="home-icon22"
+          >
+            <path
+              d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path></svg
+          ><svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-open"
+            class="home-icon24"
+          >
+            <path
+              d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div data-role="accordion-container" class="home-element4 accordion">
+        <div class="home-content20">
+          <span class="home-header29">Incididunt ut labore et dolore?</span>
+          <span data-role="accordion-content" class="home-description09">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo.
+            <span [innerHTML]="rawgjxq"></span>
+          </span>
+        </div>
+        <div class="home-icon-container4">
+          <svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-closed"
+            class="home-icon26"
+          >
+            <path
+              d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path></svg
+          ><svg
+            viewBox="0 0 1024 1024"
+            data-role="accordion-icon-open"
+            class="home-icon28"
+          >
+            <path
+              d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="home-get-yours">
+    <div class="home-row2">
+      <div class="home-column">
+        <div class="home-card11">
+          <img
+            alt="image"
+            src="/assets/Characters/character-9.svg"
+            class="home-image30"
+          />
+        </div>
+      </div>
+      <div class="home-column1">
+        <div class="home-card12">
+          <img
+            alt="image"
+            src="/assets/Characters/character-10.svg"
+            class="home-image31"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="home-column2">
+      <div class="home-card13">
+        <div class="home-content21">
+          <h2 class="home-header30">Get yours now</h2>
+          <p class="home-description10">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliquat enim ad
+            minim veniam.
+          </p>
+        </div>
+        <button class="home-button7 button">View on Opensea</button>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+  <div class="home-accordion1">
+    <dangerous-html
+      html="<script>
+ /*
+  Accordion - Code Embed
+  */
+  const accordionContainers = document.querySelectorAll('[data-role='accordion-container']'); // All accordion containers
+  const accordionContents = document.querySelectorAll('[data-role='accordion-content']'); // All accordion content
+  const accordionIconsClosed = document.querySelectorAll('[data-role='accordion-icon-closed']'); // All accordion closed icons
+  const accordionIconsOpen = document.querySelectorAll('[data-role='accordion-icon-open']'); // All accordion open icons
+
+  accordionContents.forEach((accordionContent) => {
+      accordionContent.style.display = 'none'; //Hides all accordion contents
+  });
+
+  accordionIconsClosed.forEach((icon) => {
+    icon.style.display = 'flex'
+  })
+
+  accordionIconsOpen.forEach((icon) => {
+    icon.style.display = 'none'
+  })
+
+  accordionContainers.forEach((accordionContainer, index) => {
+      accordionContainer.addEventListener('click', () => {
+          if (accordionContents[index].style.display === 'flex') {
+              // If the accordion is already open, close it
+              accordionContents[index].style.display = 'none';
+              accordionIconsClosed[index].style.display = 'flex';
+              accordionIconsOpen[index].style.display = 'none'
+          } else {
+              // If the accordion is closed, open it
+              accordionContents.forEach((accordionContent) => {
+                  accordionContent.style.display = 'none'; //Hides all accordion contents
+              });
+
+              accordionIconsClosed.forEach((accordionIcon) => {
+                  accordionIcon.style.display = 'flex'; // Resets all icon transforms to 0deg (default)
+              });
+
+              accordionIconsOpen.forEach((accordionIcon) => {
+                accordionIcon.style.display = 'none';
+              })
+              
+              accordionContents[index].style.display = 'flex'; // Shows accordion content
+              accordionIconsClosed[index].style.display = 'none'; // Rotates accordion icon 180deg
+              accordionIconsOpen[index].style.display = 'flex';
+          }
+      });
+  });
+</script>
+"
+    ></dangerous-html>
+  </div>
+</div>
