@@ -39,9 +39,11 @@ export class LoginService {
     return this.http.get(`${this.myAppUrl}${this.myApiUrl3}/TraerInfoPersona/${id.toString()}`);
   }
   
-  setLocalStorage(data: string | any, rol: any): void {
+  setLocalStorage(data: string | any, rol: any, identification: string | any, status: string | any ): void {
     localStorage.setItem('token', data);
     localStorage.setItem('rol', rol);
+    localStorage.setItem('identificacion', identification);
+    localStorage.setItem('status', status);
     //AGREGAR QUE GUARDE LA IDENTIFICACION, GUARDE EL ESTADO "COMPLETADO" , "EN PROYECTO" , "PEDNIENTE VERIFCAICION".
   }
 

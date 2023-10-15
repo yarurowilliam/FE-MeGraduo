@@ -19,6 +19,8 @@ export class LoginComponent {
   //role: string = '' ;
   role: string[]=[];
   status: string = '';
+  identification: string = '';
+  
   login: FormGroup;
   
 
@@ -51,17 +53,22 @@ export class LoginComponent {
       this.getUserStatus(usuario.identificacion)
     ]).subscribe(
       ([loginData, roles, userStatus]) => {
-        console.log(loginData);
+        console.log("login data: "+loginData);
         this.role = roles;
         console.log("Roles:", this.role);
         this.status = userStatus;
         const statusString = userStatus.status.toString();
-        console.log("StatusString:", statusString);
+        this.identification  = userStatus.identificacion.toString();
+        
+        console.log("soy identif: "+ this.identification, "soy tipo: " ,typeof(this.identification, statusString));
+        
         console.log("Status:", this.status);
+
+        
   
         // Ahora que tienes todos los datos, puedes continuar con la lógica basada en el rol y el estado.
         this.loading = false;
-        this.loginService.setLocalStorage(loginData.token, this.role);
+        this.loginService.setLocalStorage(loginData.token, this.role, this.identification, statusString);
         let roleString = this.role[0]
         console.log("RoleString:", roleString);
         
