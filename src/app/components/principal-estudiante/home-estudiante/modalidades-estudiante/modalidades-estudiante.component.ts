@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastrService } from 'ngx-toastr';
 import { Estudiante } from 'src/app/models/estudianteFullInfo';
@@ -15,12 +15,14 @@ export class ModalidadesEstudianteComponent {
   nombreUsuario: string;
   rolU: string;
   estudiante : Estudiante;
+  comprobante: string = "Comprobar si aplico";
 
   constructor(private router: Router,
     private loginService: LoginService,
     private aRoute: ActivatedRoute,
     private toastr: ToastrService,
-    private _service: ModalidadesEstudianteService) 
+    private _service: ModalidadesEstudianteService,
+    private cd: ChangeDetectorRef) 
     {}
 
     ngOnInit(): void {
@@ -46,7 +48,20 @@ export class ModalidadesEstudianteComponent {
       );
     }
 
+    userApto():void{
+      setTimeout(() => {
+        this.comprobante = "Presentar propuesta";
+      }, 1000);
+      
+      this.cd.detectChanges();
+    }
+
 async validarRequisitos(): Promise<void> {
+
+  if (this.comprobante === "Presentar propuesta") {
+    this.router.navigate(['/programa']);
+    return;
+  }
 
   try {
     const data = await this._service.validarRequisitos(parseInt(this.nombreUsuario)).toPromise();
@@ -56,6 +71,7 @@ async validarRequisitos(): Promise<void> {
         'Usted cumple con los requisitos para presentar una propuesta!',
         'Validacion de Creditos'
       );
+      this.userApto();
     }
     /*this.router.navigate(['/programa']);*/
     this.loading = false;
