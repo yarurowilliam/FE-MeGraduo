@@ -25,7 +25,15 @@
             />
           </button>
         </div>
-        <button class="button" style="background-color: #70B620;">Gestionar Mis Proyectos</button>
+        <div class="dropdown">
+          <button style="background-color: #70B620;" class="btn button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gestionar Mis Proyectos
+          </button>
+          <div class="dropdown-menu" style="padding-top: 0px; text-align: right;" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item button " >Ver Perfil</button>
+            <button class="dropdown-item button " (click)="logOut()">Cerrar Sesión</button>
+          </div>
+        </div>
       </div>
       <div data-thq="thq-burger-menu" class="home-burger-menu">
         <button class="button home-button5">

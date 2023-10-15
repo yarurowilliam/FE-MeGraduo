@@ -24,6 +24,11 @@ export class NavstudentComponent implements OnInit{
     console.log(this.nombreUsuario + " " + this.rolU);
   }
 
+  logOut(): void{ 
+    this.loginService.removeLocalStorge();
+    this.router.navigate(['/login']);
+    this.toastr.warning('Gracias por utilizar nuestros servicios', 'Sesion finalizada');
+  }
   goToHome(): void{
     this.router.navigate(['/home-estudiantes']);
   }
