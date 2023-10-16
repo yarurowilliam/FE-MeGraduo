@@ -22,7 +22,7 @@
                                         [ngStyle]="{ 'background-color': isSelectedOption === 'editarPerfil' ? '#e9e32c' : '' }"
                                         [ngClass]="{'selected-link': isSelectedOption === 'editarPerfil'}"
                                         (click)="isSelectedOption = 'editarPerfil'">Editar perfil</a>
-                                    <a class="nav-link" 
+                                    <a class="nav-link" style="cursor: pointer;"
                                         [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
                                         [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
                                         (click)="logOut()">Salir</a>
@@ -39,58 +39,40 @@
 
 
 
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="d-flex justify-content-center align-items-center">
-
                 <form [formGroup]="teacherProfile" class="ms-3 mt-2" (ngSubmit)="saveProfileTeacher()">
                     <div class="row mb-3">
-                        <!--
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                IdType
-                                <label for="typeIdentificacion" class="labelSelect">Tipo Identificación
-                                    <strong>*</strong></label>
-                                <select formControlName="typeIdentificacion" class="form-select form-control" [ngClass]="{'border-red': teacherProfile.get('typeIdentificacion')?.hasError('required') && 
-                                                            teacherProfile.get('typeIdentificacion')?.touched
-                                                            }">
-                                    <option value="">Selecciona ID tipo</option>
-                                    <option *ngFor="let type of typeId" [value]="type.nombre">{{ type.nombre }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    -->
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <!--IdNumber-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">N° Identificación</label>
-                                <input type="number" class="form-control" id="identification"
-                                    formControlName="identification" [ngClass]="{'border-red': teacherProfile.get('identification')?.hasError('required') && 
-                                                            teacherProfile.get('identification')?.hasError('minLength') &&
-                                                            teacherProfile.get('identification')?.hasError('maxLength')
+                                <input type="number" class="form-control" id="identificacion" readonly
+                                    formControlName="identificacion" [ngClass]="{'border-red': teacherProfile.get('identificacion')?.hasError('required') && 
+                                                            teacherProfile.get('identificacion')?.hasError('minLength') &&
+                                                            teacherProfile.get('identificacion')?.hasError('maxLength')
                                                             }">
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4 col">
                             <!--Firstname-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">Primer Nombre
                                     <strong>*</strong></label>
-                                <input type="text" class="form-control" id="firstName" formControlName="firstName"
-                                    placeholder="Ej: José" [ngClass]="{'border-red': teacherProfile.get('firstName')?.hasError('required') && 
-                                                            teacherProfile.get('firstName')?.touched
+                                <input type="text" class="form-control" id="primerNombre" formControlName="primerNombre"
+                                    placeholder="Ej: José" [ngClass]="{'border-red': teacherProfile.get('primerNombre')?.hasError('required') && 
+                                                            teacherProfile.get('primerNombre')?.touched
                                                             }">
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <!--secondName-->
                             <div class="form-group">
-                                <label class="ms-1 label-tag labelSelect">Segundo Nombre <strong>*</strong></label>
-                                <input type="text" class="form-control" id="secondName" formControlName="secondName"
-                                    placeholder="Ej: David" [ngClass]="{'border-red': teacherProfile.get('secondName')?.hasError('required') && 
-                                                            teacherProfile.get('secondName')?.touched
-                                                            }">
+                                <label class="ms-1 label-tag labelSelect">Segundo Nombre</label>
+                                <input type="text" class="form-control" id="segundoNombre" formControlName="segundoNombre"
+                                    placeholder="Ej: David">
                             </div>
                         </div>
 
@@ -98,116 +80,87 @@
 
                     <!--SecondRow-->
                     <div class="row mb-3">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <!--LastName1-->
                             <div class="form-group">
                                 <label class="ms-1  label-tag" class="labelSelect">Primer Apellido
                                     <strong>*</strong></label>
-                                <input type="text" class="form-control" id="fisrtLastName"
-                                    formControlName="fisrtLastName" placeholder="Ej: Rodriguez" [ngClass]="{'border-red': teacherProfile.get('fisrtLastName')?.hasError('required') && 
-                                                            teacherProfile.get('fisrtLastName')?.touched
+                                <input type="text" class="form-control" id="primerApellido"
+                                    formControlName="primerApellido" placeholder="Ej: Rodriguez" [ngClass]="{'border-red': teacherProfile.get('primerApellido')?.hasError('required') && 
+                                                            teacherProfile.get('primerApellido')?.touched
                                                             }">
 
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <!--LastName2-->
                             <div class="form-group">
-                                <label class="ms-1 mb-1 label-tag" class="labelSelect">Segundo Apellido
-                                    <strong>*</strong></label>
-                                <input type="text" class="form-control" id="secondLastName"
-                                    formControlName="secondLastName" placeholder="Ej: Ruiz" [ngClass]="{'border-red': teacherProfile.get('secondLastName')?.hasError('required') && 
-                                                            teacherProfile.get('secondLastName')?.touched
-                                                            }">
+                                <label class="ms-1 mb-1 label-tag" class="labelSelect">Segundo Apellido</label>
+                                <input type="text" class="form-control" id="segundoApellido"
+                                    formControlName="segundoApellido" placeholder="Ej: Ruiz">
 
                             </div>
                         </div>
-                        <!--
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                Birthday
-                                <label class="ms-1 mb-1 label-tag" class="labelSelect">Fecha de Nacimiento
-                                    <strong>*</strong></label>
-                                <input type="date" class="form-control" id="birthday" formControlName="birthday"
-                                    [ngClass]="{'border-red': teacherProfile.get('birthday')?.hasError('required') &&
-                                                            teacherProfile.get('birthday')?.touched
-                                                            }" maxlength="10">
-
-                            </div>
-                        </div>
-                        -->
-                        <div class="col-lg-3">
+                    
+                        <div class="col-lg-4">
                             <!--Cel-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">Teléfono / Celular
-                                    <strong>*</strong></label>
-                                    <input type="tel" class="form-control" id="cellphone" formControlName="cellphone"
-                                    placeholder="Ej: 3013023034"
-                                    [ngClass]="{'border-red': teacherProfile.get('cellphone')?.hasError('required') && teacherProfile.get('cellphone')?.touched
-                                    || teacherProfile.get('cellphone')?.hasError('pattern') }">
+                                  <strong>*</strong>
+                                </label>
+                                <input type="text" maxlength="10" class="form-control" id="telefono" formControlName="telefono"
+                                  placeholder="Ej: 3013023034"
+                                  [ngClass]="{
+                                    'border-red': (teacherProfile.get('telefono')?.hasError('required') &&  teacherProfile.get('telefono')?.touched) || teacherProfile.get('telefono')?.hasError('pattern')
+                                  }">
 
-                                  
-
-                            </div>
+                                  <span class="text-danger"  
+                                  *ngIf="teacherProfile.get('telefono')?.hasError('pattern')">
+                                    Celular <strong>inválido</strong>.
+                                  </span>
+                              </div>
+                              
                         </div>
 
-                        
-                        <!--asd
-                            <div class="col-lg-3">
-                            <div class="form-group">
-                                
-                                <label for="place" class="labelSelect">Sede <strong>*</strong></label>
-                                <select formControlName="place" class="form-select form-control" [ngClass]="{'border-red': teacherProfile.get('place')?.hasError('required') && 
-                                                            teacherProfile.get('place')?.touched
-                                                            }">
-                                    <option value="">Selecciona sede</option>
-                                    <option *ngFor="let placeItem of place" [value]="placeItem.nombre">{{ placeItem.nombre
-                                        }}</option>
-                                </select>
-
-                            </div>
-                        </div>
-                        -->
+                       
                     </div>
 
                     <!--ThirdRow-->
                     <div class="row mb-3">
 
                         
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="form-group">
                                 <!--direction-->
                                 <label for="program" class="labelSelect">Dirección <strong>*</strong></label>
-                                <input type="text" class="form-control" id="direction" formControlName="direction"
-                                    placeholder="Ingrese dirección" [ngClass]="{'border-red': teacherProfile.get('direction')?.hasError('required') && 
-                                                        teacherProfile.get('direction')?.touched
+                                <input type="text" class="form-control" id="direccion" formControlName="direccion"
+                                    placeholder="Ingrese dirección" [ngClass]="{'border-red': teacherProfile.get('direccion')?.hasError('required') && 
+                                                        teacherProfile.get('direccion')?.touched
                                                                 }">
                             </div>
                         </div> 
                         
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <!--E-mail-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">E-Mail</label>
-                                <input type="email" class="form-control" id="email" formControlName="email"
+                                <input type="email" class="form-control" id="email" formControlName="email" 
                                     [ngClass]="{'border-red': teacherProfile.get('email')?.hasError('required') && teacherProfile.get('email')?.touched}">
 
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                          <!--Programa-->
+                          <div class="col-lg-4">
                             <div class="form-group">
-                              <!--role-->
-                              <label class="ms-1 mb-1 label-tag" class="labelSelect">Roles</label>
-                              <ul class="list-unstyled role-list">
-                                <li *ngFor="let role of roles">{{ role }}</li>
-                              </ul>
+                                <label for="idProgramaLbl" class="ms-1 mb-1 label-tag" class="labelSelect">Seleccione su programa</label>
+                              <select formControlName="idPrograma" name="idPrograma" class="form-select form-control">
+                                <option value="">Seleccione un programa</option>
+                                <option *ngFor="let programa of programas" [value]="programa.id">{{ programa.nombrePrograma }}</option>
+                              </select>
                             </div>
                           </div>
-                          
-                          
-                       
                     </div>
 
                     <app-loading *ngIf="loading"></app-loading>

@@ -57,18 +57,3 @@ h3{
 strong{
     color: red;
 }
-
-.role-list {
-    max-height: 150px; /* Establece la altura máxima de la lista */
-    overflow-y: auto; /* Añade scroll vertical si el contenido excede la altura máxima */
-    border: 1px solid #ccc; /* Añade un borde para visualización */
-    background-color: var(--bs-secondary-bg);
-    opacity: 1;
-    border-radius: 10px;
-    
-  }
-
-.role-list li {
-    margin-left: 10px;
-    margin-top: 5px;
-  }

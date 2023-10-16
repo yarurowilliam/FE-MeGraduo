@@ -50,6 +50,8 @@ export class LoginService {
   removeLocalStorge(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('rol');
+    localStorage.removeItem('status');
+    localStorage.removeItem('identificacion');
   }
 
   getTokenDecoded(): any {
