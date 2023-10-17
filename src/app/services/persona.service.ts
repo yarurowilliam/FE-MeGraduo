@@ -5,6 +5,7 @@ import { Persona } from '../models/persona';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { Estudiante } from '../models/estudianteFullInfo';
+import { Docente } from '../models/docenteFullInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,11 @@ export class PersonaService {
 
   }
 
-  saveInfoPersona(infoPerson: Persona): Observable<any>{
+  saveInfoPersona(infoPerson: Persona | Docente): Observable<any>{
     return this.http.post(this.myAppUrl + this.myApiUrl3+ '/GuardarInfoPersona', infoPerson);
   }
+
+  
 
   saveProfileTeacher(teacherProfile: Persona): Observable<any>{
     return this.http.post(this.myAppUrl + this.myApiUrl, teacherProfile);

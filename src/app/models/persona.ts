@@ -8,5 +8,7 @@ export class Persona{
     email?: string = '';
     direccion?: string = '';
     idPrograma?: number;
+    enfasis?: string;
     tieneProyecto?: boolean;
+    
 }

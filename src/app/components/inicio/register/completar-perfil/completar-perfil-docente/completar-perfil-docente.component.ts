@@ -55,6 +55,7 @@ export class CompletarPerfilDocenteComponent {
         email: ['', [Validators.required, Validators.email]],
         direccion: ['', [Validators.required]],
         idPrograma: ['', [Validators.required]],
+        enfasis: ['', [Validators.required, Validators.maxLength(30)]],
       },
       {}
     );
@@ -110,7 +111,7 @@ this.getUserStatus(this.idUsuario).subscribe(
 async savePersona(): Promise<void> {
   console.log(this.teacherProfile);
 
-  const infoPerson: Persona = {
+  const infoPerson: Docente = {
     identificacion: this.teacherProfile.value.identificacion,
     primerNombre: this.teacherProfile.value.primerNombre,
     segundoNombre: this.teacherProfile.value.segundoNombre,
@@ -141,9 +142,10 @@ async savePersona(): Promise<void> {
 
 // Método de guardado docente asincrónico
 async saveDocente(): Promise<void> {
-  const infoDocente: Persona = {
+  const infoDocente: Docente = {
     identificacion: this.teacherProfile.value.identificacion,
     idPrograma: this.teacherProfile.value.idPrograma,
+    enfasis: this.teacherProfile.value.enfasis
   };
 
   try {

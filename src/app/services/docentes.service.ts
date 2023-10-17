@@ -21,7 +21,7 @@ export class DocentesService {
 
  
 
-  saveInfoTeacher(infoDocente: Persona): Observable<any>{
+  saveInfoTeacher(infoDocente: Docente): Observable<any>{
     return this.http.post(this.myAppUrl + this.myApiUrl+ '/GuardarInfoDocenteDefault', infoDocente);
   }
 
