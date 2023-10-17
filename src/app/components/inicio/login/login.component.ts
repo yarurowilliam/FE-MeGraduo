@@ -96,6 +96,10 @@ export class LoginComponent {
                   this.toastr.info("Su cuenta está en proceso de verificación por parte del administrador", 'Verificación Admin ');
                   this.router.navigate(['/pendiente-verificacion']); // Redirigir a componente 
                   this.login.reset();
+                }else if (roleString === "DOCENTE" && statusString === 'VERIFICADO') {
+                  this.toastr.info("Bienvenido Docente!", 'Welcome');
+                  this.router.navigate(['/docente-panel']); // Redirigir a componente programa
+                  this.login.reset();
                 }
                 else  if (this.role.includes("DOCENTE_DIRECTOR") && statusString === 'VERIFICADO') {
                   this.toastr.success('Ingreso fue exitoso, bienvenido docente director ' + usuario.identificacion , 'Operacion exitosa!');

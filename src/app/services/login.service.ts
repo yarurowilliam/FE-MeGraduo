@@ -36,7 +36,7 @@ export class LoginService {
   }
 
   getEstudianteDeatils(id: number): Observable<any> {
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl3}/TraerInfoPersona/${id.toString()}`);
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl3}/TraerInfoPersonaEstudiante/${id.toString()}`);
   }
   
   setLocalStorage(data: string | any, rol: any, identification: string | any, status: string | any ): void {
