@@ -13,6 +13,7 @@ import { DocentesService } from 'src/app/services/docentes.service';
 import { LoginService } from 'src/app/services/login.service';
 import { PersonaService } from 'src/app/services/persona.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Docente } from 'src/app/models/docenteFullInfo';
 
 @Component({
   selector: 'app-completar-perfil-docente',

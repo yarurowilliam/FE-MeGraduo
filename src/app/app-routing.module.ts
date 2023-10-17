@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
 import { ModalidadesEstudianteComponent } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/modalidades-estudiante.component';
 import { NotFound } from './components/principal/not-found/not-found.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
+import { ProyectoGradoComponent } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/proyecto-grado/proyecto-grado.component';
 
 const routes: Routes = [
   
@@ -57,11 +58,12 @@ const routes: Routes = [
   { path: 'detalle-proyecto/:id', component: DetalleProyectoComponent },
   { path: 'calificaciones', component: DetalleProyectoCalificacionesComponent },
   { path: 'comentarios', component: DetalleProyectoComentariosComponent },
+  { path: 'pendiente-verificacion', component: PreregistroVerificarEstudianteComponent},
 
   { path: 'home-estudiantes', component: PrincipalEstudianteComponent, canActivate:[AuthGuard],data: { role: 'ESTUDIANTE' } ,children: [
     { path: '', component: HomeEstudianteComponent},
     { path: 'modalidades-disponibles', component: ModalidadesEstudianteComponent},
-    { path: 'pendiente-verificacion', component: PreregistroVerificarEstudianteComponent}
+    { path: 'proyecto-grado', component: ProyectoGradoComponent},
   ]},
 
   

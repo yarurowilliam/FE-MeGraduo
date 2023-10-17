@@ -82,21 +82,26 @@ export class LoginComponent {
                   this.router.navigate(['/completar-perfil-student']); // Redirigir a componente de completado de perfil
                 } else if (roleString === "ESTUDIANTE" && statusString === 'PENDIENTE VERIFICACION') {
                   this.toastr.info("Su cuenta está en proceso de verificación por parte del administrador", 'Verificación Admin ');
-                  this.router.navigate(['/home-estudiantes/pendiente-verificacion']); // Redirigir a componente 
+                  this.router.navigate(['/pendiente-verificacion']); // Redirigir a componente 
                   this.login.reset();
                 }else if (roleString === "ESTUDIANTE" && statusString === 'VERIFICADO') {
                   this.toastr.info("Bienvenido Estudiante!", 'Welcome');
                   this.router.navigate(['/home-estudiantes']); // Redirigir a componente programa
                   this.login.reset();
                 } else if (roleString === "DOCENTE" && statusString === 'COMPLETAR INFORMACION') {
+                  console.log("Entro por aqui?")
                   this.toastr.info("Por favor completar su perfil en la plataforma!", 'Completar perfil');
                   this.router.navigate(['/completar-perfil-teacher']); // Redirigir a componente de completado de perfil DOCENTE
+                } else if (roleString === "DOCENTE" && statusString === 'PENDIENTE VERIFICACION') {
+                  this.toastr.info("Su cuenta está en proceso de verificación por parte del administrador", 'Verificación Admin ');
+                  this.router.navigate(['/pendiente-verificacion']); // Redirigir a componente 
+                  this.login.reset();
                 }
-                else  if (this.role.includes("DOCENTE_DIRECTOR")) {
-                  this.toastr.success('Ingreso fue exitoso, bienvenido docente ' + usuario.identificacion , 'Operacion exitosa!');
+                else  if (this.role.includes("DOCENTE_DIRECTOR") && statusString === 'VERIFICADO') {
+                  this.toastr.success('Ingreso fue exitoso, bienvenido docente director ' + usuario.identificacion , 'Operacion exitosa!');
                   this.router.navigate(['/docente-panel/docente-director']); // Redirigir a componente de docentes director
-                }else  if (this.role.includes("DOCENTE_COMITÉ")) {
-                  this.toastr.success('Ingreso fue exitoso, bienvenido docente ' + usuario.identificacion , 'Operacion exitosa!');
+                }else  if (this.role.includes("DOCENTE_COMITÉ") && statusString === 'VERIFICADO') {
+                  this.toastr.success('Ingreso fue exitoso, bienvenido docente comite' + usuario.identificacion , 'Operacion exitosa!');
                   this.router.navigate(['/docente-panel/docente-comité']); // Redirigir a componente de docentes de comité ******(POR AHORA)*******
                 }
                 else {

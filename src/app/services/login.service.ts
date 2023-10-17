@@ -47,6 +47,24 @@ export class LoginService {
     //AGREGAR QUE GUARDE LA IDENTIFICACION, GUARDE EL ESTADO "COMPLETADO" , "EN PROYECTO" , "PEDNIENTE VERIFCAICION".
   }
 
+  getIdentificationLocalStorage():any{
+    const identification = localStorage.getItem('identificacion');
+    if(identification){
+      return identification; 
+    }else{
+      return null;
+    }
+  }
+
+  getStatusLocalStorage():any{
+    const status = localStorage.getItem('status');
+    if(status){
+      return status; 
+    }else{
+      return null;
+    }
+  }
+
   removeLocalStorge(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('rol');

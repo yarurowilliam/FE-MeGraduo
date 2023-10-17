@@ -51,6 +51,7 @@ import { ConfigurationModule } from './components/principal/configuration/config
 import { ConfigurationEstudianteModule } from './components/principal-estudiante/configuration-estudiante/configuration-estudiante.module';
 import { HomeEstudianteComponent } from './components/principal-estudiante/home-estudiante/home-estudiante.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes = [
   {
@@ -126,7 +127,8 @@ const routes = [
     RouterModule,
     NgxPaginationModule,
     ConfigurationModule,
-    ConfigurationEstudianteModule
+    ConfigurationEstudianteModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent],

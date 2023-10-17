@@ -9,8 +9,10 @@ export class Estudiante {
     direccion: string;
     idPrograma: number;
     creditosAprobados: number;
-    modalidad: number;
-    subModalidad: number;
-    estado: string;
-    tieneProyecto: boolean;
+    modalidad?: number;
+    subModalidad?: number;
+    estado?: string;
+    tieneProyecto?: boolean;
+	rolDefault? : string;
+	estadoUsuario? : string;
 }
