@@ -1,0 +1,58 @@
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <span class="text-black-50"><strong>{{role}}</strong></span>
+                <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <span class="font-weight-bold" #userSpan>Edogaru</span>
+                <span class="text-black-50" #emailSpan>edogaru@mail.com.my</span>
+                <span></span></div>
+        </div>
+        <div class="col-md-7 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-center">Perfil MeGraduo</h4>
+                </div>
+                <form [formGroup]="profileForm">
+                <div class="row mt-2">
+                    <div class="col-md-12">
+                        <label class="labels">Nombres</label>
+                        <input type="text" formControlName="nombres" readonly class="form-control" value="">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="labels">Apellidos</label>
+                        <input type="text" formControlName="apellidos" readonly class="form-control"  value="">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="labels">Teléfono / Celular</label>
+                        <input type="text" formControlName="telefono" readonly class="form-control"  value="">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="labels">Dirección</label>
+                        <input type="text" formControlName="direccion" readonly class="form-control"  value="">
+                    </div>
+
+                    <div class="col-md-8">
+                        <label class="labels">Programa</label>
+                        <input type="text" formControlName="programa" readonly class="form-control"  value="">
+                    </div>
+
+                    <div *ngIf="this.role === 'DOCENTE'" class="col-md-8">
+                        <label class="labels">Énfasis</label>
+                        <input type="text" formControlName="enfasis" readonly class="form-control"  value="">
+                    </div>                  
+                </div>
+                 </form>
+                <div class="mt-5 text-center">
+                    
+                    <button class="btn btn-primary profile-button" (click)="irProyectos()" type="button">Ir a proyectos</button>
+                    <button class="btn btn-primary profile-button ms-4" (click)="logOut()" type="button">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

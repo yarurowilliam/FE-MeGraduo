@@ -52,6 +52,7 @@ import { ConfigurationEstudianteModule } from './components/principal-estudiante
 import { HomeEstudianteComponent } from './components/principal-estudiante/home-estudiante/home-estudiante.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 
 const routes = [
   {
@@ -111,7 +112,8 @@ const routes = [
     DetalleProyectoComentariosComponent,
     DetalleProyectoCalificacionesComponent,
     HomeEstudianteComponent,
-    PreregistroVerificarEstudianteComponent
+    PreregistroVerificarEstudianteComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule,

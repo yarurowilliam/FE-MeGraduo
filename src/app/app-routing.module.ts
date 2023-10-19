@@ -36,6 +36,7 @@ import { ModalidadesEstudianteComponent } from './components/principal-estudiant
 import { NotFound } from './components/principal/not-found/not-found.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
 import { ProyectoGradoComponent } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/proyecto-grado/proyecto-grado.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 
 const routes: Routes = [
   
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'loading', component:LoadingComponent},
   {path: 'completar-perfil-student', component: CompletarPerfilEstudianteComponent},
   {path: 'completar-perfil-teacher', component: CompletarPerfilDocenteComponent},
+  {path: 'profile', component: ProfilesComponent},
   {path: 'planteamiento', component: PlanteamientoComponent},
   {path: 'objetivos', component: ObjetivosComponent},
   {path: 'anexos', component: AnexosComponent},

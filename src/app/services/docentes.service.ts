@@ -28,6 +28,12 @@ export class DocentesService {
   getListPrograms(): Observable<any[]> {
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl2}/GetListProgramas`);
   }
+
+  // Add a method to fetch full info for a docente
+  getFullInfoDocente(identificacion: any): Observable<Docente> {
+    // You can interpolate the identificacion in the URL
+    return this.http.get<Docente>(`${this.myAppUrl}${this.myApiUrl}/TraerFullInfoDocente/${identificacion}`);
+  }
   
   
 }
