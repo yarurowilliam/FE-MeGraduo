@@ -46,6 +46,17 @@
     color: white;
 }
 
+.checkOption {
+    cursor: pointer;
+    transition: color 0.3s; /* Transición para el cambio de color en hover */
+  }
+  
+  .checkOption:hover {
+    color: #0c7d45;
+    background-color: #0c7d4496;
+    border-radius: 5%;
+    
+  }
 
 .table th::content,
 .table td::content {

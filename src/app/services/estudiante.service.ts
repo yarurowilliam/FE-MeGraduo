@@ -28,6 +28,11 @@ export class EstudianteService {
   getListPrograms(): Observable<any[]> {
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl2}/GetListProgramas`);
   }
+
+  
+  getListStudents(id: number): Observable<any[]>{
+    return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerEstudiantesValidos/${id.toString()}`);
+  }
    // Add a method to fetch full info for a estudiante
    getFullInfoEstudiante(identificacion: any): Observable<Estudiante> {
     // You can interpolate the identificacion in the URL

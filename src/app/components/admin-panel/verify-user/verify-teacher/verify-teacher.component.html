@@ -21,10 +21,10 @@
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">N°
                                                 Identificación</label>
-                                            <input type="number" class="form-control" id="identification"
-                                                formControlName="identification" [ngClass]="{'border-red': modalVerifyTeacher.get('identification')?.hasError('required') && 
-                                                                        modalVerifyTeacher.get('identification')?.hasError('minLength') &&
-                                                                        modalVerifyTeacher.get('identification')?.hasError('maxLength')
+                                            <input type="number" class="form-control" id="identificacion"
+                                                formControlName="identificacion" [ngClass]="{'border-red': modalVerifyTeacher.get('identificacion')?.hasError('required') && 
+                                                                        modalVerifyTeacher.get('identificacion')?.hasError('minLength') &&
+                                                                        modalVerifyTeacher.get('identificacion')?.hasError('maxLength')
                                                                         }">
                                         </div>
                                     </div>
@@ -34,9 +34,9 @@
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">Primer Nombre
                                                 <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="firstName"
-                                                formControlName="firstName" placeholder="Ej: José" [ngClass]="{'border-red': modalVerifyTeacher.get('firstName')?.hasError('required') && 
-                                                                        modalVerifyTeacher.get('firstName')?.touched
+                                            <input type="text" class="form-control" id="primerNombre"
+                                                formControlName="primerNombre" placeholder="Ej: José" [ngClass]="{'border-red': modalVerifyTeacher.get('primerNombre')?.hasError('required') && 
+                                                                        modalVerifyTeacher.get('primerNombre')?.touched
                                                                         }">
                                         </div>
                                     </div>
@@ -46,9 +46,9 @@
                                         <div class="form-group">
                                             <label class="ms-1 label-tag labelSelect">Segundo Nombre
                                                 <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="secondName"
-                                                formControlName="secondName" placeholder="Ej: David" [ngClass]="{'border-red': modalVerifyTeacher.get('secondName')?.hasError('required') && 
-                                                                        modalVerifyTeacher.get('secondName')?.touched
+                                            <input type="text" class="form-control" id="segundoNombre"
+                                                formControlName="segundoNombre" placeholder="Ej: David" [ngClass]="{'border-red': modalVerifyTeacher.get('segundoNombre')?.hasError('required') && 
+                                                                        modalVerifyTeacher.get('segundoNombre')?.touched
                                                                         }">
                                         </div>
                                     </div>
