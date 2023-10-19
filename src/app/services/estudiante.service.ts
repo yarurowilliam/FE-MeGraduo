@@ -27,6 +27,8 @@ export class EstudianteService {
   getListPrograms(): Observable<any[]> {
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl2}/GetListProgramas`);
   }
-  
 
+  getListStudents(id: number): Observable<any>{
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/TraerEstudiantesValidos/${id.toString()}`);
+  }
 }

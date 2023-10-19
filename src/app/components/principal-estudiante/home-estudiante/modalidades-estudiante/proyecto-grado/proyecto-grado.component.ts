@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { config } from 'src/config/config';
 import { LoginService } from 'src/app/services/login.service';
+import { EstudiantesValidadosModalComponent } from './estudiantes-validados-modal/estudiantes-validados-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Estudiante } from 'src/app/models/estudianteFullInfo';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-proyecto-grado',
@@ -13,25 +17,21 @@ export class ProyectoGradoComponent {
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
   rolEstablecido = "";
   tittle2 = "2. INFORMACIÓN ESPECIFICA DE LA PROPUESTA DE PROYECTO DE GRADO";
+  tittle3 = "3. PLANTEAMIENTO/FORMULACION DEL PROBLEMA Y JUSTIFICACIÓN";
+  tittle5 = "5. OBJETIVO GENERAL Y ESPEFICICOS";
+  tittle7 = "7. BIBLIOGRAFÍA";
   identificacion = "";
+  identificacion2 = "";
+  identificacion3 = "";
   msgAdvertencia = "";
   generalInfo: FormGroup;
-  specificInfo: FormGroup;
-  tableComponent: { nombre: string }[] = [
-    { nombre: "Nombre estudiante" },
-    { nombre: "Identificación" },
-    { nombre: "Número" },
-    { nombre: "Programa Académico" },
-    { nombre: "N° Creditos Aprobados" },
-    { nombre: "% Créditos probados" },
-    { nombre: "Correo electrónico" },
-    { nombre: "Teléfono" },
-    { nombre: "Celular" },
-    { nombre: " " },
-  ];
-  
+  specificInfo: FormGroup;  
 
-  constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private loginService: LoginService, 
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private modalService: NgbModal,
+    private toastr: ToastrService) {
     this.rolEstablecido = this.loginService.getRoleLocalStorage();
     console.log(this.rolEstablecido); 
     if (this.rolEstablecido.includes("ESTUDIANTE")) {
@@ -44,99 +44,21 @@ export class ProyectoGradoComponent {
     this.generalInfo = this.formBuilder.group({
       txtTitulo: ['', [Validators.required]],
       txtEstudiante1: [this.identificacion, [Validators.required]],
-      txtEstudiante2: [''],
-      txtEstudiante3: [''],
+      txtEstudiante2: [this.identificacion2],
+      txtEstudiante3: [this.identificacion3],
     });
     this.specificInfo = this.formBuilder.group({
       inv_line: ['', [Validators.required]],
       sub_inv_line:['', [Validators.required]],
       tematicArea:['', [Validators.required]],
       inv_group:['', [Validators.required]],
+      planteamiento: ['', [Validators.required]],
+      justificacion: ['', [Validators.required]],
+      objetivoGeneral: ['', [Validators.required]],
+      objetivoEspecifico: ['', [Validators.required]],
+      bibliografia: ['', [Validators.required]]
     })
-
-    this.generateTestData();
   }
-
-
-students: any[] = [];
-generateTestData() {
-  this.students = [
-    {
-      nombre: "Brahayan David Betancur Carrillo",
-      identificacionTipo: "Cédula",
-      nIdentificacion: "123456789",
-      programaAcademico: "Ingeniería de Software",
-      nCreditosAprobados: 120,
-      porcentajeCreditosAprobados: 80,
-      correoElectronico: "johndoe@example.com",
-      telefono: "1234567890",
-      celular: "9876543210",
-    },
-    {
-      nombre: "Jane Mane Neigthware Postre",
-      identificacionTipo: "Pasaporte",
-      nIdentificacion: "987654321",
-      programaAcademico: "Ingeniería de Sistemas",
-      nCreditosAprobados: 150,
-      porcentajeCreditosAprobados: 90,
-      correoElectronico: "janesmith@example.com",
-      telefono: "9876543210",
-      celular: "1234567890",
-    },
-    {
-      nombre: "Jane Mane Neigthware Postre",
-      identificacionTipo: "Pasaporte",
-      nIdentificacion: "987654321",
-      programaAcademico: "Ingeniería Electrónica",
-      nCreditosAprobados: 150,
-      porcentajeCreditosAprobados: 90,
-      correoElectronico: "janesmith@example.com",
-      telefono: "9876543210",
-      celular: "1234567890",
-    },
-    {
-      nombre: "Jane Mane Neigthware Postre",
-      identificacionTipo: "Pasaporte",
-      nIdentificacion: "987654321",
-      programaAcademico: "Ingeniería Ambiental",
-      nCreditosAprobados: 150,
-      porcentajeCreditosAprobados: 90,
-      correoElectronico: "janesmith@example.com",
-      telefono: "9876543210",
-      celular: "1234567890",
-    },
-    {
-      nombre: "Jane Mane Neigthware Postre",
-      identificacionTipo: "Pasaporte",
-      nIdentificacion: "987654321",
-      programaAcademico: "Ingniería de Sistemas",
-      nCreditosAprobados: 150,
-      porcentajeCreditosAprobados: 90,
-      correoElectronico: "janesmith@example.com",
-      telefono: "9876543210",
-      celular: "1234567890",
-    },
-  ];
-}
-
-selectedStudent: any;
-
-onStudentSelection(student: any) {
-  this.selectedStudent = student;
-}
-
-
-removeSelectedStudent() {
-  if (this.selectedStudent) {
-    const index = this.students.indexOf(this.selectedStudent);
-    if (index !== -1) {
-      this.students.splice(index, 1);
-    }
-    this.selectedStudent = null; // Limpiar la selección después de eliminar
-  }
-}
-
-
 
 generalInfoSave() {
   if (this.generalInfo.invalid) {
@@ -154,8 +76,34 @@ specificInfoSave() {
   this.router.navigate(['inf-espcifica']);
 }
 
-openAddUsersModal() {
-  this.router.navigate(['/inf-general_addUsers']);
-} 
+openModalEstudiante() {
+  this.modalService.open(EstudiantesValidadosModalComponent, { size: 'lg' }).result.then((estudiante) => this.actualizarEstudiante(estudiante));
+}
+
+actualizarEstudiante(estudiante: Estudiante) {
+  if(this.identificacion === estudiante.identificacion.toString() || this.identificacion3 === estudiante.identificacion.toString()){
+    this.toastr.error('El estudiante ya se encuentra registrado en la propuesta', 'Error');
+  }else{
+    this.toastr.success('El estudiante se ha agregado correctamente', 'Éxito');
+    this.identificacion2 = estudiante.identificacion.toString();
+    this.generalInfo.controls['txtEstudiante2'].setValue(estudiante.identificacion.toString());
+    console.log(this.identificacion2);
+  }
+}
+
+openModalEstudiante2() {
+  this.modalService.open(EstudiantesValidadosModalComponent, { size: 'lg' }).result.then((estudiante) => this.actualizarEstudiante2(estudiante));
+}
+
+actualizarEstudiante2(estudiante: Estudiante) {
+  if(this.identificacion2 === estudiante.identificacion.toString() || this.identificacion === estudiante.identificacion.toString()){
+    this.toastr.error('El estudiante ya se encuentra registrado en la propuesta', 'Error');
+  }else{
+    this.identificacion3 = estudiante.identificacion.toString();
+    this.toastr.success('El estudiante se ha agregado correctamente', 'Éxito');   
+    this.generalInfo.controls['txtEstudiante3'].setValue(estudiante.identificacion.toString());
+    console.log(this.identificacion2);
+  }
+}
   
 }

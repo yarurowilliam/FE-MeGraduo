@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { EstudiantesValidadosModalComponent } from './home-estudiante/modalidades-estudiante/proyecto-grado/estudiantes-validados-modal/estudiantes-validados-modal.component';
 import { EstudiantesValidadosComponent } from './home-estudiante/modalidades-estudiante/proyecto-grado/estudiantes-validados-modal/estudiantes-validados/estudiantes-validados.component'
+import { FiltroEstudiantePipe } from 'src/app/pipes/filtro-estudiante.pipe';
 
 const routes = [
   {
@@ -20,7 +21,13 @@ const routes = [
 ]
 
 @NgModule({
-  declarations: [PrincipalEstudianteComponent, ProyectoGradoComponent, EstudiantesValidadosModalComponent, EstudiantesValidadosComponent],
+  declarations: [
+    PrincipalEstudianteComponent, 
+    ProyectoGradoComponent, 
+    EstudiantesValidadosModalComponent, 
+    EstudiantesValidadosComponent, 
+    FiltroEstudiantePipe
+  ],
   imports: [BrowserAnimationsModule, NgbModule, ReactiveFormsModule, FormsModule, CommonModule, ConfigurationEstudianteModule, RouterModule.forChild(routes)
 ],
   exports: [PrincipalEstudianteComponent],

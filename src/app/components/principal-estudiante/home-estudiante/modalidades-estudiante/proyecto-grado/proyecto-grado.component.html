@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 ">
             <h1 class="h1-text">{{tittle1}}</h1>
-            <form [formGroup]="generalInfo" (ngSubmit)="generalInfoSave()">
+            <form [formGroup]="specificInfo" (ngSubmit)="specificInfoSave()">
                 <div class="container pt-3 ps-5 pe-5 ">
                     <div class="row">
                         <div class="col-lg-20">
@@ -31,84 +31,30 @@
 
                         <div class="col-md-20 d-flex m-2">
                             <label for="txtEstudiante2"  class="form-control p-1 flex-grow-0 lblSpecific">Estudiante #2</label>
-                            <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtEstudiante2"
+                            <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtEstudiante2" (click)="openModalEstudiante()"
                             formControlName="txtEstudiante2" placeholder="Click para buscar estudiante"/>
                         </div>
+
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="identificacion2!==''">
+                          <i class="fas fa-exclamation-triangle"></i>
+                          <strong>!</strong> 
+                          Al finalizar la propuesta llegara un correo electronico a este estudiante para que confirme su participacion en este proyecto, si no confirma el correo electronico, no sera miembro de esta propuesta.
+                        </div>
+
 
                         
                         <div class="col-md-20 d-flex m-2">
                             <label for="txtEstudiante3"  class="form-control p-1 flex-grow-0 lblSpecific">Estudiante #3</label>
-                            <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtEstudiante3"
+                            <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtEstudiante3" (click)="openModalEstudiante2()"
                             formControlName="txtEstudiante3" placeholder="Click para buscar estudiante"/>
                         </div>
 
-
-                        <div class="col-lg-4">
-                            <button class="btn btn-success btn-secondary" data-bs-toggle="modal"
-                                data-bs-target="#modalAddStudents">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-person-bounding-box" viewBox="0 0 16 16">
-                                    <path
-                                        d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z" />
-                                    <path
-                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                </svg>
-                                Buscar estudiante
-                            </button>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="identificacion3!==''">
+                          <i class="fas fa-exclamation-triangle"></i>
+                          <strong>!</strong> 
+                          Al finalizar la propuesta llegara un correo electronico a este estudiante para que confirme su participacion en este proyecto, si no confirma el correo electronico, no sera miembro de esta propuesta.
                         </div>
 
-                        <div class="row">
-                            <!--TABLE-->
-                            <div class="col-lg-12 mt-5">
-                                <div class="form-group">
-                                    <div class="table-responsive mb-3">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" *ngFor="let column of tableComponent">{{
-                                                        column.nombre }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let student of students">
-                                                    <td>{{ student.nombre }}</td>
-                                                    <td>{{ student.identificacionTipo }}</td>
-                                                    <td>{{ student.nIdentificacion }}</td>
-                                                    <td>{{ student.programaAcademico }}</td>
-                                                    <td style="text-align: center;">{{ student.nCreditosAprobados }}
-                                                    </td>
-                                                    <td style="text-align: center;">{{
-                                                        student.porcentajeCreditosAprobados }}%</td>
-                                                    <td>{{ student.correoElectronico }}</td>
-                                                    <td>{{ student.telefono }}</td>
-                                                    <td>{{ student.celular }}</td>
-                                                    <td>
-                                                        <input class="radioUpc" type="radio" name="studentSelection"
-                                                            (change)="onStudentSelection(student)" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <!--delete student-->
-                        <div class="col-lg-4">
-                            <button (click)="removeSelectedStudent()" type="button"
-                                class="btn btn-outline-danger btnThird">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-person-x-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z">
-                                    </path>
-                                </svg>
-                                Quitar estudiante
-                            </button>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -164,13 +110,86 @@
                 </div>
               </form>
               
-              <!--Next buttom-->
-              <div class="col-md-12  text-end pt-5">
-                <div class="contact-form mt-45 ">
-                    <button type="submit" class="btn btn-success btn-nextGroup"
-                        [disabled]="generalInfo.invalid || specificInfo.invalid " routerLink="/planteamiento">Siguiente</button>
-                </div>
+
+        </div>
+    </div>
+
+    <div class="row m4-4">
+      <div class="col-lg-12 ">
+         <h1 class="h1-text">{{tittle3}}</h1>
+         <div class="container pt-3 ps-md-5 pe-md-5">
+          <div class="row">
+            <div class="col-md-9 d-flex m-1">
+              <label for="planteamiento"  class="form-control p-1 flex-grow-0 lblSpecific">Planteamiento y formulacion del problema:</label>
+              <textarea class="form-control me-2 textareaGroup" formControlName="planteamiento"
+              id="planteamiento"
+              [ngClass]="{'is-invalid': specificInfo.get('planteamiento')?.hasError('required') && specificInfo.get('planteamiento')?.touched}"
+              ></textarea>
             </div>
+
+            <div class="row">
+              <div class="col-md-9 d-flex m-1">
+                <label for="justificacion"  class="form-control p-1 flex-grow-0 lblSpecific">Justificacion:</label>
+                <textarea class="form-control me-2 textareaGroup" formControlName="justificacion"
+                id="justificacion"
+                [ngClass]="{'is-invalid': specificInfo.get('justificacion')?.hasError('required') && specificInfo.get('justificacion')?.touched}"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+         </div>
+      </div>
+    </div>
+
+    
+    <div class="row m4-4">
+      <div class="col-lg-12 ">
+         <h1 class="h1-text">{{tittle5}}</h1>
+          <div class="container pt-3 ps-md-5 pe-md-5">
+            <div class="row">
+              <div class="col-md-9 d-flex m-1">
+                <label for="objetivoGeneral "  class="form-control p-1 flex-grow-0 lblSpecific">Objetivo General:</label>
+                <textarea class="form-control me-2 textareaGroup" formControlName="objetivoGeneral"
+                id="objetivoGeneral"
+                [ngClass]="{'is-invalid': specificInfo.get('objetivoGeneral')?.hasError('required') && specificInfo.get('objetivoGeneral')?.touched}"
+                 ></textarea>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-9 d-flex m-1">
+                <label for="objetivoEspecifico"  class="form-control p-1 flex-grow-0 lblSpecific">Objetivos Especificos:</label>
+                <textarea class="form-control me-2 textareaGroup" formControlName="objetivoEspecifico"
+                id="objetivoEspecifico"
+                [ngClass]="{'is-invalid': specificInfo.get('objetivoEspecifico')?.hasError('required') && specificInfo.get('objetivoEspecifico')?.touched}"
+                 ></textarea>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="row m4-4">
+      <div class="col-lg-12 ">
+         <h1 class="h1-text">7. BIBLIOGRAFIA</h1>
+          <div class="container pt-3 ps-md-5 pe-md-5">
+            <div class="row">
+              <div class="col-md-9 d-flex m-1">
+                <label for="bibliografia"  class="form-control p-1 flex-grow-0 lblSpecific">Bibliografias:</label>
+                <textarea class="form-control me-2 textareaGroup" formControlName="bibliografia"
+                id="bibliografia"
+                [ngClass]="{'is-invalid': specificInfo.get('bibliografia')?.hasError('required') && specificInfo.get('bibliografia')?.touched}"
+                 ></textarea>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+                  <!--Next buttom-->
+    <div class="col-md-12  text-end pt-5">
+        <div class="contact-form mt-45 ">
+            <button type="submit" class="btn btn-success btn-nextGroup"
+            [disabled]="generalInfo.invalid || specificInfo.invalid " routerLink="/planteamiento">Siguiente</button>
         </div>
     </div>
 </div>
