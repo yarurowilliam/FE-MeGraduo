@@ -32,7 +32,7 @@
                     </li>
                 </ul>
             </div>
-            
+
         </div>
 
 
@@ -71,8 +71,8 @@
                             <!--secondName-->
                             <div class="form-group">
                                 <label class="ms-1 label-tag labelSelect">Segundo Nombre</label>
-                                <input type="text" class="form-control" id="segundoNombre" formControlName="segundoNombre"
-                                    placeholder="Ej: David">
+                                <input type="text" class="form-control" id="segundoNombre"
+                                    formControlName="segundoNombre" placeholder="Ej: David">
                             </div>
                         </div>
 
@@ -102,34 +102,32 @@
 
                             </div>
                         </div>
-                    
+
                         <div class="col-lg-4">
                             <!--Cel-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">Teléfono / Celular
-                                  <strong>*</strong>
+                                    <strong>*</strong>
                                 </label>
-                                <input type="text" maxlength="10" class="form-control" id="telefono" formControlName="telefono"
-                                  placeholder="Ej: 3013023034"
-                                  [ngClass]="{
+                                <input type="text" maxlength="10" class="form-control" id="telefono"
+                                    formControlName="telefono" placeholder="Ej: 3013023034" [ngClass]="{
                                     'border-red': (teacherProfile.get('telefono')?.hasError('required') &&  teacherProfile.get('telefono')?.touched) || teacherProfile.get('telefono')?.hasError('pattern')
-                                  }">
+                                }">
 
-                                  <span class="text-danger"  
-                                  *ngIf="teacherProfile.get('telefono')?.hasError('pattern')">
+                                <span class="text-danger" *ngIf="teacherProfile.get('telefono')?.hasError('pattern')">
                                     Celular <strong>inválido</strong>.
-                                  </span>
-                              </div>
-                              
+                                </span>
+                            </div>
+
                         </div>
 
-                       
+
                     </div>
 
                     <!--ThirdRow-->
                     <div class="row mb-3">
 
-                        
+
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <!--direction-->
@@ -139,33 +137,52 @@
                                                         teacherProfile.get('direccion')?.touched
                                                                 }">
                             </div>
-                        </div> 
-                        
+                        </div>
+
                         <div class="col-lg-4">
                             <!--E-mail-->
                             <div class="form-group">
                                 <label class="ms-1 mb-1 label-tag" class="labelSelect">E-Mail</label>
-                                <input type="email" class="form-control" id="email" formControlName="email" 
+                                <input type="email" class="form-control" id="email" formControlName="email"
                                     [ngClass]="{'border-red': teacherProfile.get('email')?.hasError('required') && teacherProfile.get('email')?.touched}">
 
                             </div>
                         </div>
 
-                          <!--Programa-->
-                          <div class="col-lg-4">
+                        <!--Programa-->
+                        <div class="col-lg-4">
                             <div class="form-group">
-                                <label for="idProgramaLbl" class="ms-1 mb-1 label-tag" class="labelSelect">Seleccione su programa</label>
-                              <select formControlName="idPrograma" name="idPrograma" class="form-select form-control">
-                                <option value="">Seleccione un programa</option>
-                                <option *ngFor="let programa of programas" [value]="programa.id">{{ programa.nombrePrograma }}</option>
-                              </select>
+                                <label for="idProgramaLbl" class="ms-1 mb-1 label-tag" class="labelSelect">Seleccione su
+                                    programa</label>
+                                <select formControlName="idPrograma" name="idPrograma" class="form-select form-control">
+                                    <option value="">Seleccione un programa</option>
+                                    <option *ngFor="let programa of programas" [value]="programa.id">{{
+                                        programa.nombrePrograma }}</option>
+                                </select>
                             </div>
-                          </div>
+                        </div>
+                    </div>
+
+                    <!--4thdRow-->
+                    <div class="row mb-3">
+
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <!--enfasis-->
+                                <label for="program" class="labelSelect">Enfasis <strong>*</strong></label>
+                                <input type="text" maxlength="30" class="form-control" id="enfasis"
+                                    formControlName="enfasis" placeholder="Ej: Desarrollador Web" [ngClass]="{'border-red': teacherProfile.get('enfasis')?.hasError('required') && 
+                                                        teacherProfile.get('enfasis')?.touched
+                                                                }">
+                            </div>
+                        </div>
+
                     </div>
 
                     <app-loading *ngIf="loading"></app-loading>
                     <button type="submit" class="btn btn-primary btn-lg mx-auto btn-confirmar"
-                    [disabled]="teacherProfile.invalid">Confirmar</button>
+                        [disabled]="teacherProfile.invalid">Confirmar</button>
                 </form>
             </div>
         </div>
