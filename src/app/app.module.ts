@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 //Components
 import { AppComponent } from './app.component';
@@ -51,7 +52,7 @@ import { ConfigurationModule } from './components/principal/configuration/config
 import { ConfigurationEstudianteModule } from './components/principal-estudiante/configuration-estudiante/configuration-estudiante.module';
 import { HomeEstudianteComponent } from './components/principal-estudiante/home-estudiante/home-estudiante.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 
 const routes = [
@@ -130,7 +131,8 @@ const routes = [
     NgxPaginationModule,
     ConfigurationModule,
     ConfigurationEstudianteModule,
-    NgbModule
+    NgbModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

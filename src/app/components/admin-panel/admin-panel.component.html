@@ -34,7 +34,7 @@
                                         (click)="isSelectedOption = 'manageUser'">Gesionar usuarios</a>
                                 </li>
 
-                                <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
+                                <a style="cursor: pointer;" class="nav-link"  (click)="logOut()"
                                 [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
                                 [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
                                 (click)="isSelectedOption = 'salir'">Salir</a>

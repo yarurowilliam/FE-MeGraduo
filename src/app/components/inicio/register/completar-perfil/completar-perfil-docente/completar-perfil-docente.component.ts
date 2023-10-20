@@ -156,7 +156,7 @@ async saveDocente(): Promise<void> {
       'Información de docente guardada correctamente',
       'Guardado de docente'
     );
-    this.router.navigate(['/docente-panel']); //LLEVAR AQUI DONDE CORRESPONDA...
+    this.router.navigate(['/pendiente-verificacion']); //LLEVAR AQUI DONDE CORRESPONDA...
     this.loading = false;
   } catch (error) {
     this.loading = false;

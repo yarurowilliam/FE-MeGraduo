@@ -14,12 +14,15 @@ export class LoginService {
   myApiUrl: string;
   myApiUrl2: string;
   myApiUrl3: string;
+  myApiUrl4: string;
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = '/api/Login';
     this.myApiUrl2 = '/api/Usuario';
     this.myApiUrl3 = '/api/Persona';
+    this.myApiUrl4 = '/api/Rol';
+
   }
 
   login(usuario: Login): Observable<any>{
@@ -33,6 +36,10 @@ export class LoginService {
 
   getUserDetails(id: number): Observable<any> {
     return this.http.get(`${this.myAppUrl}${this.myApiUrl2}/VerificarUsuario/${id.toString()}`);
+  }
+
+  getListRoles():Observable<any>{
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl4}/GetListRoles`);
   }
 
   getEstudianteDeatils(id: number): Observable<any> {
