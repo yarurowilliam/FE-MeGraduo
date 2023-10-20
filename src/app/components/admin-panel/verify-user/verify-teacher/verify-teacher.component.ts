@@ -40,13 +40,13 @@ export class VerifyTeacherComponent {
   constructor(private formBuilder: FormBuilder, private router: Router,
      private personaService: PersonaService, private toastr: ToastrService) {
     this.modalVerifyTeacher = this.formBuilder.group({
-      identification: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
-      firstName: [ '', [Validators.required]],
-      secondName: ['', [Validators.required]],
+      identificacion: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+      primerNombre: [ '', [Validators.required]],
+      segundoNombre: ['', [Validators.required]],
       fisrtLastName: [ '', [Validators.required]],
       secondLastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      rolDefault: ['',],
+      role: ['',],
       comentarios: [''],
 
     })

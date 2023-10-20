@@ -22,10 +22,10 @@
                                         <!--IdNumber-->
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">N° Identificación</label>
-                                            <input type="number" class="form-control" id="identification"
-                                                formControlName="identification" [ngClass]="{'border-red': modalVerifyStudent.get('identification')?.hasError('required') && 
-                                                                        modalVerifyStudent.get('identification')?.hasError('minLength') &&
-                                                                        modalVerifyStudent.get('identification')?.hasError('maxLength')
+                                            <input type="number" class="form-control" id="identificacion"
+                                                formControlName="identificacion" [ngClass]="{'border-red': modalVerifyStudent.get('identificacion')?.hasError('required') && 
+                                                                        modalVerifyStudent.get('identificacion')?.hasError('minLength') &&
+                                                                        modalVerifyStudent.get('identificacion')?.hasError('maxLength')
                                                                         }">
                                         </div>
                                     </div>
@@ -35,9 +35,9 @@
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">Primer Nombre
                                                 <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="firstName" formControlName="firstName"
-                                                placeholder="Ej: José" [ngClass]="{'border-red': modalVerifyStudent.get('firstName')?.hasError('required') && 
-                                                                        modalVerifyStudent.get('firstName')?.touched
+                                            <input type="text" class="form-control" id="primerNombre" formControlName="primerNombre"
+                                                placeholder="Ej: José" [ngClass]="{'border-red': modalVerifyStudent.get('primerNombre')?.hasError('required') && 
+                                                                        modalVerifyStudent.get('primerNombre')?.touched
                                                                         }">
                                         </div>
                                     </div>
@@ -46,9 +46,9 @@
                                         <!--secondName-->
                                         <div class="form-group">
                                             <label class="ms-1 label-tag labelSelect">Segundo Nombre <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="secondName" formControlName="secondName"
-                                                placeholder="Ej: David" [ngClass]="{'border-red': modalVerifyStudent.get('secondName')?.hasError('required') && 
-                                                                        modalVerifyStudent.get('secondName')?.touched
+                                            <input type="text" class="form-control" id="segundoNombre" formControlName="segundoNombre"
+                                                placeholder="Ej: David" [ngClass]="{'border-red': modalVerifyStudent.get('segundoNombre')?.hasError('required') && 
+                                                                        modalVerifyStudent.get('segundoNombre')?.touched
                                                                         }">
                                         </div>
                                     </div>
@@ -58,9 +58,9 @@
                                         <div class="form-group">
                                             <label class="ms-1  label-tag" class="labelSelect">Primer Apellido
                                                 <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="fisrtLastName"
-                                                formControlName="fisrtLastName" placeholder="Ej: Rodriguez" [ngClass]="{'border-red': modalVerifyStudent.get('fisrtLastName')?.hasError('required') && 
-                                                                        modalVerifyStudent.get('fisrtLastName')?.touched
+                                            <input type="text" class="form-control" id="primerApellido"
+                                                formControlName="primerApellido" placeholder="Ej: Rodriguez" [ngClass]="{'border-red': modalVerifyStudent.get('primerApellido')?.hasError('required') && 
+                                                                        modalVerifyStudent.get('primerApellido')?.touched
                                                                         }">
             
                                         </div>
@@ -77,9 +77,9 @@
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">Segundo Apellido
                                                 <strong>*</strong></label>
-                                            <input type="text" class="form-control" id="secondLastName"
-                                                formControlName="secondLastName" placeholder="Ej: Ruiz" [ngClass]="{'border-red': modalVerifyStudent.get('secondLastName')?.hasError('required') && 
-                                                                        modalVerifyStudent.get('secondLastName')?.touched
+                                            <input type="text" class="form-control" id="segundoApellido"
+                                                formControlName="segundoApellido" placeholder="Ej: Ruiz" [ngClass]="{'border-red': modalVerifyStudent.get('segundoApellido')?.hasError('required') && 
+                                                                        modalVerifyStudent.get('segundoApellido')?.touched
                                                                         }">
             
                                         </div>
@@ -99,14 +99,14 @@
                                         <!--approbedCredits-->
                                         <div class="form-group">
                                             <label class="ms-1 mb-1 label-tag" class="labelSelect">Creditos Aprobados</label>
-                                            <input type="number" class="form-control" id="approbedCredits"
-                                                formControlName="approbedCredits">
+                                            <input type="number" class="form-control" id="creditosAprobados"
+                                                formControlName="creditosAprobados">
                                             <span class="text-danger ms-2"
-                                                *ngIf="modalVerifyStudent.get('approbedCredits')?.hasError('required') && modalVerifyStudent.get('approbedCredits')?.touched">
+                                                *ngIf="modalVerifyStudent.get('creditosAprobados')?.hasError('required') && modalVerifyStudent.get('creditosAprobados')?.touched">
                                                 E-mail <strong>requerido</strong>
                                             </span>
                                             <span class="text-danger ms-2"
-                                                *ngIf="modalVerifyStudent.get('approbedCredits')?.hasError('approbedCredits') && modalVerifyStudent.get('approbedCredits')?.touched">
+                                                *ngIf="modalVerifyStudent.get('creditosAprobados')?.hasError('creditosAprobados') && modalVerifyStudent.get('creditosAprobados')?.touched">
                                                 E-mail <strong>inválido.</strong>
                                             </span>
                                         </div>

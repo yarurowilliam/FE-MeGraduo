@@ -1,4 +1,8 @@
-<div class="container">
+<div *ngIf="loading" class="container">
+    <app-loading></app-loading>
+</div>
+
+<div *ngIf="loading == false" class="container">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="h1-text">Lista de usuarios por verificar</h1>
@@ -6,10 +10,7 @@
                 <div class="container pt-3 ps-5 pe-5">
                     <div class="row">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <label for="emailFilter">Filtrar por correo electrónico:</label>
-                                <input type="text">
-                            </div>
+                            
                             <!-- TABLE -->
                             <div class="col-lg-12 mt-5">
                                 <div class="form-group">
@@ -22,35 +23,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let student of students">
-                                                    <td>{{ student.nombre }}</td>
-                                                    <td>{{ student.identificacionTipo }}</td>
-                                                    <td>{{ student.nIdentificacion }}</td>
-                                                    <td>{{ student.programaAcademico }}</td>
-                                                    <td style="text-align: center;">{{ student.nCreditosAprobados }}
+                                                <tr *ngFor="let estudiante of estudiantes">
+                                                    <td>{{ estudiante.primerNombre }}</td>
+                                                    <td>{{ estudiante.identificacion }}</td>
+                                                    <td>{{ estudiante.idPrograma  }}</td>
+                                                    <td>{{ estudiante.email }}</td>
+                                                    <td class="text-center">
+                                                        <ng-container 
+                                                            *ngIf="estudiante.rolDefault === 'ESTUDIANTE'; else docenteCheck">
+                                                            <i (click)="verifyStudent()" class="fas fa-check text-success checkOption"
+                                                                ></i>
+                                                        </ng-container>
                                                     </td>
-                                                    <td style="text-align: center;">{{
-                                                        student.porcentajeCreditosAprobados }}%</td>
-                                                    <td>{{ student.correoElectronico }}</td>
-                                                    <td>{{ student.telefono }}</td>
-                                                    <td>{{ student.celular }}</td>
-                                                    <td>{{ student.rol }}</td>
-                                                    <td>
-                                                        <button *ngIf="student.rol === 'estudiante'" class="btn-success"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modalAddStudents">Verificar</button>
-                                                        <button *ngIf="student.rol === 'Docente'" class="btn-success"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#modalAddDocente">Verificar</button>
                                                 </tr>
                                             </tbody>
+
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </form>

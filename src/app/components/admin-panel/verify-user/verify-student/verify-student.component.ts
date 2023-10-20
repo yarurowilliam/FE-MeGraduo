@@ -43,6 +43,7 @@ export class VerifyStudentComponent {
       primerApellido: [ '', [Validators.required]],
       segundoApellido: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
+      creditosAprobados: [''],
       email: ['', [Validators.required, Validators.email]],
       direccion: ['', [Validators.required]],
     });
