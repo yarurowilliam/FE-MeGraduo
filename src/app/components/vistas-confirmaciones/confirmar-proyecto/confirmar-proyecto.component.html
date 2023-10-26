@@ -1,0 +1,24 @@
+<div class="not-found-container">
+    <app-loading *ngIf="loading"></app-loading>
+    <h3>ACEPTAR PROPUESTA</h3>
+    <div class="not-found-container2">
+      <h2 class="not-found-text2" *ngIf="!error">
+        IDENTIFICACION: {{identificacion}} - PROPUESTA ID: {{idProyecto}}
+      </h2>
+    </div>
+    <div class="home-buttons" *ngIf="!error">
+      <button style="background-color: #70B620;" class="button" (click)="onConfirmarPropuesta()">Confirmar Propuesta</button>
+    </div>   
+    <div class="home-buttons" *ngIf="error">
+        <div>
+            <div  class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{msgAlerta}}
+        </div>
+        <div>
+            <button style="background-color: #70B620;" class="button" (click)="volverAPrinciapl()">Inicio</button>
+        </div>
+    </div>
+
+
+  </div>
+  

@@ -59,7 +59,7 @@ export class ModalidadesEstudianteComponent {
 async validarRequisitos(): Promise<void> {
 
   if (this.comprobante === "Presentar propuesta") {
-    this.router.navigate(['/programa']);
+    this.router.navigate(['/home-estudiantes/proyecto-grado']);
     return;
   }
 

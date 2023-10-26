@@ -53,6 +53,8 @@ import { HomeEstudianteComponent } from './components/principal-estudiante/home-
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ConfirmarEmailComponent } from './components/vistas-confirmaciones/confirmar-email/confirmar-email.component';
+import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/confirmar-proyecto/confirmar-proyecto.component';
 
 const routes = [
   {
@@ -113,7 +115,9 @@ const routes = [
     DetalleProyectoCalificacionesComponent,
     HomeEstudianteComponent,
     PreregistroVerificarEstudianteComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    ConfirmarEmailComponent,
+    ConfirmarProyectoComponent
   ],
   imports: [
     BrowserModule,

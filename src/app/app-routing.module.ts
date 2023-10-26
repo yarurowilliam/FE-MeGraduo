@@ -37,10 +37,15 @@ import { NotFound } from './components/principal/not-found/not-found.component';
 import { PreregistroVerificarEstudianteComponent } from './components/principal-preregistro/preregistro-verificar-estudiante/preregistro-verificar-estudiante.component';
 import { ProyectoGradoComponent } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/proyecto-grado/proyecto-grado.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ProyectoGradoResolver } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/proyecto-grado/proyecto-grado.resolver';
+import { ConfirmarEmailComponent } from './components/vistas-confirmaciones/confirmar-email/confirmar-email.component';
+import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/confirmar-proyecto/confirmar-proyecto.component';
 
 const routes: Routes = [
   
   {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'confirmar-email/:id', component: ConfirmarEmailComponent},
+  {path: 'confirmar-propuesta/:idProyecto/:identificacion', component: ConfirmarProyectoComponent },
   {path: 'error', component: NotFound},
   {path: 'home', component: HomeComponent},
   {path: 'inicio', component: InitComponent },
@@ -65,7 +70,7 @@ const routes: Routes = [
   { path: 'home-estudiantes', component: PrincipalEstudianteComponent, canActivate:[AuthGuard],data: { role: 'ESTUDIANTE' } ,children: [
     { path: '', component: HomeEstudianteComponent},
     { path: 'modalidades-disponibles', component: ModalidadesEstudianteComponent},
-    { path: 'proyecto-grado', component: ProyectoGradoComponent},
+    { path: 'proyecto-grado', component: ProyectoGradoComponent, resolve: { proyectoGradoData: ProyectoGradoResolver }},
   ]},
 
   

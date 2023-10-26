@@ -19,6 +19,9 @@ export class UsuarioService {
     this.myApiUrl = '/api/Usuario/';
   }
 
+  confirmarEmail(id: number): Observable<any> {
+    return this.http.put<any>(`${this.myAppUrl}${this.myApiUrl}ConfirmarEmail/${id}`, {});
+}
 
   getTokenId(): number | any {
     // Obtener el token del localStorage
