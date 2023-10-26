@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -12,8 +15,20 @@ export class AdminPanelComponent {
   /**
    *
    */
-  constructor() {
+  constructor(private loginService: LoginService,
+              private router: Router,
+              private toastr: ToastrService) {
     
     
+  }
+
+  logOut(): void {
+    this.loginService.removeLocalStorge();
+    this.router.navigate(['/login']);
+    this.toastr.warning(
+      'Gracias por utilizar nuestros servicios',
+      'Sesion finalizada'
+    );
+    console.clear()
   }
 }

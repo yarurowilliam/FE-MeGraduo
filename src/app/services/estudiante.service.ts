@@ -29,13 +29,15 @@ export class EstudianteService {
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl2}/GetListProgramas`);
   }
 
-  
+  getStudentsToVerify(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerEstudiantesPendientesVerificacion`);
+  }
+
   getListStudents(id: number): Observable<any[]>{
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerEstudiantesValidos/${id.toString()}`);
   }
-   // Add a method to fetch full info for a estudiante
-   getFullInfoEstudiante(identificacion: any): Observable<Estudiante> {
-    // You can interpolate the identificacion in the URL
+
+  getFullInfoEstudiante(identificacion: any): Observable<Estudiante> {  
     return this.http.get<Estudiante>(`${this.myAppUrl}${this.myApiUrl}/TraerInfoPersonaEstudiante/${identificacion}`);
   }
 

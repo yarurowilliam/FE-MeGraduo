@@ -44,9 +44,9 @@ export class CompletarPerfilEstudianteComponent implements OnInit {
           ],
         ],
         primerNombre: ['', [Validators.required]],
-        segundoNombre: ['', [Validators.required]],
+        segundoNombre: [''],
         primerApellido: ['', [Validators.required]],
-        segundoApellido: ['', [Validators.required]],
+        segundoApellido: [''],
         telefono: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         direccion: ['', [Validators.required]],
@@ -156,7 +156,7 @@ async saveEstudiante(): Promise<void> {
       'Información de estudiante guardada correctamente',
       'Guardado de estudiante'
     );
-    this.router.navigate(['/programa']); //LLEVAR AQUI DONDE CORRESPONDA...
+    this.router.navigate(['/pendiente-verificacion']); //LLEVAR AQUI DONDE CORRESPONDA...
     this.loading = false;
   } catch (error) {
     this.loading = false;

@@ -34,6 +34,10 @@ export class DocentesService {
     // You can interpolate the identificacion in the URL
     return this.http.get<Docente>(`${this.myAppUrl}${this.myApiUrl}/TraerFullInfoDocente/${identificacion}`);
   }
+
+  getTeachersToVerify(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerDocentesPendientesVerificacion`);
+  }
   
   
 }
