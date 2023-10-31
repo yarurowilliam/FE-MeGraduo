@@ -104,6 +104,26 @@ getAllArchivos(idPropuesta: number): Observable<FileProyectosGrado[]> {
       catchError(this.errorHandler)
     );
 }
+
+cambiarEstadoPropuesta(idProyecto: number, proyecto: ProyectoGrado) {
+  const url = `${this.myAppUrl}/api/ProyectoGrado/ActualizarProyecto/${idProyecto}`;
+  return this.http.post(url, proyecto);
+}
+
+cambiarDirector(idProyecto: number, idDirector: number) {
+  const url = `${this.myAppUrl}/api/ProyectoGrado/AddDirector/${idProyecto}`;
+  return this.http.post(url, idDirector);
+}
+
+cambiarAsesor(idProyecto: number, idAsesor: number) {
+  const url = `${this.myAppUrl}/api/ProyectoGrado/AddAsesor/${idProyecto}`;
+  return this.http.post(url, idAsesor);
+}
+
+cambiarAntePro(idProyecto: number, fechaNew: Date) {
+  const url = `${this.myAppUrl}/api/ProyectoGrado/AddFechaAnteProyecto/${idProyecto}`;
+  return this.http.post(url, fechaNew);
+}
   // Manejador de errores genérico (esto es solo un ejemplo, puedes personalizarlo según tus necesidades)
   errorHandler(error: any): Observable<never> {
     console.error('Error en el servicio:', error);

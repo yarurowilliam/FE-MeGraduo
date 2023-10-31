@@ -28,7 +28,7 @@ export class ProfilesComponent {
   programas: [] | any;
   idUsuario: number = 0;
   profileForm: FormGroup;
-  role: string = ''
+  role: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -62,9 +62,9 @@ export class ProfilesComponent {
     console.log("este es el rol:"+ this.role)
 
    
-    if(this.role=== 'DOCENTE'){
+    if(this.role.includes('DOCENTE')){
       this.isDocente()
-    }else if (this.role === 'ESTUDIANTE'){
+    }else if (this.role.includes('ESTUDIANTE')){
       this.isEstudiante()
     }else{
       console.log("No hay rol")
@@ -78,9 +78,9 @@ export class ProfilesComponent {
     return new Promise<string>((resolve, reject) => {
       let idPrograma;
   
-      if (this.role === "DOCENTE") {
+      if (this.role.includes("DOCENTE")) {
         idPrograma = this.docente.idPrograma;
-      } else if (this.role === "ESTUDIANTE") {
+      } else if (this.role.includes("ESTUDIANTE")) {
         idPrograma = this.estudiante.idPrograma;
       } else {
         reject("Rol no válido");
@@ -144,10 +144,10 @@ export class ProfilesComponent {
   }
 
  irProyectos(){
-  if(this.role === "DOCENTE"){
+  if(this.role.includes("DOCENTE")){
     this.router.navigate(['/docente-panel'])
-  }else if(this.role === "ESTUDIANTE"){
-    this.router.navigate(['/home-estudiantes/modalidades-disponibles'])
+  }else if(this.role.includes("ESTUDIANTE")){
+    this.router.navigate(['/home-estudiantes'])
   }else{
     this.router.navigate(['/NotFound'])
   }

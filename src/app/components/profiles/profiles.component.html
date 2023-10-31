@@ -40,7 +40,7 @@
                         <input type="text" formControlName="programa" readonly class="form-control"  value="">
                     </div>
 
-                    <div *ngIf="this.role === 'DOCENTE'" class="col-md-8">
+                    <div *ngIf="this.role.includes('DOCENTE')" class="col-md-8">
                         <label class="labels">Énfasis</label>
                         <input type="text" formControlName="enfasis" readonly class="form-control"  value="">
                     </div>                  

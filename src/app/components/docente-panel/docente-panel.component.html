@@ -7,138 +7,94 @@
             <div class="rounded border border-secondary">
                 <ul class="nav flex-column menuStyle">
                     <li class="nav-item">
-                        <a style="font-size: 16px; background-color: #0c7d45; color: white; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
+                        <!-- MENÚ DOCENTE -->
+                        <a *ngIf="rolesDocente.includes('DIR')" style="font-size: 16px; background-color: #0c7d45; color: white; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
                             class="nav-link active-link selected-submenu" data-bs-toggle="collapse"
-                            href="#submenuDocente" role="button" aria-expanded="true"
-                            aria-controls="submenuDocente" [ngClass]="{'show': isSubMenuOpen}"
+                            href="#submenuDocente1" role="button" aria-expanded="true"
+                            aria-controls="submenuDocente1" [ngClass]="{'show': isSubMenuOpen}"
                             (click)="isSubMenuOpen = !isSubMenuOpen">
-                            Opciones de {{tipoDeDocente}} <i class="fas fa-chevron-down ms-3"
+                            Opciones de Director <i class="fas fa-chevron-down ms-3"
                                 [ngClass]="{'fa-rotate-180': isSubMenuOpen}"></i>
                         </a>
-                        <!--MENÚ DOCENTE-->
-                        <div *ngIf="tipoDeDocente === 'DIR'" class="collapse show" id="submenuDocente">
+                        <div *ngIf="rolesDocente.includes('DIR')" class="collapse show" id="submenuDocente1">
                             <ul class="nav flex-column submenu">
                                 <li class="nav-item">
                                     <a class="nav-link" routerLink="/docente-panel/docente-view"
                                         [ngStyle]="{ 'background-color': isSelectedOption === 'proyectos_finalizados' ? '#e9e32c' : '' }"
                                         [ngClass]="{'selected-link': isSelectedOption === 'proyectos_finalizados'}"
                                         (click)="isSelectedOption = 'proyectos_finalizados'">Ver Proyectos</a>
-
-                                        <a class="nav-link" routerLink="/profile"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'miProfile' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'myProfile'}"
-                                        (click)="isSelectedOption = 'miProfile'">Mi Perfil</a>
                                 </li>
-
-                                <a class="nav-link" 
-                                [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
-                                [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
-                                (click)="logOut()">Salir</a>
-                            </ul>
-                        </div>
-
-                        <!--MENÚ DOCENTE COMITÉ-->
-                        <div *ngIf="tipoDeDocente === 'DOCENTE_COMITE'"  class="collapse show" id="submenuDocente">
-                            <ul class="nav flex-column submenu">
-                                <li class="nav-item">
-                                    <a class="nav-link" routerLink="/docente-panel/docente-comite"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'Ver Proyectos' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'Ver Proyectos'}"
-                                        (click)="isSelectedOption = 'Ver Proyectos'">Ver Proyectos</a>
-
-                                        <a class="nav-link" routerLink="/profile"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'miProfile' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'myProfile'}"
-                                        (click)="isSelectedOption = 'miProfile'">Mi Perfil</a>
-                                </li>
-
-                                <a class="nav-link" 
-                                [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
-                                [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
-                                (click)="logOut()">Salir</a>
-                            </ul>
-                        </div>
-
-                        <!--MENÚ DOCENTE DIRECTOR-->
-                        <div *ngIf="tipoDeDocente === 'DOCENTE'"  class="collapse show" id="submenuDocente">
-                            <ul class="nav flex-column submenu">
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'verProyectos' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'verProyectos'}"
-                                        (click)="docenteDirectorOptions('verProyectos')">Consultar proyectos</a>
-
-                                        <a class="nav-link"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'misProyectos' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'misProyectos'}"
-                                        (click)="docenteDirectorOptions('misProyectos')">Mis proyectos</a>
-                                        
-
-                                        <a class="nav-link" routerLink="/profile"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'miProfile' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'miProfile'}"
-                                        (click)="isSelectedOption = 'miProfile'">Mi Perfil</a>
-                                </li>
-
-                                <a class="nav-link" 
-                                [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
-                                [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
-                                (click)="logOut()">Salir</a>
                             </ul>
                         </div>
                     </li>
-
-                    
                 </ul>
-                <!--
-                <ul class="nav flex-column menuStyle">
-                    <li class="nav-item">
-                        <a style="font-size: 18px; background-color: #0c7d45; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
-                            class="nav-link active-link selected-submenu" data-bs-toggle="collapse"
-                            href="#submenuAdminSede" role="button" aria-expanded="true"
-                            aria-controls="submenuAdminSede" [ngClass]="{'show': isSubMenuOpen}"
-                            (click)="!isSubMenuOpen">
-                            Gestión de Sede <i class="fas fa-chevron-down ml-auto"
-                                [ngClass]="{'fa-rotate-180': isSubMenuOpen}"></i>
-                        </a>
-                        <div class="collapse show" id="submenuAdminSede">
-                            <ul class="nav flex-column submenu">
-                                <li class="nav-item">
-                                    <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'userVerification' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'userVerification'}"
-                                        (click)="isSelectedOption = 'userVerification'">Verificar usuarios</a>
-
-                                        <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'createUser' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'createUser'}"
-                                        (click)="isSelectedOption = 'createUser'">Crear usuarios</a>
-
-                                        <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
-                                        [ngStyle]="{ 'background-color': isSelectedOption === 'manageUser' ? '#e9e32c' : '' }"
-                                        [ngClass]="{'selected-link': isSelectedOption === 'manageUser'}"
-                                        (click)="isSelectedOption = 'manageUser'">Gesionar usuarios</a>
-                                </li>
-
-                                <a class="nav-link" routerLink="/tu-cuenta/editar-perfil"
-                                [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
-                                [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
-                                (click)="isSelectedOption = 'salir'">Salir</a>
-                            </ul>
-                        </div>
-                    </li>
-
-                    
-                </ul>-->
             </div>
-            
         </div>
 
-        <div class="col-md-9">
-            
-            <router-outlet></router-outlet>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="rounded border border-secondary">
+                    <ul class="nav flex-column menuStyle">
+                        <li class="nav-item">
+                            <!-- MENÚ DOCENTE COMITÉ -->
+                            <a *ngIf="rolesDocente.includes('DOCENTE_COMITE')" style="font-size: 16px; background-color: #0c7d45; color: white; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
+                                class="nav-link active-link selected-submenu" data-bs-toggle="collapse"
+                                href="#submenuDocenteComite" role="button" aria-expanded="true"
+                                aria-controls="submenuDocenteComite" [ngClass]="{'show': isSubMenuOpen2}"
+                                (click)="isSubMenuOpen2 = !isSubMenuOpen2">
+                                Opciones del comite <i class="fas fa-chevron-down ms-3"
+                                    [ngClass]="{'fa-rotate-180': isSubMenuOpen2}"></i>
+                            </a>
+                            <div *ngIf="rolesDocente.includes('DOCENTE_COMITE')" class="collapse show" id="submenuDocenteComite">
+                                <ul class="nav flex-column submenu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/docente-panel/docente-comite"
+                                            [ngStyle]="{ 'background-color': isSelectedOption === 'Ver Proyectos' ? '#e9e32c' : '' }"
+                                            [ngClass]="{'selected-link': isSelectedOption === 'Ver Proyectos'}"
+                                            (click)="isSelectedOption = 'Ver Proyectos'">Ver Proyectos</a>
+                                    </li>
+    
+                                </ul>
+                            </div>
+
+                            <!-- MENÚ DOCENTE-->
+                            <a *ngIf="rolesDocente.includes('DOCENTE')" style="font-size: 16px; background-color: #0c7d45; color: white; font-weight: bold; border-top-left-radius: 4px; border-top-right-radius: 4px;"
+                                class="nav-link active-link selected-submenu" data-bs-toggle="collapse"
+                                href="#submenuDocenteDirector" role="button" aria-expanded="true"
+                                aria-controls="submenuDocenteDirector" [ngClass]="{'show': isSubMenuOpen3}"
+                                (click)="isSubMenuOpen3 = !isSubMenuOpen3">
+                                Opciones de Docente <i class="fas fa-chevron-down ms-3"
+                                    [ngClass]="{'fa-rotate-180': isSubMenuOpen3}"></i>
+                            </a>
+                            <div *ngIf="rolesDocente.includes('DOCENTE')" class="collapse show" id="submenuDocenteDirector">
+                                <ul class="nav flex-column submenu">
+                                    <li class="nav-item">  
+                                            <a class="nav-link"
+                                            [ngStyle]="{ 'background-color': isSelectedOption === 'misProyectos' ? '#e9e32c' : '' }"
+                                            [ngClass]="{'selected-link': isSelectedOption === 'misProyectos'}"
+                                            (click)="docenteDirectorOptions('misProyectos')">Mis proyectos</a>
+                                            
+    
+                                            <a class="nav-link" routerLink="/profile"
+                                            [ngStyle]="{ 'background-color': isSelectedOption === 'miProfile' ? '#e9e32c' : '' }"
+                                            [ngClass]="{'selected-link': isSelectedOption === 'miProfile'}"
+                                            (click)="isSelectedOption = 'miProfile'">Mi Perfil</a>
+                                    </li>
+    
+                                    <a class="nav-link" 
+                                    [ngStyle]="{ 'background-color': isSelectedOption === 'salir' ? '#e9e32c' : '' }"
+                                    [ngClass]="{'selected-link': isSelectedOption === 'salir'}"
+                                    (click)="logOut()">Salir</a>
+                                </ul>
+                            </div>
+                        </li>      
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <router-outlet></router-outlet>
+            </div>
         </div>
     </div>
 </div>
-
-

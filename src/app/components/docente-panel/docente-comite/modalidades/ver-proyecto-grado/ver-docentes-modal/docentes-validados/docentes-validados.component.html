@@ -1,0 +1,47 @@
+<div class="panel panel-primary"
+        style="width: auto; margin:auto; margin-top: auto; background-color: rgba(255, 255, 255, 0.8);">
+        <div class="panel-body">
+            <div class="row separar">
+                <div class="col-sm-12">
+                <!--TABLA-->
+                <div style="overflow-x:auto;">
+                    <div class="row separar">
+                        <div class="col-sm-2">
+                            <label>Consultar:</label>
+                        </div>  
+                        <div class="col-4">
+                            <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="Consultar por ID y Nombre">
+                        </div>
+                    </div>
+                <table class='table table-striped' *ngIf='docentes && docentes.length'>
+                    <thead>
+                        <tr>
+                        <tr>
+                            <th>#</th>           
+                            <th>Identificacion</th>
+                            <th>Apellidos</th>
+                            <th>Nombres</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th>Enfasis</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let docente of docentes | filtroDocente:searchText; index as i"  (click)="seleccionar(docente)">                
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{docente.identificacion}}</td>
+                        <td>{{docente.primerApellido}} {{docente.segundoApellido}}</td>
+                        <td>{{docente.primerNombre}} {{docente.segundoNombre}}</td>
+                        <td>{{docente.telefono}}</td>
+                        <td>{{docente.email}}</td>
+                        <td>{{docente.enfasis}}</td>
+                        <td>{{docente.estado}}</td>
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

@@ -339,7 +339,7 @@
   align-items: flex-start;
   border-radius: var(--dl-radius-radius-round);
   flex-direction: column;
-  background-color: #FDEA6B;
+  background-color: #70B620;
 }
 .home-avatar1 {
   width: 100%;
@@ -407,7 +407,7 @@
   padding-right: var(--dl-space-space-fiveunits);
   flex-direction: column;
   padding-bottom: var(--dl-space-space-fourunits);
-  background-color: #FFCF77;
+  background-color: #70B620;
 }
 .home-avatar2 {
   width: 60px;
@@ -585,7 +585,7 @@
   flex-direction: column;
 }
 .home-caption01 {
-  color: #FFCF77;
+  color: #70B620;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 1px;

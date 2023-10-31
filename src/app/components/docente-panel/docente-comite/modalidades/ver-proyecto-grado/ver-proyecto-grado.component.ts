@@ -11,13 +11,15 @@ import { FileProyectosGrado } from 'src/app/models/FileProyectosGrado';
 import { saveAs } from 'file-saver';
 import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VerDocentesModalComponent } from './ver-docentes-modal/ver-docentes-modal.component';
 
 @Component({
-  selector: 'app-home-estudiante',
-  templateUrl: './home-estudiante.component.html',
-  styleUrls: ['./home-estudiante.component.css']
+  selector: 'app-ver-proyecto-grado',
+  templateUrl: './ver-proyecto-grado.component.html',
+  styleUrls: ['./ver-proyecto-grado.component.css']
 })
-export class HomeEstudianteComponent implements OnInit{
+export class VerProyectoGradoComponent implements OnInit {
   loading = false;
   nombreUsuario?: string;
   rolU?: string;
@@ -33,6 +35,9 @@ export class HomeEstudianteComponent implements OnInit{
   archivos?: FileProyectosGrado[]
   descripcion = "";
   persona : Persona;
+  limpiarText: '';
+  estadoPro : '';
+  txtAsesor = '';
   //VISTA PROYECTO
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
   rolEstablecido = "";
@@ -40,12 +45,14 @@ export class HomeEstudianteComponent implements OnInit{
   tittle3 = "3. PLANTEAMIENTO/FORMULACION DEL PROBLEMA Y JUSTIFICACIÓN";
   tittle5 = "5. OBJETIVO GENERAL Y ESPEFICICOS";
   tittle7 = "7. BIBLIOGRAFÍA";
+  txtDirector = '';
   page = 1;
   pageSize = 6;
   constructor(private router: Router,
     private loginService: LoginService,
     private aRoute: ActivatedRoute, 
     private toastr: ToastrService,
+    private modalService: NgbModal,
     private proyectoService : ProyectoService,
     private docenteService : DocentesService
     ) {}
@@ -53,12 +60,128 @@ export class HomeEstudianteComponent implements OnInit{
   ngOnInit(): void {
     this.getNombreUsuario();
     console.log(this.nombreUsuario + " " + this.rolU);
+    this.testMetod();
+  }
+
+  openModalDocente() {
+    console.log("click click")
+    this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizar(docente));
+  }
+
+  actualizar(docente: Docente) {
+    if(this.txtDirector === docente.identificacion.toString()){
+      this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
+    }else{
+      this.toastr.success('El director se ha agregado correctamente', 'Éxito');
+      this.txtDirector = docente.identificacion.toString();
+      console.log(this.txtDirector);
+    }
+  }
+
+  addDirector(){
+    if(this.txtDirector === ''){
+      this.toastr.error('No se ha seleccionado un director', 'Error');
+    }else{
+      this.proyectoService.cambiarDirector(this.proyecto.id, parseInt(this.txtDirector)).subscribe(response => {
+        this.toastr.success('Director agregado!', 'Info');
+        console.log('Director agregado!', response);
+        this.testMetod();
+      }, error => {
+        console.error('Hubo un error al agregar el director:', error);
+        this.toastr.error(error.error.message, 'Error');
+      });
+    }
+  }
+
+  addAsesor(){
+    if(this.txtAsesor === ""){
+      this.toastr.error('No se ha seleccionado un asesor', 'Error');
+    }else{
+      this.proyectoService.cambiarAsesor(this.proyecto.id, parseInt(this.txtAsesor)).subscribe(response => {
+        this.toastr.success('Asesor agregado!', 'Info');
+        console.log('Asesor agregado!', response);
+        this.testMetod();
+      }, error => {
+        console.error('Hubo un error al agregar el asesor:', error);
+        this.toastr.error(error.error.message, 'Error');
+      });
+    }
+  }
+
+
+  openModalDocente2() {
+    console.log("click click")
+    this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizar2(docente));
+  }
+
+  actualizar2(docente: Docente) {
+    if(this.txtAsesor === docente.identificacion.toString()){
+      this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
+    }else{
+      this.toastr.success('El asesor se ha agregado correctamente', 'Éxito');
+      this.txtAsesor = docente.identificacion.toString();
+      console.log(this.txtDirector);
+    }
+  }
+  testMetod(): void{
+    const idProyectoStr = this.aRoute.snapshot.paramMap.get('id');
+
+    if (idProyectoStr !== null) {
+      const idProyecto = +idProyectoStr; // Convierte a número si no es null
+      if (!isNaN(idProyecto)) {
+        // Comprueba que el valor sea un número válido
+        // Llama al servicio para obtener los detalles del proyecto
+        this.proyectoService.getProyectoPorId(idProyecto).subscribe(
+          (data: any) => {
+            this.toastr.info('Proyecto encontrado, cargando info..', 'Info');
+            this.proyecto = data;
+            if(this.proyecto.idIntegrante1 != null){
+              this.getInfoEstudiante1(this.proyecto.idIntegrante1);
+            }
+            if(this.proyecto.idIntegrante2 != null){
+              this.getInfoEstudiante2(this.proyecto.idIntegrante2);
+            }
+            if(this.proyecto.idIntegrante3 != null){
+              this.getInfoEstudiante3(this.proyecto.idIntegrante3);
+            }
+            if(this.proyecto.idDirector != null){
+              this.getInfoDocenteDirector(this.proyecto.idDirector);
+            }
+            if(this.proyecto.idAsesor != null){
+              this.getInfoDocenteAsesor(this.proyecto.idAsesor);
+            }
+            if(this.proyecto.idJurado != null){
+              this.getInfoDocenteJurado1(this.proyecto.idJurado);
+            }
+            if(this.proyecto.idJurado2 != null){
+              this.getInfoDocenteJurado2(this.proyecto.idJurado2);
+            }
+            this.loadArchivos(this.proyecto.id);
+            console.log('Proyecto:', this.proyecto);
+            this.loading = false
+          },
+          (error) => {
+            console.error('Error al cargar detalles del proyecto:', error);
+          }
+        );
+      }
+    }
+  }
+
+  back(): void{
+    const role = this.loginService.getRoleLocalStorage()
+    console.log("este es el rol:"+ role)
+  
+    if(role == 'DOCENTE_COMITE'){
+      this.router.navigate(['/docente-panel/docente-comite']);
+    } else {
+      this.router.navigate(['/docente-panel/docente-view']);
+    } 
   }
 
   getNombreUsuario(): void{
     this.nombreUsuario = this.loginService.getTokenDecoded().sub;
     this.rolU = this.loginService.getTokenDecoded().sid;
-    this.getInfoEstudiante();
   }
 
   selectedFile: File = null;
@@ -86,7 +209,7 @@ export class HomeEstudianteComponent implements OnInit{
       this.toastr.error('No se puede agregar un comentario vacio', 'Error');
     }else{
       const comentario: Comentario = {
-        descripcion: textoComentario,
+        descripcion: '[COMITE]: ' + textoComentario,
         fechaComentario: new Date(),
         idPersona: parseInt(this.nombreUsuario)
       };
@@ -94,7 +217,7 @@ export class HomeEstudianteComponent implements OnInit{
           this.toastr.success('Comentario agregado!', 'Info');
           console.log('Comentario agregado!', response);
           this.descripcion = "";
-          this.getProyecto();
+          this.testMetod();
     }, error => {
         console.error('Hubo un error al agregar el comentario:', error);
         this.toastr.error(error.error.message, 'Error');
@@ -244,7 +367,7 @@ export class HomeEstudianteComponent implements OnInit{
     if(this.estudiante.modalidad == 0){
       this.toastr.info('No hay proyecto asignado, escoja una modalidad', 'Info');
     }else{
-      this.proyectoService.getProyectoByEstudiante(this.estudiante.identificacion).subscribe(response => {
+      this.proyectoService.getProyectoByEstudiante(this.estudiante1.identificacion).subscribe(response => {
         this.toastr.info('Proyecto encontrado, cargando info..', 'Info');
         this.proyecto = response;
         if(this.proyecto.idIntegrante1 != null){

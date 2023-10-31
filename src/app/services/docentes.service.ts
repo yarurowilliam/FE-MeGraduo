@@ -38,6 +38,10 @@ export class DocentesService {
   getTeachersToVerify(): Observable<any[]>{
     return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerDocentesPendientesVerificacion`);
   }
-  
+
+
+  getAllTeachers(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.myAppUrl}${this.myApiUrl}/TraerDocentes`);
+  }
   
 }

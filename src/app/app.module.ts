@@ -33,6 +33,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { VerifyUserComponent } from './components/admin-panel/verify-user/verify-user.component';
 import { ManageUserComponent } from './components/admin-panel/manage-user/manage-user.component';
 import { FiltroEmailPipe } from './pipes/filtro-email.pipe';
+import { FiltroDocentePipe } from './pipes/filtro-docente.pipe';
 import { VerifyStudentComponent } from './components/admin-panel/verify-user/verify-student/verify-student.component';
 import { VerifyTeacherComponent } from './components/admin-panel/verify-user/verify-teacher/verify-teacher.component';
 import { PlanteamientoComponent } from './components/planteamiento/planteamiento.component';
@@ -56,6 +57,10 @@ import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ConfirmarEmailComponent } from './components/vistas-confirmaciones/confirmar-email/confirmar-email.component';
 import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/confirmar-proyecto/confirmar-proyecto.component';
+import { GestionarRolesComponent } from './components/admin-panel/gestionar-roles/gestionar-roles.component';
+import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
+import { VerDocentesModalComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/ver-docentes-modal.component';
+import { DocentesValidadosComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/docentes-validados/docentes-validados.component';
 
 const routes = [
   {
@@ -101,6 +106,7 @@ const routes = [
     VerifyStudentComponent,
     VerifyTeacherComponent,
     FiltroEmailPipe,
+    FiltroDocentePipe,
     PlanteamientoComponent,
     ObjetivosComponent,
     AnexosComponent,
@@ -118,7 +124,11 @@ const routes = [
     PreregistroVerificarEstudianteComponent,
     ProfilesComponent,
     ConfirmarEmailComponent,
-    ConfirmarProyectoComponent
+    ConfirmarProyectoComponent,
+    GestionarRolesComponent,
+    VerProyectoGradoComponent,
+    VerDocentesModalComponent,
+    DocentesValidadosComponent
   ],
   imports: [
     BrowserModule,
