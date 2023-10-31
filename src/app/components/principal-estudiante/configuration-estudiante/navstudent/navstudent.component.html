@@ -5,11 +5,6 @@
       <span class="home-logo" (click)="goToHome()">MeGraduo</span>
       <div data-thq="thq-navbar-nav" data-role="Nav" class="home-desktop-menu">
         <nav data-thq="thq-navbar-nav-links" data-role="Nav" class="home-nav">
-          <button class="home-button button-clean button">About</button>
-          <button class="home-button1 button-clean button">Features</button>
-          <button class="home-button2 button-clean button">Pricing</button>
-          <button class="home-button3 button-clean button">Team</button>
-          <button class="home-button4 button-clean button">Blog</button>
         </nav>
       </div>
       <div data-thq="thq-navbar-btn-group" class="home-btn-group">
@@ -26,12 +21,12 @@
           </button>
         </div>
         <div class="dropdown">
-          <button style="background-color: #70B620;" class="btn button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Gestionar Mis Proyectos
+          <button style="color: white; background-color: #70B620;" class="btn button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hola, {{estudiante.primerNombre}}
           </button>
           <div class="dropdown-menu" style="padding-top: 0px; text-align: right;" aria-labelledby="dropdownMenuButton">
-            <button class="dropdown-item button " routerLink="/profile" >Ver Perfil</button>
-            <button class="dropdown-item button " (click)="logOut()">Cerrar Sesión</button>
+            <button class="dropdown-item button " style="color: white; background-color: #70B620;" routerLink="/profile" >Ver Perfil</button>
+            <button class="dropdown-item button " style="color: white; background-color: #70B620;" (click)="logOut()">Cerrar Sesión</button>
           </div>
         </div>
       </div>

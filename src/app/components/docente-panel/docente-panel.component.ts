@@ -10,14 +10,23 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './docente-panel.component.html',
   styleUrls: ['./docente-panel.component.css']
 })
-export class DocentePanelComponent  {
+export class DocentePanelComponent implements OnInit {
   isSelectedOption: string = ' '; // Opción por defecto seleccionada
-  isSubMenuOpen: boolean = true; // Submenú desplegado por defecto
-  tipoDeDocente: string = "DOCENTE";
+  isSubMenuOpen: boolean = true; 
+  isSubMenuOpen2: boolean = true;
+  isSubMenuOpen3: boolean = true;// Submenú desplegado por defecto
+  tipoDeDocente: string = '';
+  rolesDocente: string[] = [];
   loading = false;
 
   constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService){}
 
+  ngOnInit(): void {
+    this.tipoDeDocente = this.loginService.getRoleLocalStorage();
+    //separa el rol en una lista de un string que esta por ,
+    this.rolesDocente = this.tipoDeDocente.split(",");
+    console.log(this.rolesDocente);
+  }
 
   logOut(): void{ 
     this.loginService.removeLocalStorge();

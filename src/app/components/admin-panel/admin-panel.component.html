@@ -22,6 +22,11 @@
                                         [ngStyle]="{ 'background-color': isSelectedOption === 'userVerification' ? '#e9e32c' : '' }"
                                         [ngClass]="{'selected-link': isSelectedOption === 'userVerification'}"
                                         (click)="isSelectedOption = 'userVerification'">Verificar usuarios</a>
+     
+                                        <a class="nav-link" routerLink="/admin-panel/gestionar-roles"
+                                        [ngStyle]="{ 'background-color': isSelectedOption === 'manageRol' ? '#e9e32c' : '' }"
+                                        [ngClass]="{'selected-link': isSelectedOption === 'manageRol'}"
+                                        (click)="isSelectedOption = 'manageRol'">Gestionar roles</a>
 
                                         <a class="nav-link" routerLink="/admin-panel/register"
                                         [ngStyle]="{ 'background-color': isSelectedOption === 'createUser' ? '#e9e32c' : '' }"

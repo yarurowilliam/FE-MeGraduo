@@ -321,7 +321,7 @@
               <div class="home-buttons">
                 <input [ngClass]="limpiarText" class="form-control form-control-sm" (change)="onFileSelected($event)" type="file" />
 
-                <button style="background-color: #70B620;" class="button" (click)="uploadFile(proyecto.id)">Upload</button>
+                <button style="color: white; background-color: #70B620;" class="button" (click)="uploadFile(proyecto.id)">Upload</button>
               </div>
 
               <br><br>
@@ -398,14 +398,11 @@
                 </li>
               </ul>
             </div>
-
-                <div>
-                  <label>Descripción:</label>
-                  <textarea [(ngModel)]="descripcion" name="descripcion" required></textarea>
-                </div>
-                <!-- Puedes agregar otros campos aquí -->
-                <button type="submit" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
-
+            <h1 class="h1-text">AÑADIR COMENTARIO</h1>
+            <div class="home-buttons">
+              <input [(ngModel)]="descripcion" name="descripcion" required class="form-control form-control-sm" type="text" />
+              <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
+            </div>
             </div>
           </div>
       </div>

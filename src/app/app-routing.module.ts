@@ -40,6 +40,8 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProyectoGradoResolver } from './components/principal-estudiante/home-estudiante/modalidades-estudiante/proyecto-grado/proyecto-grado.resolver';
 import { ConfirmarEmailComponent } from './components/vistas-confirmaciones/confirmar-email/confirmar-email.component';
 import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/confirmar-proyecto/confirmar-proyecto.component';
+import { GestionarRolesComponent } from './components/admin-panel/gestionar-roles/gestionar-roles.component';
+import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
 
 const routes: Routes = [
   
@@ -67,6 +69,7 @@ const routes: Routes = [
   { path: 'comentarios', component: DetalleProyectoComentariosComponent },
   { path: 'pendiente-verificacion', component: PreregistroVerificarEstudianteComponent},
 
+
   { path: 'home-estudiantes', component: PrincipalEstudianteComponent, canActivate:[AuthGuard],data: { role: 'ESTUDIANTE' } ,children: [
     { path: '', component: HomeEstudianteComponent},
     { path: 'modalidades-disponibles', component: ModalidadesEstudianteComponent},
@@ -80,14 +83,16 @@ const routes: Routes = [
     { path: 'register',component: RegisterComponent },
     { path: 'verifyStudent',component: VerifyStudentComponent },
     { path: 'verifyTeacher',component: VerifyTeacherComponent},
+    { path: 'gestionar-roles', component: GestionarRolesComponent}
     
   ]},
   { path: 'docente-panel', component: DocentePanelComponent, /*canActivate:[AuthGuard],*/ children: [
     { path: '', component: DocenteComponent},
     { path: 'blank', component: LoadingComponent},
     { path: 'docente-view', component: DocenteComponent},
-    { path: 'docente-comite',component: DocenteComiteComponent },   
+    { path: 'docente-comite',component: DocenteComiteComponent   },
     { path: 'docente-director',component: DocenteDirectorComponent},    
+    { path: 'ver-proyecto/:id', component: VerProyectoGradoComponent},
   ]},
 
   {path: '**', component: NotFound}
