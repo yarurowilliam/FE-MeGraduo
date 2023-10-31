@@ -12,14 +12,16 @@ import { saveAs } from 'file-saver';
 import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VerDocentesModalComponent } from './ver-docentes-modal/ver-docentes-modal.component';
+import { VerDocentesModalComponent } from '../ver-docentes-modal/ver-docentes-modal.component';
+
+
 
 @Component({
-  selector: 'app-ver-proyecto-grado',
-  templateUrl: './ver-proyecto-grado.component.html',
-  styleUrls: ['./ver-proyecto-grado.component.css']
+  selector: 'app-ver-anteproyecto',
+  templateUrl: './ver-anteproyecto.component.html',
+  styleUrls: ['./ver-anteproyecto.component.css']
 })
-export class VerProyectoGradoComponent implements OnInit {
+export class VerAnteproyectoComponent {
   loading = false;
   nombreUsuario?: string;
   rolU?: string;
@@ -173,7 +175,6 @@ export class VerProyectoGradoComponent implements OnInit {
     console.log("este es el rol:"+ role)
   
     if (role.includes('DOCENTE_COMITE')) {
-      // Retrocede en la historia del navegador
       window.history.back();
     } else {
       this.router.navigate(['/docente-panel/docente-view']);
@@ -406,4 +407,5 @@ export class VerProyectoGradoComponent implements OnInit {
   goToTheModalidades(): void{
     this.router.navigate(['/home-estudiantes/modalidades-disponibles']);
   }
+
 }

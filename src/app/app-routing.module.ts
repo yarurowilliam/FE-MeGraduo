@@ -42,6 +42,9 @@ import { ConfirmarEmailComponent } from './components/vistas-confirmaciones/conf
 import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/confirmar-proyecto/confirmar-proyecto.component';
 import { GestionarRolesComponent } from './components/admin-panel/gestionar-roles/gestionar-roles.component';
 import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
+import { AnteproyectosFaseComponent } from './components/docente-panel/docente-comite/anteproyectos-fase/anteproyectos-fase.component';
+import { VerAnteproyectoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-anteproyecto/ver-anteproyecto.component';
+
 
 const routes: Routes = [
   
@@ -90,11 +93,13 @@ const routes: Routes = [
     { path: '', component: DocenteComponent},
     { path: 'blank', component: LoadingComponent},
     { path: 'docente-view', component: DocenteComponent},
-    { path: 'docente-comite',component: DocenteComiteComponent   },
+    { path: 'docente-comite',component: DocenteComiteComponent},
+    { path: 'docente-comite/anteproyectos',component: AnteproyectosFaseComponent},
     { path: 'docente-director',component: DocenteDirectorComponent},    
     { path: 'ver-proyecto/:id', component: VerProyectoGradoComponent},
+    { path: 'ver-anteproyecto/:id', component: VerAnteproyectoComponent},
+    
   ]},
-
   {path: '**', component: NotFound}
 ];
 

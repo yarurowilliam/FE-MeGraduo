@@ -61,6 +61,9 @@ import { GestionarRolesComponent } from './components/admin-panel/gestionar-role
 import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
 import { VerDocentesModalComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/ver-docentes-modal.component';
 import { DocentesValidadosComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/docentes-validados/docentes-validados.component';
+import { AnteproyectosFaseComponent } from './components/docente-panel/docente-comite/anteproyectos-fase/anteproyectos-fase.component';
+import { VerAnteproyectoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-anteproyecto/ver-anteproyecto.component';
+
 
 const routes = [
   {
@@ -128,7 +131,10 @@ const routes = [
     GestionarRolesComponent,
     VerProyectoGradoComponent,
     VerDocentesModalComponent,
-    DocentesValidadosComponent
+    DocentesValidadosComponent,
+    AnteproyectosFaseComponent,
+    VerAnteproyectoComponent,
+    
   ],
   imports: [
     BrowserModule,

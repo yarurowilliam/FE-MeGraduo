@@ -1,0 +1,426 @@
+<section class="home-collection">
+    <app-loading *ngIf="loading"></app-loading>
+    <div class="home-content04">
+        <div class="col-lg-2">
+            <!-- Botón de Volver -->
+            <button class="btn btn-danger"  (click)="back()">
+                <i class="fa fa-arrow-left"></i> Volver
+            </button>
+        </div>
+        <div class="col-lg-10">
+            <!-- Título -->
+            <h1 class="h1-text">INFORMACIÓN DEL PROYECTO</h1>
+        </div>
+      
+      <h3>ESTADO DEL PROYECTO : </h3>
+      <div class="fase-container">
+        <div [ngClass]="proyecto?.tipoFase == 'PROPUESTA' ? 'active-stage' : 'inactive-stage'">
+          <h2>01. PROPUESTA</h2>
+        </div>
+        <div [ngClass]="proyecto?.tipoFase == 'FASE1' ? 'active-stage' : 'inactive-stage'">
+          <h2>02. ANTEPROYECTO</h2>
+        </div>
+        <div [ngClass]="proyecto?.tipoFase == 'FASE2' ? 'active-stage' : 'inactive-stage'">
+          <h2>03. PROYECTO</h2>
+        </div>
+      </div>
+      <div class="fase-container" *ngIf="proyecto?.idDirector === null ||proyecto?.idDirector === ''">  
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong></strong> 
+          Como miembro del comite, debe seleccionar un director para este proyecto!
+        </div>
+      </div>
+  
+      <div class="fase-container" *ngIf="proyecto?.estadoProyecto === 'PROPUESTA EN COMITE'">  
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong></strong> 
+          Señor Docente del Comite, debe ir hasta la parte final para hacer comentario de correcciones, si añade un director o un asesor al proyecto es necesario que actualice al final del documento, recuerde que debe añadir las fechas en caso de que vaya a aceptar la propuesta...
+        </div>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-lg-12 ">
+          <h1 class="h1-text">{{tittle1}}</h1>
+        
+              <div class="container pt-3 ps-5 pe-5 ">
+                  <div class="row">
+                      <div class="col-lg-20">
+                          <div class="col-md-20 d-flex m-2">
+                              <label for="txtTitulo"  class="form-control p-1 flex-grow-0 lblSpecific">Título de la propuesta:</label>
+                              <textarea type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="titulo"
+                              placeholder="Ingrese titulo de la propuesta" [(ngModel)]="proyecto.titulo" readonly
+                              ></textarea>
+                          </div>
+                      </div>
+                      <label class="labelSelect mt-2 h1-text">INTEGRANTE (S) ESTUDIANTES</label>
+                      <div class="home-main3">
+                        <div class="home-card10" *ngIf="proyecto?.idIntegrante1 !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/e8deBWu.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{estudiante1?.primerNombre}} {{estudiante1?.primerApellido}}</span>
+                            <h3 class="home-title7">{{estudiante1?.identificacion}}</h3>
+                            <div *ngIf="proyecto?.estadoIntegrante1 === 'ACEPTADA'" class="estado-aceptado">
+                              Invitacion: {{proyecto?.estadoIntegrante1}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="home-card9" *ngIf="proyecto?.idIntegrante2 !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/e8deBWu.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12" >
+                            <span class="home-caption09">{{estudiante2?.primerNombre}} {{estudiante2?.primerApellido}}</span>
+                            <h3 class="home-title7">{{estudiante2?.identificacion}}</h3>
+                            <div *ngIf="proyecto?.estadoIntegrante2 === 'ACEPTADA'" class="estado-aceptado">
+                              Invitacion: {{proyecto?.estadoIntegrante2}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="home-card8" *ngIf="proyecto?.idIntegrante3 !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/e8deBWu.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{estudiante3?.primerNombre}} {{estudiante3?.primerApellido}}</span>
+                            <h3 class="home-title7">{{estudiante3?.identificacion}}</h3>
+                            <div *ngIf="proyecto?.estadoIntegrante3 === 'ACEPTADA'" class="estado-aceptado">
+                              Invitacion: {{proyecto?.estadoIntegrante3}}
+                            </div>
+                          </div>
+                        </div>
+                        
+                    
+                      </div>
+  
+                      <label class="labelSelect mt-2 h1-text">DOCENTE DIRECTOR</label>
+                      <div class="home-main3">
+                        <div class="home-card10" *ngIf="proyecto?.idDirector !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/7nygcLO.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{docenteDirector?.primerNombre}} {{docenteDirector?.primerApellido}}</span>
+                            <h3 class="home-title7">{{docenteDirector?.identificacion}}</h3>
+                            <div *ngIf="proyecto?.estadoDirector === 'ACEPTADA'" class="estado-aceptado">
+                              Invitacion: {{proyecto?.estadoDirector}}
+                            </div>
+                          </div>
+                        </div>    
+             
+                      </div>
+     
+                      <div *ngIf="proyecto?.idDirector === null">
+                        <div class="col-md-20 d-flex m-2">
+                            <label for="txtDirector"  class="form-control p-1 flex-grow-0 lblSpecific">Director: </label>
+                            <input type="text" [(ngModel)]="txtDirector" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtDirector" (click)="openModalDocente()"
+                            placeholder="Click para buscar director"/>
+                            <button style="color: white; background-color: #70B620;" class="button" (click)="addDirector()">Agregar Director</button>
+                            </div>  
+                        <strong>AUN NO HA SIDO REGISTRADO UN DIRECTOR.</strong>
+                      </div>   
+  
+                      <label class="labelSelect mt-2 h1-text">DOCENTE ASESOR</label>
+                      <div class="home-main3">
+                        <div class="home-card10" *ngIf="proyecto?.idAsesor !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/4zsdFp3.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{docenteAsesor?.primerNombre}} {{docentedocenteAsesorDirector?.primerApellido}}</span>
+                            <h3 class="home-title7">{{docenteAsesor?.identificacion}}</h3>
+                          </div>
+                        </div>    
+             
+                      </div>
+                      <div *ngIf="proyecto?.idAsesor === null">
+                        <div class="col-md-20 d-flex m-2">
+                            <label for="txtAsesor"  class="form-control p-1 flex-grow-0 lblSpecific">Asesor: </label>
+                            <input type="text"  [(ngModel)]="txtAsesor"  readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtAsesor"   (click)="openModalDocente2()"
+                            placeholder="Click para buscar asesor"/>
+                            <button style="color: white; background-color: #70B620;" class="button" (click)="addAsesor()">Agregar Asesor</button>
+                        </div>  
+                        <strong>AUN NO HA SIDO REGISTRADO AUN SU ASESOR.</strong>
+                      </div>   
+  
+                      <label class="labelSelect mt-2 h1-text">JURADOS</label>
+                      <div class="home-main3">
+                        <div class="home-card10" *ngIf="proyecto?.idJurado !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/4zsdFp3.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{docenteJurado1.primerNombre}} {{docenteJurado1.primerApellido}}</span>
+                            <h3 class="home-title7">{{docenteJurado1.identificacion}}</h3>
+                          </div>
+                        </div>    
+                        <div class="home-card9" *ngIf="proyecto?.idJurado2 !== null">
+                          <div class="home-image20">
+                            <img
+                              alt="image"
+                              src="https://i.imgur.com/4zsdFp3.png"
+                              class="home-image21"
+                            />
+                          </div>
+                          <div class="home-content12">
+                            <span class="home-caption09">{{docenteJurado2?.primerNombre}} {{docenteJurado2?.primerApellido}}</span>
+                            <h3 class="home-title7">{{docenteJurado2?.identificacion}}</h3>
+                          </div>
+                        </div>    
+                      </div>
+                      <div *ngIf="proyecto?.idJurado === null">
+                        <strong>LOS JURADOS SE ASIGNAN EN LA FASE 2.</strong>
+                      </div>                
+                  </div>
+              </div>
+              
+              <!--
+ <div class="row mt-4">
+                <div class="col-lg-12 ">
+        
+                    <h1 class="h1-text">{{tittle2}}</h1>
+        
+                    
+                        <div class="container pt-3 ps-md-5 pe-md-5">
+                          <div class="row">
+                            <div class="col-md-9 d-flex m-1">
+                              <label for="inv_line"  class="form-control p-1 flex-grow-0 lblSpecific">Linea de Investigación:</label>
+                              <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="inv_line"
+                                placeholder="Ingrese linea de investigación"
+                                [(ngModel)]="proyecto.lineaInvestigacion" readonly>
+                            </div>
+                          </div>
+        
+                          <div class="row">
+                            <div class="col-md-9 d-flex m-1">
+                              <label for="sub_inv_line" class="form-control  p-1 flex-grow-0 lblSpecific">Sub-Linea de Investigación:</label>
+                              <input type="text" maxlength="90"  class="form-control flex-grow-1 border-secondary" id="sub_inv_line" 
+                              [(ngModel)]="proyecto.subLineaInvestigacion" readonly>
+                            </div>
+                          </div>
+        
+                          <div class="row">
+                            <div class="col-md-9 d-flex m-1">
+                              <label for="tematicArea" maxlength="90"  class="form-control p-1 flex-grow-0 lblSpecific">Área Temática:</label>
+                              <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="tematicArea" 
+                              [(ngModel)]="proyecto.areaTematica" readonly>
+                            </div>
+                          </div>
+        
+                          <div class="row">
+                            <div class="col-md-9 d-flex m-1">
+                              <label for="inv_group"  class="form-control p-1 flex-grow-0 lblSpecific">Grupo de Investigación:</label>
+                              <input type="text"  class="form-control flex-grow-1 border-secondary" id="inv_group" 
+                              [(ngModel)]="proyecto.grupoInvestigacion" readonly>
+                             </div>
+                          </div>
+                        </div>
+                </div>  
+               </div>
+
+                 <div class="row m4-4">
+        <div class="col-lg-12 ">
+           <h1 class="h1-text">{{tittle3}}</h1>
+           <div class="container pt-3 ps-md-5 pe-md-5">
+            <div class="row">
+              <div class="col-md-9 d-flex m-1">
+                <label for="planteamiento"  class="form-control p-1 flex-grow-0 lblSpecific">Planteamiento y formulacion del problema:</label>
+                <textarea class="form-control me-2 textareaGroup"
+                id="planteamiento" [(ngModel)]="proyecto.planteamientoProblema" readonly
+                ></textarea>
+              </div>
+  
+              <div class="row">
+                <div class="col-md-9 d-flex m-1">
+                  <label for="justificacion"  class="form-control p-1 flex-grow-0 lblSpecific">Justificacion:</label>
+                  <textarea class="form-control me-2 textareaGroup"
+                  id="justificacion" [(ngModel)]="proyecto.justificacion" readonly
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+           </div>
+        </div>
+      </div>
+
+      <div class="row m4-4">
+        <div class="col-lg-12 ">
+           <h1 class="h1-text">{{tittle5}}</h1>
+            <div class="container pt-3 ps-md-5 pe-md-5">
+              <div class="row">
+                <div class="col-md-9 d-flex m-1">
+                  <label for="objetivoGeneral "  class="form-control p-1 flex-grow-0 lblSpecific">Objetivo General:</label>
+                  <textarea class="form-control me-2 textareaGroup" 
+                  id="objetivoGeneral"  [(ngModel)]="proyecto.objetivoGeneral" readonly
+                  ></textarea>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-9 d-flex m-1">
+                  <label for="objetivoEspecifico"  class="form-control p-1 flex-grow-0 lblSpecific">Objetivos Especificos:</label>
+                  <textarea class="form-control me-2 textareaGroup"
+                  id="objetivoEspecifico" [(ngModel)]="proyecto.objetivosEspecificos" readonly
+                 ></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  
+      <div class="row m4-4">
+        <div class="col-lg-12 ">
+           <h1 class="h1-text">7. BIBLIOGRAFIA</h1>
+            <div class="container pt-3 ps-md-5 pe-md-5">
+              <div class="row">
+                <div class="col-md-9 d-flex m-1">
+                  <label for="bibliografia"  class="form-control p-1 flex-grow-0 lblSpecific">Bibliografias:</label>
+                  <textarea class="form-control me-2 textareaGroup" id="bibliografia"
+                  [(ngModel)]="proyecto.bibliografia" readonly
+                   ></textarea>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+              -->
+             
+      </div>
+  
+    
+  
+      
+  
+      <div class="row mt-4 m4-4">
+        <div class="col-lg-12 ">
+           <h1 class="h1-text">2. ANEXOS</h1>
+            <div class="container pt-3 ps-md-5 pe-md-5">
+              <div class="row">
+  
+                <div class="home-buttons">
+                  <input [ngClass]="limpiarText" class="form-control form-control-sm" (change)="onFileSelected($event)" type="file" />
+  
+                  <button style="color: white; background-color: #70B620;" class="button" (click)="uploadFile(proyecto.id)">Upload</button>
+                </div>
+  
+                <br><br>
+                <br><br>
+  
+                <table class="table table-striped table-hover table-bordered" >
+                  <thead>
+                      <tr>
+                        <th>#</th>           
+                        <th>Nombre Archivo</th>
+                        <th>Fecha Subida</th>
+                        <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr
+                          *ngFor="let archivo of archivos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i" >
+                          <th scope="row">{{ i + 1 }}</th>
+                          <td>{{ archivo.fileName }}</td>
+                          <td>{{ archivo.fechaSubida}} </td>
+                          <td>
+                              <a (click)="descargarArchivo(archivo.id)" class="ver" title="Ver"
+                                  data-toggle="tooltip"><i class="fas fa-download"></i></a>
+                              <a  (click)="eliminarArchivo(archivo.id)"  class="eliminar" title="Eliminar"
+                                  data-toggle="tooltip"><i class="fas fa-trash"></i></a>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div class="d-flex justify-content-end">
+                  <ngb-pagination [collectionSize]="archivos?.length" [(page)]="page" [pageSize]="pageSize">
+                  </ngb-pagination>
+              </div>
+              <h3 *ngIf="archivos?.length == 0 && loading == false">No hay anexos en el sistema, carguelos ahora!</h3>  
+              </div>
+            </div>
+        </div>
+      </div>
+  
+      <div class="row m4-4">
+        <div class="col-lg-12 ">
+           <h1 class="h1-text">9. COMENTARIOS</h1>
+            <div class="container pt-3 ps-md-5 pe-md-5">
+              <div class="row">
+  
+                <!-- Contenedor Principal -->
+              <div class="comments-container">
+                <h1>Comentarios</h1>
+  
+                <ul id="comments-list" class="comments-list">
+                  <li>
+                    <div class="comment-main-level" *ngFor="let comentario of proyecto.comentarios">
+                      <!-- Avatar -->
+                      <div class="comment-avatar"><img src="https://yt3.googleusercontent.com/ytc/APkrFKYrcby4xjQBbmeUoF6TvejORvcSUYUwttVWYMmG=s900-c-k-c0x00ffffff-no-rj" alt=""></div>
+                      <!-- Contenedor del Comentario -->
+                      <div class="comment-box">
+                        <div class="comment-head">
+                          <h6 class="comment-name by-author"><a>{{comentario.nombrePersona}}</a></h6>
+                          <span>{{ comentario.fechaComentario | date }}</span>
+                        </div>
+                        <div class="comment-content">
+                          {{ comentario.descripcion }}
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                    </div>
+                    <!-- Respuestas de los comentarios -->
+                  </li>
+                </ul>
+              </div>
+              <h1 class="h1-text">AÑADIR COMENTARIO</h1>
+              <div class="home-buttons">
+                <input [(ngModel)]="descripcion" name="descripcion" required class="form-control form-control-sm" type="text" />
+                <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
+              </div>
+
+
+              <h1 class="h1-text">GESTION...</h1>
+              <div class="home-buttons">
+                  <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
+                      <option value="ANTIPROYECTO">ANTIPROYECTO</option>
+                      <option value="RECHAZADO">RECHAZADO</option>
+                      <option value="CORRECCIONES">CORRECCIONES</option>
+                  </select>
+                  <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Gesionar</button>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+    <button class="home-view2 button-link button">View all</button>
+  </section>

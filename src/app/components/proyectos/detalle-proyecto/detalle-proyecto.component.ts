@@ -49,8 +49,10 @@ back(): void{
   const role = this.loginService.getRoleLocalStorage()
   console.log("este es el rol:"+ role)
 
-  if(role == 'DOCENTE_COMITE'){
-    this.router.navigate(['/docente-panel/docente-comite']);
+  
+  if(role.includes('DOCENTE_COMITE')){
+    window.history.back();
+    //this.router.navigate(['/docente-panel/docente-comite']);
   } else {
     this.router.navigate(['/docente-panel/docente-view']);
   } 

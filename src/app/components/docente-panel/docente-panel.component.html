@@ -54,7 +54,13 @@
                                             [ngClass]="{'selected-link': isSelectedOption === 'Ver Proyectos'}"
                                             (click)="isSelectedOption = 'Ver Proyectos'">Ver Proyectos</a>
                                     </li>
-    
+                                    <li class="nav-item">
+                                        <a class="nav-link" routerLink="/docente-panel/docente-comite/anteproyectos"
+                                            [ngStyle]="{ 'background-color': isSelectedOption === 'Anteproyectos' ? '#e9e32c' : '' }"
+                                            [ngClass]="{'selected-link': isSelectedOption === 'Anteproyectos'}"
+                                            (click)="isSelectedOption = 'Anteproyectos'">Anteproyectos fase</a>
+                                    </li>
+                                 
                                 </ul>
                             </div>
 
