@@ -105,19 +105,20 @@ getAllArchivos(idPropuesta: number): Observable<FileProyectosGrado[]> {
     );
 }
 
-cambiarEstadoPropuesta(idProyecto: number, proyecto: ProyectoGrado) {
-  const url = `${this.myAppUrl}/api/ProyectoGrado/ActualizarProyecto/${idProyecto}`;
-  return this.http.post(url, proyecto);
-}
-
 cambiarDirector(idProyecto: number, idDirector: number) {
-  const url = `${this.myAppUrl}/api/ProyectoGrado/AddDirector/${idProyecto}`;
-  return this.http.post(url, idDirector);
+  const url = `${this.myAppUrl}/api/ProyectoGrado/AddDirector/${idProyecto}/${idDirector}`;
+  return this.http.post(url, {})
+    .pipe(
+      catchError(this.errorHandler)
+    );
 }
 
 cambiarAsesor(idProyecto: number, idAsesor: number) {
-  const url = `${this.myAppUrl}/api/ProyectoGrado/AddAsesor/${idProyecto}`;
-  return this.http.post(url, idAsesor);
+  const url = `${this.myAppUrl}/api/ProyectoGrado/AddAsesor/${idProyecto}/${idAsesor}`;
+  return this.http.post(url, {})
+    .pipe(
+      catchError(this.errorHandler)
+    );
 }
 
 cambiarAntePro(idProyecto: number, fechaNew: Date) {
@@ -130,6 +131,28 @@ cambiarAntePro(idProyecto: number, fechaNew: Date) {
     return throwError(error);
   }
   
+  addJuradoToProyecto(idProyecto: number, idJurado: number): Observable<any> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/AddJuradoUno/${idProyecto}/${idJurado}`;
+    return this.http.post(url, {})
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
   
+  addJuradoDosToProyecto(idProyecto: number, idJurado: number): Observable<any> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/AddJuradoDos/${idProyecto}/${idJurado}`;
+    return this.http.post(url, {})
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  cambiarEstadoPropuesta(idProyecto: number, proyecto: ProyectoGrado): Observable<any> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/ActualizarProyecto/${idProyecto}`;
+    return this.http.post(url, proyecto)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
 
 }

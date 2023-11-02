@@ -56,6 +56,25 @@
                           Al finalizar la propuesta llegara un correo electronico a este estudiante para que confirme su participacion en este proyecto, si no confirma el correo electronico, no sera miembro de esta propuesta.
                         </div>
 
+                                                
+                        <div class="col-md-20 d-flex m-2">
+                          <label for="txtDirector"  class="form-control p-1 flex-grow-0 lblSpecific">Director</label>
+                          <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtDirector" (click)="openModalDocente()"
+                          formControlName="txtDirector" placeholder="Click para buscar director"/>
+                      </div>
+
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="txtDirector!==''">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>!</strong> 
+                        Al finalizar la propuesta llegara un correo electronico a este estudiante para que confirme su participacion en este proyecto, si no confirma el correo electronico, no sera miembro de esta propuesta.
+                      </div>
+
+                      <div class="col-md-20 d-flex m-2">
+                        <label for="txtAsesor"  class="form-control p-1 flex-grow-0 lblSpecific">Asesor</label>
+                        <input type="text" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtAsesor" (click)="openModalDocente2()"
+                        formControlName="txtAsesor" placeholder="Click para buscar asesor"/>
+                    </div>
+
                     </div>
                 </div>
            
@@ -70,24 +89,25 @@
 
             
                 <div class="container pt-3 ps-md-5 pe-md-5">
+                  
                   <div class="row">
                     <div class="col-md-9 d-flex m-1">
-                      <label for="inv_line"  class="form-control p-1 flex-grow-0 lblSpecific">Linea de Investigación:</label>
-                      <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="inv_line"
-                       formControlName="inv_line" placeholder="Ingrese linea de investigación"
-                       [ngClass]="{'is-invalid': specificInfo.get('inv_line')?.hasError('required') && specificInfo.get('inv_line')?.touched}">
-                       
-                   
+                      <label for="inv_line" class="form-control p-1 flex-grow-0 lblSpecific">Linea de Investigación:</label>
+                      <select class="form-control flex-grow-1 border-secondary" id="inv_line" formControlName="inv_line" 
+                        (change)="onLineaChange(specificInfo.get('inv_line').value)"
+                        [ngClass]="{'is-invalid': specificInfo.get('inv_line')?.hasError('required') && specificInfo.get('inv_line')?.touched}">
+                        <option *ngFor="let linea of lineasInvestigacion" [value]="linea.nombre">{{ linea.nombre }}</option>
+                      </select>
                     </div>
                   </div>
-
+                  
                   <div class="row">
                     <div class="col-md-9 d-flex m-1">
                       <label for="sub_inv_line" class="form-control  p-1 flex-grow-0 lblSpecific">Sub-Linea de Investigación:</label>
-                      <input type="text" maxlength="90"  class="form-control flex-grow-1 border-secondary" id="sub_inv_line" 
-                      formControlName="sub_inv_line" placeholder="Sub-Linea de Investigación"
-                      [ngClass]="{'is-invalid': specificInfo.get('sub_inv_line')?.hasError('required') && specificInfo.get('sub_inv_line')?.touched}">
-                      
+                      <select class="form-control flex-grow-1 border-secondary" id="sub_inv_line" formControlName="sub_inv_line" 
+                        [ngClass]="{'is-invalid': specificInfo.get('sub_inv_line')?.hasError('required') && specificInfo.get('sub_inv_line')?.touched}">
+                        <option *ngFor="let sublinea of sublineasSeleccionadas" [value]="sublinea">{{ sublinea }}</option>
+                      </select>
                     </div>
                   </div>
 

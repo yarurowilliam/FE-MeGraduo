@@ -43,6 +43,7 @@ import { ConfirmarProyectoComponent } from './components/vistas-confirmaciones/c
 import { GestionarRolesComponent } from './components/admin-panel/gestionar-roles/gestionar-roles.component';
 import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
 
+
 const routes: Routes = [
   
   {path: '', redirectTo: 'home', pathMatch: 'full'},

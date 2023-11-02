@@ -26,7 +26,7 @@
       </p>
     </div>
     
-    <h3>ESTADO DEL PROYECTO : </h3>
+    <h3>FASE DEL PROYECTO : </h3>
     <div class="fase-container">
       <div [ngClass]="proyecto?.tipoFase == 'PROPUESTA' ? 'active-stage' : 'inactive-stage'">
         <h2>01. PROPUESTA</h2>
@@ -38,6 +38,15 @@
         <h2>03. PROYECTO</h2>
       </div>
     </div>
+    <div class="estado-proyecto-container">
+      <span class="estado-proyecto-label">ESTADO:</span> 
+      <span class="estado-proyecto">{{proyecto?.estadoProyecto}}</span>
+  </div>
+  <div class="estado-proyecto-container">
+    <span class="estado-proyecto-label">FECHA CREACION:</span> 
+    <span class="estado-proyecto">{{proyecto?.fechaCreacion | date }}</span>
+</div>
+
     <div class="fase-container" *ngIf="proyecto?.estadoProyecto === 'PROPUESTA PENDIENTE'">  
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <i class="fas fa-exclamation-triangle"></i>
@@ -53,6 +62,14 @@
         Tu propuesta se encuentra pendiente de ser revisada por el comite...
       </div>
     </div>
+
+    <div class="fase-container" *ngIf="proyecto?.estadoProyecto === 'PROPUESTA CON CORRECCIONES'">  
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong></strong> 
+        Tu propuesta fue enviada a correcciones por el comite, desde este momento puedes editar los campos [Excepto Compañeros, Director, Asesor y Jurados], para enviar esta informacion debe ir hasta el final del documento y dar finalizar correcciones.
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-lg-12 ">
@@ -64,7 +81,7 @@
                         <div class="col-md-20 d-flex m-2">
                             <label for="txtTitulo"  class="form-control p-1 flex-grow-0 lblSpecific">Título de la propuesta:</label>
                             <textarea type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="titulo"
-                            placeholder="Ingrese titulo de la propuesta" [(ngModel)]="proyecto.titulo" readonly
+                            placeholder="Ingrese titulo de la propuesta" [(ngModel)]="proyecto.titulo" [readonly]="isReadonly"
                             ></textarea>
                         </div>
                     </div>
@@ -212,17 +229,21 @@
                         <div class="row">
                           <div class="col-md-9 d-flex m-1">
                             <label for="inv_line"  class="form-control p-1 flex-grow-0 lblSpecific">Linea de Investigación:</label>
-                            <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="inv_line"
-                              placeholder="Ingrese linea de investigación"
-                              [(ngModel)]="proyecto.lineaInvestigacion" readonly>
+                              <select class="form-control flex-grow-1 border-secondary" id="inv_line" 
+                              (click)="onLineaChange(proyecto.lineaInvestigacion)"
+                              [(ngModel)]="proyecto.lineaInvestigacion" [readonly]="isReadonly">
+                                <option *ngFor="let linea of lineasInvestigacion" [value]="linea.nombre">{{ linea.nombre }}</option>
+                            </select>
                           </div>
                         </div>
       
                         <div class="row">
                           <div class="col-md-9 d-flex m-1">
                             <label for="sub_inv_line" class="form-control  p-1 flex-grow-0 lblSpecific">Sub-Linea de Investigación:</label>
-                            <input type="text" maxlength="90"  class="form-control flex-grow-1 border-secondary" id="sub_inv_line" 
-                            [(ngModel)]="proyecto.subLineaInvestigacion" readonly>
+                            <select class="form-control flex-grow-1 border-secondary" id="sub_inv_line"
+                            [(ngModel)]="proyecto.subLineaInvestigacion" [readonly]="isReadonly">
+                            <option *ngFor="let sublinea of sublineasSeleccionadas" [value]="sublinea">{{ sublinea }}</option>
+                          </select>
                           </div>
                         </div>
       
@@ -230,7 +251,7 @@
                           <div class="col-md-9 d-flex m-1">
                             <label for="tematicArea" maxlength="90"  class="form-control p-1 flex-grow-0 lblSpecific">Área Temática:</label>
                             <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="tematicArea" 
-                            [(ngModel)]="proyecto.areaTematica" readonly>
+                            [(ngModel)]="proyecto.areaTematica" [readonly]="isReadonly">
                           </div>
                         </div>
       
@@ -238,7 +259,7 @@
                           <div class="col-md-9 d-flex m-1">
                             <label for="inv_group"  class="form-control p-1 flex-grow-0 lblSpecific">Grupo de Investigación:</label>
                             <input type="text"  class="form-control flex-grow-1 border-secondary" id="inv_group" 
-                            [(ngModel)]="proyecto.grupoInvestigacion" readonly>
+                            [(ngModel)]="proyecto.grupoInvestigacion" [readonly]="isReadonly">
                            </div>
                         </div>
                       </div>
@@ -254,7 +275,7 @@
             <div class="col-md-9 d-flex m-1">
               <label for="planteamiento"  class="form-control p-1 flex-grow-0 lblSpecific">Planteamiento y formulacion del problema:</label>
               <textarea class="form-control me-2 textareaGroup"
-              id="planteamiento" [(ngModel)]="proyecto.planteamientoProblema" readonly
+              id="planteamiento" [(ngModel)]="proyecto.planteamientoProblema" [readonly]="isReadonly"
               ></textarea>
             </div>
 
@@ -262,7 +283,7 @@
               <div class="col-md-9 d-flex m-1">
                 <label for="justificacion"  class="form-control p-1 flex-grow-0 lblSpecific">Justificacion:</label>
                 <textarea class="form-control me-2 textareaGroup"
-                id="justificacion" [(ngModel)]="proyecto.justificacion" readonly
+                id="justificacion" [(ngModel)]="proyecto.justificacion" [readonly]="isReadonly"
                 ></textarea>
               </div>
             </div>
@@ -279,7 +300,7 @@
               <div class="col-md-9 d-flex m-1">
                 <label for="objetivoGeneral "  class="form-control p-1 flex-grow-0 lblSpecific">Objetivo General:</label>
                 <textarea class="form-control me-2 textareaGroup" 
-                id="objetivoGeneral"  [(ngModel)]="proyecto.objetivoGeneral" readonly
+                id="objetivoGeneral"  [(ngModel)]="proyecto.objetivoGeneral" [readonly]="isReadonly"
                 ></textarea>
               </div>
             </div>
@@ -288,7 +309,7 @@
               <div class="col-md-9 d-flex m-1">
                 <label for="objetivoEspecifico"  class="form-control p-1 flex-grow-0 lblSpecific">Objetivos Especificos:</label>
                 <textarea class="form-control me-2 textareaGroup"
-                id="objetivoEspecifico" [(ngModel)]="proyecto.objetivosEspecificos" readonly
+                id="objetivoEspecifico" [(ngModel)]="proyecto.objetivosEspecificos" [readonly]="isReadonly"
                ></textarea>
               </div>
             </div>
@@ -304,7 +325,7 @@
               <div class="col-md-9 d-flex m-1">
                 <label for="bibliografia"  class="form-control p-1 flex-grow-0 lblSpecific">Bibliografias:</label>
                 <textarea class="form-control me-2 textareaGroup" id="bibliografia"
-                [(ngModel)]="proyecto.bibliografia" readonly
+                [(ngModel)]="proyecto.bibliografia" [readonly]="isReadonly"
                  ></textarea>
               </div>
             </div>
@@ -317,11 +338,11 @@
          <h1 class="h1-text">8. ANEXOS</h1>
           <div class="container pt-3 ps-md-5 pe-md-5">
             <div class="row">
-
+              
               <div class="home-buttons">
                 <input [ngClass]="limpiarText" class="form-control form-control-sm" (change)="onFileSelected($event)" type="file" />
 
-                <button style="color: white; background-color: #70B620;" class="button" (click)="uploadFile(proyecto.id)">Upload</button>
+                <button mat-raised-button color="primary" style="color: white; background-color: #70B620;" class="button" (click)="uploadFile(proyecto.id)">Upload</button>
               </div>
 
               <br><br>
@@ -341,7 +362,7 @@
                         *ngFor="let archivo of archivos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i" >
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ archivo.fileName }}</td>
-                        <td>{{ archivo.fechaSubida}} </td>
+                        <td>{{ archivo.fechaSubida | date }}  </td>
                         <td>
                             <a (click)="descargarArchivo(archivo.id)" class="ver" title="Ver"
                                 data-toggle="tooltip"><i class="fas fa-download"></i></a>
@@ -407,6 +428,33 @@
           </div>
       </div>
     </div>
+
+    <div class="row m4-4" *ngIf="proyecto?.estadoProyecto === 'PROPUESTA CON CORRECCIONES'">
+      <div class="col-lg-12">
+          <h1 class="h1-text">GESTION DE LA PROPUESTA</h1>
+          <div class="container pt-3 ps-md-5 pe-md-5">
+              <div class="change-director-section mt-4">
+                  <div class="change-director-header">
+                      <h2 class="change-director-title">GESTION DE LA PROPUESTA</h2>
+                  </div>
+                  <div class="d-flex flex-column align-items-center">
+                      <div class="col-md-12 d-flex m-2">
+                          <label for="estadoPro" class="form-control p-1 flex-grow-0 lblSpecific">Estados: </label>
+                          <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
+                              <option value="PROPUESTA EN COMITE">ENVIAR A COMITE</option>
+                          </select>
+                      </div>
+                      <!-- Campo de fecha y etiqueta verde -->
+                      <div *ngIf="estadoPro === 'ANTEPROYECTO' || estadoPro === 'CORRECCIONES'" class="col-md-12 d-flex align-items-center m-2">
+                          <label for="fechaPresentacion" class="form-control p-1 flex-grow-0 lblSpecific">Fecha Presentación: </label>
+                          <input type="date" [(ngModel)]="fechaPresentacion" [min]="today" class="form-control form-control-sm ml-2">
+                      </div>
+                      <button style="color: white; background-color: #70B620;" class="button mt-2" (click)="cambiarEstadoProyecto()">ENVIAR</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
 
   <button class="home-view2 button-link button">View all</button>

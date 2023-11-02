@@ -24,6 +24,14 @@
           <h2>03. PROYECTO</h2>
         </div>
       </div>
+      <div class="estado-proyecto-container">
+        <span class="estado-proyecto-label">ESTADO:</span> 
+        <span class="estado-proyecto">{{proyecto?.estadoProyecto}}</span>
+    </div>
+    <div class="estado-proyecto-container">
+      <span class="estado-proyecto-label">FECHA CREACION:</span> 
+      <span class="estado-proyecto">{{proyecto?.fechaCreacion | date }}</span>
+  </div>
       <div class="fase-container" *ngIf="proyecto?.idDirector === null ||proyecto?.idDirector === ''">  
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <i class="fas fa-exclamation-triangle"></i>
@@ -129,17 +137,7 @@
                         </div>    
              
                       </div>
-     
-                      <div *ngIf="proyecto?.idDirector === null">
-                        <div class="col-md-20 d-flex m-2">
-                            <label for="txtDirector"  class="form-control p-1 flex-grow-0 lblSpecific">Director: </label>
-                            <input type="text" [(ngModel)]="txtDirector" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtDirector" (click)="openModalDocente()"
-                            placeholder="Click para buscar director"/>
-                            <button style="color: white; background-color: #70B620;" class="button" (click)="addDirector()">Agregar Director</button>
-                            </div>  
-                        <strong>AUN NO HA SIDO REGISTRADO UN DIRECTOR.</strong>
-                      </div>   
-  
+       
                       <label class="labelSelect mt-2 h1-text">DOCENTE ASESOR</label>
                       <div class="home-main3">
                         <div class="home-card10" *ngIf="proyecto?.idAsesor !== null">
@@ -157,14 +155,37 @@
                         </div>    
              
                       </div>
-                      <div *ngIf="proyecto?.idAsesor === null">
+
+                      <div class="change-director-section mt-4">
+                        <div class="change-director-header">
+                            <h2 class="change-director-title">¿Desea cambiar o agregar un director?</h2>
+                        </div>
                         <div class="col-md-20 d-flex m-2">
-                            <label for="txtAsesor"  class="form-control p-1 flex-grow-0 lblSpecific">Asesor: </label>
-                            <input type="text"  [(ngModel)]="txtAsesor"  readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtAsesor"   (click)="openModalDocente2()"
-                            placeholder="Click para buscar asesor"/>
-                            <button style="color: white; background-color: #70B620;" class="button" (click)="addAsesor()">Agregar Asesor</button>
+                            <label for="txtDirector" class="form-control p-1 flex-grow-0 lblSpecific">Director: </label>
+                            <input type="text" [(ngModel)]="txtDirector" readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtDirector" (click)="openModalDocente()"
+                            placeholder="Click para buscar director"/>
+                            <button style="color: white; background-color: #70B620;" class="button" (click)="addDirector()">Agregar/Cambiar Director</button>
                         </div>  
-                        <strong>AUN NO HA SIDO REGISTRADO AUN SU ASESOR.</strong>
+
+                        <div *ngIf="proyecto?.idDirector === null">         
+                        <strong>AUN NO HA SIDO REGISTRADO UN DIRECTOR.</strong>
+                        </div>
+                    </div>
+
+                      <div class="change-director-section mt-4">
+                        <div class="change-director-header">
+                            <h2 class="change-director-title">¿Desea cambiar o agregar un asesor?</h2>
+                        </div>
+                        <div class="col-md-20 d-flex m-2">
+                          <label for="txtAsesor"  class="form-control p-1 flex-grow-0 lblSpecific">Asesor: </label>
+                          <input type="text"  [(ngModel)]="txtAsesor"  readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtAsesor"   (click)="openModalDocente2()"
+                          placeholder="Click para buscar asesor"/>
+                          <button style="color: white; background-color: #70B620;" class="button" (click)="addAsesor()">Agregar/Cambiar Asesor</button>
+                      </div>  
+
+                        <div *ngIf="proyecto?.idAsesor === null">         
+                        <strong>AUN NO HA SIDO REGISTRADO UN ASESOR.</strong>
+                        </div>
                       </div>   
   
                       <label class="labelSelect mt-2 h1-text">JURADOS</label>
@@ -196,8 +217,34 @@
                           </div>
                         </div>    
                       </div>
-                      <div *ngIf="proyecto?.idJurado === null">
-                        <strong>LOS JURADOS SE ASIGNAN EN LA FASE 2.</strong>
+                      <div>
+
+                        <div class="change-director-section mt-4">
+                          <div class="change-director-header">
+                              <h2 class="change-director-title">¿Desea cambiar o agregar los jurados?</h2>
+                          </div>
+                          <div class="col-md-20 d-flex m-2">
+                            <label for="txtJurado"  class="form-control p-1 flex-grow-0 lblSpecific">Jurado 1: </label>
+                            <input type="text"  [(ngModel)]="txtJurado"  readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtJurado"   (click)="openModalDocenteJurado()"
+                            placeholder="Click para buscar jurado"/>
+                            <button style="color: white; background-color: #70B620;" class="button" (click)="addJuradoUno()">Agregar/Cambiar Jurado</button>
+                        </div>  
+
+                        <div class="col-md-20 d-flex m-2">
+                          <label for="txtJurado2"  class="form-control p-1 flex-grow-0 lblSpecific">Jurado 2: </label>
+                          <input type="text"  [(ngModel)]="txtJurado2"  readonly maxlength="90" class="form-control flex-grow-1 border-secondary" id="txtJurado2"   (click)="openModalDocenteJurado2()"
+                          placeholder="Click para buscar jurado"/>
+                          <button style="color: white; background-color: #70B620;" class="button" (click)="addJuradoDos()">Agregar/Cambiar Jurado</button>
+                      </div>  
+  
+                          <div *ngIf="proyecto?.idJurado === null">         
+                          <strong>AUN NO HA SIDO REGISTRADO UN JURADO 1.</strong>
+                          </div>
+
+                          <div *ngIf="proyecto?.idJurado2 === null">         
+                            <strong>AUN NO HA SIDO REGISTRADO UN JURADO 2.</strong>
+                            </div>
+                        </div>   
                       </div>                
                   </div>
               </div>
@@ -341,7 +388,7 @@
                           *ngFor="let archivo of archivos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; index as i" >
                           <th scope="row">{{ i + 1 }}</th>
                           <td>{{ archivo.fileName }}</td>
-                          <td>{{ archivo.fechaSubida}} </td>
+                          <td>{{ archivo.fechaSubida | date}} </td>
                           <td>
                               <a (click)="descargarArchivo(archivo.id)" class="ver" title="Ver"
                                   data-toggle="tooltip"><i class="fas fa-download"></i></a>
@@ -398,21 +445,40 @@
                 <input [(ngModel)]="descripcion" name="descripcion" required class="form-control form-control-sm" type="text" />
                 <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
               </div>
-
-
-              <h1 class="h1-text">GESTION...</h1>
-              <div class="home-buttons">
-                  <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
-                      <option value="ANTIPROYECTO">ANTIPROYECTO</option>
-                      <option value="RECHAZADO">RECHAZADO</option>
-                      <option value="CORRECCIONES">CORRECCIONES</option>
-                  </select>
-                  <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
-              </div>
               </div>
             </div>
         </div>
       </div>
+
+      <div class="row m4-4">
+        <div class="col-lg-12">
+            <h1 class="h1-text">GESTION DE LA PROPUESTA</h1>
+            <div class="container pt-3 ps-md-5 pe-md-5">
+                <div class="change-director-section mt-4">
+                    <div class="change-director-header">
+                        <h2 class="change-director-title">GESTION DE LA PROPUESTA</h2>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="col-md-12 d-flex m-2">
+                            <label for="estadoPro" class="form-control p-1 flex-grow-0 lblSpecific">Estados: </label>
+                            <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
+                                <option value="ANTEPROYECTO">ACEPTAR PROPUESTA</option>
+                                <option value="RECHAZADA">RECHAZAR PROPUESTA</option>
+                                <option value="CORRECCIONES">ENVIAR A CORRECCIONES</option>
+                            </select>
+                        </div>
+                        <!-- Campo de fecha y etiqueta verde -->
+                        <div *ngIf="estadoPro === 'ANTEPROYECTO' || estadoPro === 'CORRECCIONES'" class="col-md-12 d-flex align-items-center m-2">
+                            <label for="fechaPresentacion" class="form-control p-1 flex-grow-0 lblSpecific">Fecha Presentación: </label>
+                            <input type="date" [(ngModel)]="fechaPresentacion" [min]="today" class="form-control form-control-sm ml-2">
+                        </div>
+                        <button style="color: white; background-color: #70B620;" class="button mt-2" (click)="cambiarEstadoProyecto()">ENVIAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
   </div>
   
     <button class="home-view2 button-link button">View all</button>

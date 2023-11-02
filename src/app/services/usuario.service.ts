@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
@@ -21,20 +21,10 @@ export class UsuarioService {
     return this.http.put<any>(`${this.myAppUrl}${this.myApiUrl}ConfirmarEmail/${id}`, {});
 }
   // Método para obtener la verificación total de un usuario por ID
-  verificacionTotalUsuario(
-    id: number,
-    creditosAcademicos?: number
-  ): Observable<any> {
-    // Construye los parámetros de consulta
-    const params = new HttpParams();
-    if (creditosAcademicos !== undefined) {
-      params.set('creditosAcademicos', creditosAcademicos.toString());
-    }
-
-    return this.http.put(
-      `${this.myAppUrl}${this.myApiUrl}VerificadoTotal/${id}`,
-      { params }
-    );
+  verificacionTotalUsuario(id: number, creditosAcademicos?: number): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const body = JSON.stringify({ creditosAcademicos: creditosAcademicos });
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}VerificadoTotal/${id}`, body, { headers: headers });
   }
 
   getTokenId(): number | any {
