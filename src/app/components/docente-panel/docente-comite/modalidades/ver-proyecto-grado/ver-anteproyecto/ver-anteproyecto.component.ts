@@ -173,12 +173,12 @@ export class VerAnteproyectoComponent {
   back(): void{
     const role = this.loginService.getRoleLocalStorage()
     console.log("este es el rol:"+ role)
-  
-    if (role.includes('DOCENTE_COMITE')) {
+    window.history.back();
+   /* if (role.includes('DOCENTE_COMITE')) {
       window.history.back();
-    } else {
-      this.router.navigate(['/docente-panel/docente-view']);
-    }
+    } else if (role.includes('DOCENTE_ASESOR')) {
+      window.history.back();
+    }*/
   }
 
   getNombreUsuario(): void{

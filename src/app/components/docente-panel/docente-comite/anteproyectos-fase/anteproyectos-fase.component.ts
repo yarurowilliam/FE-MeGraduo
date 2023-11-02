@@ -39,8 +39,7 @@ export class AnteproyectosFaseComponent {
      this.proyectoServide.getAllProyectos().subscribe(
       (data: any) => {
         // Filtrar los proyectos con estado "finalizado y en curso"
-        this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase != " ");
-        //this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase === "ANTEPROYECTO");
+        this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase === "ANTEPROYECTO");
         this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
         console.log("Listado de proyectos: ", this.listProyectos);
         

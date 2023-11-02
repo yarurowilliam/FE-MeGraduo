@@ -115,10 +115,7 @@
 }
 
 .btn-registrar:hover{
-    
-  
   padding: 5px 40px;
-  transform : translateY(-0px);
   background-color: #44a444;
   color: #ffffff;
   border: solid 2px #44a444;
@@ -167,9 +164,9 @@ p{
   color: white;
 }
 
-/* Estilos responsivos */
-@media (max-width: 768px) {
-  .container {
-    padding: 0 15px;
+
+@media screen and (max-width: 768px) {
+  .containerSvg {
+    display: none;
   }
 }
