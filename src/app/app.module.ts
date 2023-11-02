@@ -61,6 +61,8 @@ import { GestionarRolesComponent } from './components/admin-panel/gestionar-role
 import { VerProyectoGradoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-proyecto-grado.component';
 import { VerDocentesModalComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/ver-docentes-modal.component';
 import { DocentesValidadosComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/docentes-validados/docentes-validados.component';
+import { AnteproyectosFaseComponent } from './components/docente-panel/docente-comite/anteproyectos-fase/anteproyectos-fase.component';
+import { VerAnteproyectoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-anteproyecto/ver-anteproyecto.component';
 import { ConfirmUploadDialogComponent } from './components/dialogs/confirm-upload-dialog/confirm-upload-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -132,6 +134,8 @@ const routes = [
     VerProyectoGradoComponent,
     VerDocentesModalComponent,
     DocentesValidadosComponent,
+    AnteproyectosFaseComponent,
+    VerAnteproyectoComponent,
     ConfirmUploadDialogComponent
   ],
   imports: [

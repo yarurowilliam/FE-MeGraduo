@@ -40,14 +40,21 @@ docenteDirectorOptions(opcion: string): void {
   console.log("Soy la opción:" + this.isSelectedOption);
 
   // Mostrar el loading antes de la navegación
-  
-  this.router.navigate(['/docente-panel/blank'])
-  // Usar un temporizador para ocultar el loading después de un retraso (por ejemplo, 1 segundo)
-  timer(1000).subscribe(() => {
-    // Realizar la navegación
-    this.router.navigate(['/docente-panel/docente-director'], { queryParams: { selectedOption: opcion } });
-
-   
-  });
+  if(this.rolesDocente.includes('DOCENTE_DIRECTOR')){
+    this.router.navigate(['/docente-panel/blank'])
+    // Usar un temporizador para ocultar el loading después de un retraso (por ejemplo, 1 segundo)
+    timer(1000).subscribe(() => {
+      // Realizar la navegación
+      this.router.navigate(['/docente-panel/docente-director'], { queryParams: { selectedOption: opcion } });
+    });
+  }else if(this.rolesDocente.includes('DOCENTE_ASESOR')){
+    this.router.navigate(['/docente-panel/blank'])
+    // Usar un temporizador para ocultar el loading después de un retraso (por ejemplo, 1 segundo)
+    timer(1000).subscribe(() => {
+      // Realizar la navegación
+      this.router.navigate(['/docente-panel/docente-asesor'], { queryParams: { selectedOption: opcion } });
+    });
+  }
+ 
 }
 }

@@ -12,14 +12,16 @@ import { saveAs } from 'file-saver';
 import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VerDocentesModalComponent } from './ver-docentes-modal/ver-docentes-modal.component';
+import { VerDocentesModalComponent } from '../ver-docentes-modal/ver-docentes-modal.component';
+
+
 
 @Component({
-  selector: 'app-ver-proyecto-grado',
-  templateUrl: './ver-proyecto-grado.component.html',
-  styleUrls: ['./ver-proyecto-grado.component.css']
+  selector: 'app-ver-anteproyecto',
+  templateUrl: './ver-anteproyecto.component.html',
+  styleUrls: ['./ver-anteproyecto.component.css']
 })
-export class VerProyectoGradoComponent implements OnInit {
+export class VerAnteproyectoComponent {
   loading = false;
   nombreUsuario?: string;
   rolU?: string;
@@ -36,21 +38,17 @@ export class VerProyectoGradoComponent implements OnInit {
   descripcion = "";
   persona : Persona;
   limpiarText: '';
-  estadoPro = '';
+  estadoPro : '';
   txtAsesor = '';
   //VISTA PROYECTO
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
   rolEstablecido = "";
+  rolTempoarl = "";
   tittle2 = "2. INFORMACIÓN ESPECIFICA DE LA PROPUESTA DE PROYECTO DE GRADO";
   tittle3 = "3. PLANTEAMIENTO/FORMULACION DEL PROBLEMA Y JUSTIFICACIÓN";
   tittle5 = "5. OBJETIVO GENERAL Y ESPEFICICOS";
   tittle7 = "7. BIBLIOGRAFÍA";
   txtDirector = '';
-  txtJurado = '';
-  txtJurado2 = '';
-  fechaPresentacion: string;
-  today: string;
-
   page = 1;
   pageSize = 6;
   constructor(private router: Router,
@@ -66,8 +64,9 @@ export class VerProyectoGradoComponent implements OnInit {
     this.getNombreUsuario();
     console.log(this.nombreUsuario + " " + this.rolU);
     this.testMetod();
-    const currentDate = new Date();
-    this.today = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+    const role = this.loginService.getRoleLocalStorage()
+    this.rolEstablecido = role;
+    console.log("este es el rol:"+ this.rolEstablecido)
   }
 
   openModalDocente() {
@@ -115,37 +114,6 @@ export class VerProyectoGradoComponent implements OnInit {
     }
   }
 
-  
-  addJuradoUno(){
-    if(this.txtJurado === ""){
-      this.toastr.error('No se ha seleccionado un jurado', 'Error');
-    }else{
-      this.proyectoService.addJuradoToProyecto(this.proyecto.id, parseInt(this.txtJurado)).subscribe(response => {
-        this.toastr.success('Jurado agregado!', 'Info');
-        console.log('Jurado agregado!', response);
-        this.testMetod();
-      }, error => {
-        console.error('Hubo un error al agregar el jurado:', error);
-        this.toastr.error(error.error.message, 'Error');
-      });
-    }
-  }
-
-  addJuradoDos(){
-    if(this.txtJurado2 === ""){
-      this.toastr.error('No se ha seleccionado un jurado', 'Error');
-    }else{
-      this.proyectoService.addJuradoDosToProyecto(this.proyecto.id, parseInt(this.txtJurado2)).subscribe(response => {
-        this.toastr.success('Jurado agregado!', 'Info');
-        console.log('Jurado agregado!', response);
-        this.testMetod();
-      }, error => {
-        console.error('Hubo un error al agregar el jurado:', error);
-        this.toastr.error(error.error.message, 'Error');
-      });
-    }
-  }
-
 
   openModalDocente2() {
     console.log("click click")
@@ -161,37 +129,6 @@ export class VerProyectoGradoComponent implements OnInit {
       console.log(this.txtDirector);
     }
   }
-
-  openModalDocenteJurado() {
-    console.log("click click")
-    this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizarJurado(docente));
-  }
-
-  actualizarJurado(docente: Docente) {
-    if(this.txtAsesor === docente.identificacion.toString() || this.txtDirector === docente.identificacion.toString() || this.txtJurado2 === docente.identificacion.toString()){
-      this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
-    }else{
-      this.toastr.success('El jurado se ha agregado correctamente', 'Éxito');
-      this.txtJurado = docente.identificacion.toString();
-      console.log(this.txtJurado);
-    }
-  }
-
-  openModalDocenteJurado2() {
-    console.log("click click")
-    this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizarJurado2(docente));
-  }
-
-  actualizarJurado2(docente: Docente) {
-    if(this.txtAsesor === docente.identificacion.toString() || this.txtDirector === docente.identificacion.toString() || this.txtJurado === docente.identificacion.toString()){
-      this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
-    }else{
-      this.toastr.success('El jurado se ha agregado correctamente', 'Éxito');
-      this.txtJurado2 = docente.identificacion.toString();
-      console.log(this.txtJurado);
-    }
-  }
-
   testMetod(): void{
     const idProyectoStr = this.aRoute.snapshot.paramMap.get('id');
 
@@ -240,13 +177,12 @@ export class VerProyectoGradoComponent implements OnInit {
   back(): void{
     const role = this.loginService.getRoleLocalStorage()
     console.log("este es el rol:"+ role)
-  
-    if (role.includes('DOCENTE_COMITE')) {
-      // Retrocede en la historia del navegador
+    window.history.back();
+   /* if (role.includes('DOCENTE_COMITE')) {
       window.history.back();
-    } else {
-      this.router.navigate(['/docente-panel/docente-view']);
-    }
+    } else if (role.includes('DOCENTE_ASESOR')) {
+      window.history.back();
+    }*/
   }
 
   getNombreUsuario(): void{
@@ -278,8 +214,16 @@ export class VerProyectoGradoComponent implements OnInit {
     if(textoComentario == null || textoComentario == ""){
       this.toastr.error('No se puede agregar un comentario vacio', 'Error');
     }else{
+      if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+          this.rolTempoarl = '[DOCENTE ASESOR]: '
+      }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+        this.rolTempoarl = '[DOCENTE ASESOR]: '
+    }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+      this.rolTempoarl = '[DOCENTE ASESOR]: '
+  }
+      
       const comentario: Comentario = {
-        descripcion: '[COMITE]: ' + textoComentario,
+        descripcion: this.rolTempoarl + textoComentario,
         fechaComentario: new Date(),
         idPersona: parseInt(this.nombreUsuario)
       };
@@ -476,96 +420,4 @@ export class VerProyectoGradoComponent implements OnInit {
     this.router.navigate(['/home-estudiantes/modalidades-disponibles']);
   }
 
-  cambiarEstadoProyecto() {
-    // Verifica si el estado es ANTEPROYECTO y si no hay fecha seleccionada
-
-    if(this.estadoPro.trim() === ''){
-      this.toastr.error('Para continuar debe seleccionar un estado', 'Error')
-    }else{
-      if (this.estadoPro === 'ANTEPROYECTO' && !this.fechaPresentacion) {
-        this.fechaPresentacion = null; // Asegurarse de que la fecha sea nula
-        this.toastr.error('Para aceptar esta propuesta debes ingresar una fecha de presentacion', 'Error')
-        return; // Termina la ejecución para que el usuario corrija
-      }
-  
-      if (this.estadoPro === 'ANTEPROYECTO' && this.fechaPresentacion){
-        this.toastr.info('Test info' , 'info');
-        const tempDate = new Date(this.fechaPresentacion);
-        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
-        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
-        this.proyecto.estadoProyecto = 'PENDIENTE ARCHIVO ANTEPROYECTO';
-        this.proyecto.tipoFase = 'ANTEPROYECTO';
-        console.log(this.proyecto);
-
-        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
-          response => {
-            this.toastr.success(response.message, 'Éxito');
-            this.loading = false;
-            location.reload();
-          },
-          error => {
-            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
-            this.loading = false;
-          }
-        );
-      }
-  
-      if (this.estadoPro === 'CORRECCIONES' && !this.fechaPresentacion) {
-        this.fechaPresentacion = null; // Asegurarse de que la fecha sea nula
-        this.toastr.error('Para aceptar esta propuesta debes ingresar una fecha de correcion', 'Error')
-        return; // Termina la ejecución para que el usuario corrija
-      }
-  
-      if (this.estadoPro === 'CORRECCIONES' && this.fechaPresentacion){
-        this.toastr.info('Test info' , 'info');
-        const tempDate = new Date(this.fechaPresentacion);
-        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
-        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
-        this.proyecto.estadoProyecto = 'PROPUESTA CON CORRECCIONES';
-        this.proyecto.tipoFase = 'PROPUESTA';
-        console.log(this.proyecto);
-        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
-          response => {
-            this.toastr.success(response.message, 'Éxito');
-            this.loading = false;
-            location.reload();
-          },
-          error => {
-            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
-            this.loading = false;
-          }
-        );
-      }
-  
-      if(this.estadoPro === 'RECHAZADA'){
-        this.toastr.info('Test info' , 'info');
-        const tempDate = new Date(this.fechaPresentacion);
-        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
-        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
-        this.proyecto.estadoProyecto = 'PROPUESTA RECHAZADA';
-        this.proyecto.tipoFase = 'TERMINADA RECHAZADA';
-        console.log(this.proyecto);
-        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
-          response => {
-            this.toastr.success(response.message, 'Éxito');
-            this.loading = false;
-            location.reload();
-          },
-          error => {
-            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
-            this.loading = false;
-          }
-        );
-      }
-
-
-  
-      // Resto del código para guardar la información...
-    }
-
-   
-  }
-
-
-  
 }

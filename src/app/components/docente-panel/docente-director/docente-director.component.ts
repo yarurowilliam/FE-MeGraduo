@@ -68,10 +68,14 @@ export class DocenteDirectorComponent implements OnInit {
           this.paginarProyectos();
         },
         (error) => {
+          console.log("Entré en el if");
+          
           console.error('Error al cargar proyectos:', error);
         }
       );
     } else {
+      console.log("Id User del docente: ", this.tokenIdUser);
+      
       // Llamar al servicio para obtener los proyectos
       this.proyectoService.getProyectoByDirectorID(this.tokenIdUser).subscribe(
         (data: any) => {
@@ -82,6 +86,7 @@ export class DocenteDirectorComponent implements OnInit {
           this.paginarProyectos();
         },
         (error) => {
+          console.log("Entré en el else");
           console.error('Error al cargar proyectos:', error);
         }
       );

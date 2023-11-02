@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { FiltroDocentePipe } from 'src/app/pipes/filtro-docente.pipe';
 
 @Component({
-  selector: 'app-docente-comite',
-  templateUrl: './docente-comite.component.html',
-  styleUrls: ['./docente-comite.component.css']
+  selector: 'app-anteproyectos-fase',
+  templateUrl: './anteproyectos-fase.component.html',
+  styleUrls: ['./anteproyectos-fase.component.css']
 })
-export class DocenteComiteComponent implements OnInit{
+export class AnteproyectosFaseComponent {
+  listProyectos: any[] = [];
+  selectedProyect: any;
   searchText: string = '';
   orderBy: string = 'asc';
   sortKey: string = '';
-  listProyectos: any[] = [];
-  selectedProyect: any;
-  tittle1 = "INFORMACIÓN GENERAL DE PROYECTOS";
+  tittle1 = "PROYECTOS EN ESTADO DE 'ANTEPROYECTOS'";
   tableComponent: { nombre: string }[] = [
     { nombre: "Título del proyecto" },
     { nombre: "Facultad" },
     { nombre: "Integrantes" },
     { nombre: "Director del proyecto" },
     { nombre: "Fecha de creación" },
-    {nombre: "Estado"},
     { nombre: "" },
   ];
 
@@ -39,8 +39,10 @@ export class DocenteComiteComponent implements OnInit{
      this.proyectoServide.getAllProyectos().subscribe(
       (data: any) => {
         // Filtrar los proyectos con estado "finalizado y en curso"
-        this.listProyectos = data.filter((proyecto: any) => proyecto.estadoProyecto === "PROPUESTA EN COMITE");
+        this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase === "ANTEPROYECTO");
         this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
+        console.log("Listado de proyectos: ", this.listProyectos);
+        
         this.calcularTotalPaginas();
         this.paginarProyectos();
       },
@@ -80,5 +82,31 @@ export class DocenteComiteComponent implements OnInit{
   canShowNext(): boolean {
     // El botón "Next" se habilita si hay más elementos por mostrar en la siguiente página
     return (this.p * this.itemsPerPage) < this.totalItems;
+  }
+
+  sortBy(key: string): void {
+    if (this.sortKey === key) {
+      this.orderBy = this.orderBy === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortKey = key;
+      this.orderBy = 'asc';
+    }
+    this.listProyectos = this.sortTable(
+      this.listProyectos,
+      this.sortKey,
+      this.orderBy
+    );
+  }
+
+  sortTable(data: any[], key: string, order: string): any[] {
+    return data.sort((a, b) => {
+      const valueA = a[key];
+      const valueB = b[key];
+      if (order === 'asc') {
+        return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+      } else {
+        return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+      }
+    });
   }
 }
