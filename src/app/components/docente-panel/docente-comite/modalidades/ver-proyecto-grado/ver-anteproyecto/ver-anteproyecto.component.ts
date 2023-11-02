@@ -13,6 +13,7 @@ import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { VerDocentesModalComponent } from '../ver-docentes-modal/ver-docentes-modal.component';
+import { InformacionProyectoGradoFase1 } from 'src/app/models/FileProyectosFase1';
 
 
 
@@ -35,10 +36,10 @@ export class VerAnteproyectoComponent {
   docenteJurado1?: Docente;
   docenteJurado2?: Docente;
   archivos?: FileProyectosGrado[]
+  archivosFase1?: InformacionProyectoGradoFase1[]
   descripcion = "";
   persona : Persona;
   limpiarText: '';
-  estadoPro : '';
   txtAsesor = '';
   //VISTA PROYECTO
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
@@ -67,6 +68,11 @@ export class VerAnteproyectoComponent {
     const role = this.loginService.getRoleLocalStorage()
     this.rolEstablecido = role;
     console.log("este es el rol:"+ this.rolEstablecido)
+  }
+
+  irPropuesta(idPropuesta : number){
+    this.router.navigate(['/docente-panel/ver-proyecto/'+idPropuesta]); // Redirigir a componente de docentes de comité ******(POR AHORA)*******
+           
   }
 
   openModalDocente() {
@@ -163,6 +169,8 @@ export class VerAnteproyectoComponent {
               this.getInfoDocenteJurado2(this.proyecto.idJurado2);
             }
             this.loadArchivos(this.proyecto.id);
+            this.loadArchivos2(this.proyecto.id);
+
             console.log('Proyecto:', this.proyecto);
             this.loading = false
           },
@@ -191,6 +199,7 @@ export class VerAnteproyectoComponent {
   }
 
   selectedFile: File = null;
+  selectedFile2: File = null;
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
@@ -209,17 +218,37 @@ export class VerAnteproyectoComponent {
       }
     );
   }
+
+  onFileSelected2(event) {
+    this.selectedFile2 = <File>event.target.files[0];
+  }
+
+  eliminarArchivo2(id: number) {
+    this.proyectoService.eliminarAnexo2(id).subscribe(
+      response => {
+        console.log(response.message);
+        this.toastr.success(response.message, 'Info');
+        this.loadArchivos2(this.proyecto.id);
+      },
+      error => {
+        this.toastr.error(error.error.message, 'Error');
+        console.error('Error al eliminar el archivo:', error);
+      }
+    );
+  }
   
   addComentario(textoComentario: string, id: number){
     if(textoComentario == null || textoComentario == ""){
       this.toastr.error('No se puede agregar un comentario vacio', 'Error');
     }else{
       if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
-          this.rolTempoarl = '[DOCENTE ASESOR]: '
-      }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
-        this.rolTempoarl = '[DOCENTE ASESOR]: '
-    }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
-      this.rolTempoarl = '[DOCENTE ASESOR]: '
+          this.rolTempoarl = '[ASESOR]: '
+      }else if(this.rolEstablecido.includes('DOCENTE_DIRECTOR')){
+        this.rolTempoarl = '[DIRECTOR]: '
+    }else if(this.rolEstablecido.includes('DOCENTE_JURADO')){
+      this.rolTempoarl = '[JURADO]: '
+    }else if(this.rolEstablecido.includes('DOCENTE_COMITE')){
+      this.rolTempoarl = '[COMITE]: '
   }
       
       const comentario: Comentario = {
@@ -240,10 +269,110 @@ export class VerAnteproyectoComponent {
 
   }
 
+  estadoPro = "";
+  
+  fechaPresentacion: string;
+  today: string;
+
+  cambiarEstadoProyecto() {
+    // Verifica si el estado es ANTEPROYECTO y si no hay fecha seleccionada
+    debugger;
+    if(this.estadoPro.trim() === ''){
+      this.toastr.error('Para continuar debe seleccionar un estado', 'Error')
+    }else{
+      if (this.estadoPro === 'PROYECTO' && !this.fechaPresentacion) {
+        this.fechaPresentacion = null; // Asegurarse de que la fecha sea nula
+        this.toastr.error('Para aceptar esta propuesta debes ingresar una fecha de presentacion', 'Error')
+        return; // Termina la ejecución para que el usuario corrija
+      }
+  
+      if (this.estadoPro === 'PROYECTO' && this.fechaPresentacion){
+        this.toastr.info('Aprobando solicitud...' , 'info');
+        const tempDate = new Date(this.fechaPresentacion);
+        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
+        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
+        this.proyecto.estadoProyecto = 'PENDIENTE ARCHIVO PROYECTO';
+        this.proyecto.tipoFase = 'PROYECTO';
+        console.log(this.proyecto);
+
+        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
+          response => {
+            this.toastr.success(response.message, 'Éxito');
+            this.loading = false;
+            location.reload();
+          },
+          error => {
+            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
+            this.loading = false;
+          }
+        );
+      }
+  
+      if (this.estadoPro === 'CORRECCIONES ANTEPROYECTO' && !this.fechaPresentacion) {
+        this.fechaPresentacion = null; // Asegurarse de que la fecha sea nula
+        this.toastr.error('Para aceptar este  debes ingresar una fecha de correcion', 'Error')
+        return; // Termina la ejecución para que el usuario corrija
+      }
+  
+      if (this.estadoPro === 'CORRECCIONES ANTEPROYECTO' && this.fechaPresentacion){
+        this.toastr.info('Enviando a correcciones' , 'info');
+        const tempDate = new Date(this.fechaPresentacion);
+        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
+        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
+        this.proyecto.estadoProyecto = 'ANTEPROYECTO CON CORRECCIONES';
+        this.proyecto.tipoFase = 'ANTEPROYECTO';
+        console.log(this.proyecto);
+        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
+          response => {
+            this.toastr.success(response.message, 'Éxito');
+            this.loading = false;
+            location.reload();
+          },
+          error => {
+            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
+            this.loading = false;
+          }
+        );
+      }
+  
+      if(this.estadoPro === 'RECHAZADA'){
+        this.toastr.info('Test info' , 'info');
+        const tempDate = new Date(this.fechaPresentacion);
+        const fechaSinHora = new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate());
+        this.proyecto.fechaPresentacionAnteProyecto = fechaSinHora;  
+        this.proyecto.estadoProyecto = 'PROPUESTA RECHAZADA';
+        this.proyecto.tipoFase = 'TERMINADA RECHAZADA';
+        console.log(this.proyecto);
+        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
+          response => {
+            this.toastr.success(response.message, 'Éxito');
+            this.loading = false;
+            location.reload();
+          },
+          error => {
+            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
+            this.loading = false;
+          }
+        );
+      }
+
+
+  
+      // Resto del código para guardar la información...
+    }
+  }
+
   descargarArchivo(id: number) {
     this.proyectoService.downloadPdfFile(id).subscribe(data => {
       const blob = new Blob([data], { type: 'application/pdf' });
       saveAs(blob, `anexo-${this.proyecto.titulo}-${id}.pdf`);  // puedes cambiar 'nombreDelArchivo' por el nombre que prefieras
+    });
+  }
+
+  descargarArchivo2(id: number) {
+    this.proyectoService.downloadPdfFile2(id).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      saveAs(blob, `anexoANTEPROYECTO-${this.proyecto.titulo}-${id}.pdf`);  // puedes cambiar 'nombreDelArchivo' por el nombre que prefieras
     });
   }
 
@@ -257,6 +386,25 @@ export class VerAnteproyectoComponent {
             this.selectedFile = null;
             this.loadArchivos(idPropuesta);
             this.selectedFile = null;
+          },
+          error => {
+            console.error('Error al subir el archivo:', error);
+          }
+        );
+    } else {
+      this.toastr.info('No ha seleccionado ningún archivo', 'Info');
+    }
+  }
+
+  uploadFile2(idPropuesta: number) {
+    if (this.selectedFile2) {
+      this.proyectoService.uploadPdfFile2(idPropuesta, this.selectedFile2)
+        .subscribe(
+          response => {
+            this.toastr.success(response.message, 'Info');
+            this.selectedFile2 = null;
+            this.loadArchivos2(idPropuesta);
+            this.selectedFile2 = null;
           },
           error => {
             console.error('Error al subir el archivo:', error);
@@ -287,6 +435,17 @@ export class VerAnteproyectoComponent {
       }, error => {
         console.log(error.error.message);
         this.archivos = [];
+      });
+  }
+
+  loadArchivos2(idProyecto: number) {
+
+    this.proyectoService.getAllArchivos2(idProyecto)  // Asume que el método se llama getAllArchivos en el servicio
+      .subscribe(data => {
+        this.archivosFase1 = data;
+      }, error => {
+        console.log(error.error.message);
+        this.archivosFase1 = [];
       });
   }
 
@@ -406,6 +565,7 @@ export class VerAnteproyectoComponent {
           this.getInfoDocenteJurado2(this.proyecto.idJurado2);
         }
         this.loadArchivos(this.proyecto.id);
+        this.loadArchivos2(this.proyecto?.id);
         console.log('Proyecto:', this.proyecto);
         this.loading = false
       }, error => {

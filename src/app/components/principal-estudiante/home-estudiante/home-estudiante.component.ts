@@ -13,6 +13,8 @@ import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmUploadDialogComponent } from '../../dialogs/confirm-upload-dialog/confirm-upload-dialog.component';
+import { InformacionProyectoGradoFase1 } from 'src/app/models/FileProyectosFase1';
+import { InformacionProyectoGradoFase2 } from 'src/app/models/FileProyectosFase2';
 
 @Component({
   selector: 'app-home-estudiante',
@@ -35,6 +37,7 @@ export class HomeEstudianteComponent implements OnInit{
   archivos?: FileProyectosGrado[]
   descripcion = "";
   persona : Persona;
+  checkTipoFase = "";
   //VISTA PROYECTO
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
   rolEstablecido = "";
@@ -136,8 +139,17 @@ export class HomeEstudianteComponent implements OnInit{
     if(this.estadoPro.trim() === ''){
       this.toastr.error('Para continuar debe seleccionar un estado', 'Error')
     }else{
-      this.proyecto.estadoProyecto = 'PROPUESTA EN COMITE';
-      this.proyecto.tipoFase = 'PROPUESTA';
+      if(this.proyecto?.tipoFase === "PROPUESTA"){
+        this.proyecto.estadoProyecto = 'PROPUESTA EN COMITE';
+        this.proyecto.tipoFase = 'PROPUESTA';
+      }else if(this.proyecto?.tipoFase === "ANTEPROYECTO"){
+        this.proyecto.estadoProyecto = 'ANTEPROYECTO EN COMITE';
+        this.proyecto.tipoFase = 'ANTEPROYECTO';
+      }else if(this.proyecto?.tipoFase === "PROYECTO"){
+        this.proyecto.estadoProyecto = 'PROYECTO EN COMITE';
+        this.proyecto.tipoFase = 'PROYECTO';
+      }
+     
         this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
           response => {
             this.toastr.success(response.message, 'Éxito');
@@ -269,8 +281,6 @@ export class HomeEstudianteComponent implements OnInit{
     );
   }
 
-
-
   getInfoEstudiante2(id: number): void {
     this.loginService.getEstudianteDeatils(id).subscribe(
       data => {
@@ -329,7 +339,12 @@ export class HomeEstudianteComponent implements OnInit{
         }else{
           this.isReadonly = true;
         }
+
+        this.checkTipoFase = this.proyecto?.tipoFase;
         this.loadArchivos(this.proyecto.id);
+        
+        this.loadArchivos2(this.proyecto?.id);
+        this.loadArchivos3(this.proyecto?.id);
         console.log('Proyecto:', this.proyecto);
         this.loading = false
       }, error => {
@@ -340,7 +355,128 @@ export class HomeEstudianteComponent implements OnInit{
     }
   }
 
+  cambiarFase(valor : string){
+    this.checkTipoFase = valor;
+  }
+
   goToTheModalidades(): void{
     this.router.navigate(['/home-estudiantes/modalidades-disponibles']);
+  }
+
+  
+  archivosFase1?: InformacionProyectoGradoFase1[]
+  selectedFile2: File = null;
+
+  loadArchivos2(idProyecto: number) {
+
+    this.proyectoService.getAllArchivos2(idProyecto)  // Asume que el método se llama getAllArchivos en el servicio
+      .subscribe(data => {
+        this.archivosFase1 = data;
+      }, error => {
+        console.log(error.error.message);
+        this.archivosFase1 = [];
+      });
+  }
+
+  descargarArchivo2(id: number) {
+    this.proyectoService.downloadPdfFile2(id).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      saveAs(blob, `anexoANTEPROYECTO-${this.proyecto.titulo}-${id}.pdf`);  // puedes cambiar 'nombreDelArchivo' por el nombre que prefieras
+    });
+  }
+  
+  uploadFile2(idPropuesta: number) {
+    if (this.selectedFile2) {
+      this.proyectoService.uploadPdfFile2(idPropuesta, this.selectedFile2)
+        .subscribe(
+          response => {
+            this.toastr.success(response.message, 'Info');
+            this.selectedFile2 = null;
+            this.loadArchivos2(idPropuesta);
+            this.selectedFile2 = null;
+          },
+          error => {
+            console.error('Error al subir el archivo:', error);
+          }
+        );
+    } else {
+      this.toastr.info('No ha seleccionado ningún archivo', 'Info');
+    }
+  }
+
+  onFileSelected2(event) {
+    this.selectedFile2 = <File>event.target.files[0];
+  }
+
+  eliminarArchivo2(id: number) {
+    this.proyectoService.eliminarAnexo2(id).subscribe(
+      response => {
+        console.log(response.message);
+        this.toastr.success(response.message, 'Info');
+        this.loadArchivos2(this.proyecto.id);
+      },
+      error => {
+        this.toastr.error(error.error.message, 'Error');
+        console.error('Error al eliminar el archivo:', error);
+      }
+    );
+  }
+
+  archivosFase2?: InformacionProyectoGradoFase2[]
+  selectedFile3: File = null;
+
+  loadArchivos3(idProyecto: number) {
+
+    this.proyectoService.getAllArchivos3(idProyecto)  // Asume que el método se llama getAllArchivos en el servicio
+      .subscribe(data => {
+        this.archivosFase2 = data;
+      }, error => {
+        console.log(error.error.message);
+        this.archivosFase2 = [];
+      });
+  }
+
+  descargarArchivo3(id: number) {
+    this.proyectoService.downloadPdfFile3(id).subscribe(data => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      saveAs(blob, `anexoPROYECTO-${this.proyecto.titulo}-${id}.pdf`);  // puedes cambiar 'nombreDelArchivo' por el nombre que prefieras
+    });
+  }
+  
+  uploadFile3(idPropuesta: number) {
+    if (this.selectedFile3) {
+      this.proyectoService.uploadPdfFile3(idPropuesta, this.selectedFile3)
+        .subscribe(
+          response => {
+            this.toastr.success(response.message, 'Info');
+            this.selectedFile3 = null;
+            this.loadArchivos3(idPropuesta);
+            this.selectedFile3 = null;
+          },
+          error => {
+            console.error('Error al subir el archivo:', error);
+          }
+        );
+    } else {
+      this.toastr.info('No ha seleccionado ningún archivo', 'Info');
+    }
+  }
+
+  onFileSelected3(event) {
+    this.selectedFile3 = <File>event.target.files[0];
+  }
+
+  eliminarArchivo3(id: number) {
+    this.proyectoService.eliminarAnexo3(id).subscribe(
+      response => {
+        console.log(response.message);
+        this.toastr.success(response.message, 'Info');
+        this.loadArchivos3(this.proyecto.id);
+      },
+      error => {
+        this.toastr.error(error.error.message, 'Error');
+        console.error('Error al eliminar el archivo:', error);
+      }
+    );
   }
 }

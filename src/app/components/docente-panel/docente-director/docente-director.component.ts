@@ -23,6 +23,7 @@ export class DocenteDirectorComponent implements OnInit {
     { nombre: 'Facultad' },
     { nombre: 'Integrantes' },
     { nombre: 'Director del proyecto' },
+    { nombre: 'Estado'},
     { nombre: 'Fecha de creación' },
     { nombre: '' },
   ];

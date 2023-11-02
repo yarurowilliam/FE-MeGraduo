@@ -5,6 +5,8 @@ import { ProyectoGrado } from '../models/proyectoGrado';
 import { environment } from '../environments/environment';
 import { FileProyectosGrado } from '../models/FileProyectosGrado';
 import { Comentario } from '../models/comentario';
+import { InformacionProyectoGradoFase1 } from '../models/FileProyectosFase1';
+import { InformacionProyectoGradoFase2 } from '../models/FileProyectosFase2';
 
 
 @Injectable({
@@ -155,4 +157,64 @@ cambiarAntePro(idProyecto: number, fechaNew: Date) {
       );
   }
 
+  uploadPdfFile2(idPropuesta: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+  
+    return this.http.post(`${this.myAppUrl}/api/ProyectoGrado/UploadAnteProyectos/${idPropuesta}`, formData)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  eliminarAnexo2(id: number): Observable<any> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/EliminarAnexoAnteProyecto/${id}`;
+    return this.http.delete<any>(url);
+  }
+  
+  downloadPdfFile2(id: number): Observable<Blob> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/DownloadAnteProyecto/${id}`;
+    return this.http.get(url, {
+      responseType: 'blob',
+      headers: new HttpHeaders().append('Content-Type', 'application/pdf')
+    });
+  }
+
+  getAllArchivos2(idPropuesta: number): Observable<InformacionProyectoGradoFase1[]> {
+    return this.http.get<InformacionProyectoGradoFase1[]>(`${this.myAppUrl}${this.myApiUrl}/GetAnexosAnteProyecto/${idPropuesta}`) // Asegúrate de poner la URL correcta
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  uploadPdfFile3(idPropuesta: number, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+  
+    return this.http.post(`${this.myAppUrl}/api/ProyectoGrado/UploadAnteProyectos2/${idPropuesta}`, formData)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  eliminarAnexo3(id: number): Observable<any> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/EliminarAnexoAnteProyecto2/${id}`;
+    return this.http.delete<any>(url);
+  }
+  
+  downloadPdfFile3(id: number): Observable<Blob> {
+    const url = `${this.myAppUrl}/api/ProyectoGrado/DownloadAnteProyecto2/${id}`;
+    return this.http.get(url, {
+      responseType: 'blob',
+      headers: new HttpHeaders().append('Content-Type', 'application/pdf')
+    });
+  }
+
+  getAllArchivos3(idPropuesta: number): Observable<InformacionProyectoGradoFase2[]> {
+    return this.http.get<InformacionProyectoGradoFase2[]>(`${this.myAppUrl}${this.myApiUrl}/GetAnexosAnteProyecto2/${idPropuesta}`) // Asegúrate de poner la URL correcta
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+  
 }

@@ -45,6 +45,9 @@ import { VerProyectoGradoComponent } from './components/docente-panel/docente-co
 import { AnteproyectosFaseComponent } from './components/docente-panel/docente-comite/anteproyectos-fase/anteproyectos-fase.component';
 import { VerAnteproyectoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-anteproyecto/ver-anteproyecto.component';
 import { DocenteAsesorComponent } from './components/docente-panel/docente-asesor/docente-asesor.component';
+import { ProyectosComponent } from './components/proyectos/proyectos.component';
+import { ProyectoFaseComponent } from './components/docente-panel/docente-comite/proyecto-fase/proyecto-fase.component';
+import { VerProyectoFaseComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-fase/ver-proyecto-fase.component';
 
 
 
@@ -101,6 +104,8 @@ const routes: Routes = [
     { path: 'docente-director',component: DocenteDirectorComponent},    
     { path: 'ver-proyecto/:id', component: VerProyectoGradoComponent},
     { path: 'ver-anteproyecto/:id', component: VerAnteproyectoComponent},
+    { path: 'ver-proyecto-fase/:id', component: VerProyectoFaseComponent},
+    { path: 'docente-comite/proyectos', component: ProyectoFaseComponent},
     
   ]},
   {path: '**', component: NotFound}

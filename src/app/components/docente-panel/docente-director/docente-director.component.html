@@ -21,9 +21,10 @@
                                                 <td>{{ list.areaTematica }}</td>
                                                 <td>{{ list.idIntegrante1 }}, {{ list.idIntegrante2 }}, {{ list.idIntegrante3 }}</td>
                                                 <td>{{ list.idDirector }}</td>
+                                                <td>{{ list.tipoFase }}</td>
                                                 <td>{{ list.fechaCreacion | date:'dd/MM/yyyy' }}</td>
                                                 <td>
-                                                    <a [routerLink]="['/detalle-proyecto', list.id]">
+                                                    <a [routerLink]="['/docente-panel/ver-anteproyecto', list.id]">
                                                       <i class="fa fa-eye"></i>
                                                     </a>
                                                   </td>

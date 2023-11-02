@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -66,6 +66,8 @@ import { VerAnteproyectoComponent } from './components/docente-panel/docente-com
 import { ConfirmUploadDialogComponent } from './components/dialogs/confirm-upload-dialog/confirm-upload-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProyectoFaseComponent } from './components/docente-panel/docente-comite/proyecto-fase/proyecto-fase.component';
+import { VerProyectoFaseComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-fase/ver-proyecto-fase.component';
 
 const routes = [
   {
@@ -136,7 +138,9 @@ const routes = [
     DocentesValidadosComponent,
     AnteproyectosFaseComponent,
     VerAnteproyectoComponent,
-    ConfirmUploadDialogComponent
+    ConfirmUploadDialogComponent,
+    ProyectoFaseComponent,
+    VerProyectoFaseComponent
   ],
   imports: [
     BrowserModule,
@@ -158,7 +162,7 @@ const routes = [
     MatDialogModule
     
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
