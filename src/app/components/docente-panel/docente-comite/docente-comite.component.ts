@@ -19,6 +19,7 @@ export class DocenteComiteComponent implements OnInit{
     { nombre: "Integrantes" },
     { nombre: "Director del proyecto" },
     { nombre: "Fecha de creación" },
+    {nombre: "Estado"},
     { nombre: "" },
   ];
 
@@ -38,7 +39,7 @@ export class DocenteComiteComponent implements OnInit{
      this.proyectoServide.getAllProyectos().subscribe(
       (data: any) => {
         // Filtrar los proyectos con estado "finalizado y en curso"
-        this.listProyectos = data.filter((proyecto: any) => proyecto.estadoProyecto != " ");
+        this.listProyectos = data.filter((proyecto: any) => proyecto.estadoProyecto === "PROPUESTA EN COMITE");
         this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
         this.calcularTotalPaginas();
         this.paginarProyectos();

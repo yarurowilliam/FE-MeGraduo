@@ -294,16 +294,18 @@
                 <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Agregar Comentario</button>
               </div>
 
-
-              <h1 class="h1-text">GESTION...</h1>
-              <div class="home-buttons">
-                  <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
-                      <option value="ANTIPROYECTO">ANTIPROYECTO</option>
-                      <option value="RECHAZADO">RECHAZADO</option>
-                      <option value="CORRECCIONES">CORRECCIONES</option>
-                  </select>
-                  <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Gestionar</button>
+              <div *ngIf="!rolEstablecido.includes('DOCENTE_ASESOR')">
+                <h1 class="h1-text">GESTION...</h1>
+                <div class="home-buttons">
+                    <select [(ngModel)]="estadoPro" name="descripcion" required class="form-control form-control-sm">
+                        <option value="ANTIPROYECTO">ANTIPROYECTO</option>
+                        <option value="RECHAZADO">RECHAZADO</option>
+                        <option value="CORRECCIONES">CORRECCIONES</option>
+                    </select>
+                    <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Gestionar</button>
+                </div>
               </div>
+            
               </div>
             </div>
         </div>

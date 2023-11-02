@@ -60,7 +60,7 @@ export class DocenteAsesorComponent {
         (data: any) => {
           // Filtrar todos los proyectos
           this.listProyectos = data.filter(
-            (proyecto: any) => (proyecto.estadoProyecto = !'')
+            (proyecto: any) => (proyecto.estadoProyecto != 'PROPUESTA FINALIZADA' && proyecto.tipoFase != 'PROPUESTA RECHAZADA')
           );
           this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
           this.calcularTotalPaginas();
@@ -78,11 +78,11 @@ export class DocenteAsesorComponent {
       // Llamar al servicio para obtener los proyectos
       this.proyectoService.getProyectoByAsesorID(this.tokenIdUser).subscribe(
         (data: any) => {
-          // Filtrar proyectos donde aparece el director
-          this.listProyectos = data;
+          // Filtrar todos los proyectos
+          this.listProyectos = data.filter(
+            (proyecto: any) => (proyecto.estadoProyecto != 'PROPUESTA FINALIZADA' && proyecto.tipoFase != 'PROPUESTA RECHAZADA')
+          );
           this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
-          console.log(this.listProyectos);
-          
           this.calcularTotalPaginas();
           this.paginarProyectos();
         },

@@ -43,6 +43,7 @@ export class VerAnteproyectoComponent {
   //VISTA PROYECTO
   tittle1 = "1. INFORMACIÓN GENERAL DE LA PROPUESTA DE PROYECTO DE GRADO";
   rolEstablecido = "";
+  rolTempoarl = "";
   tittle2 = "2. INFORMACIÓN ESPECIFICA DE LA PROPUESTA DE PROYECTO DE GRADO";
   tittle3 = "3. PLANTEAMIENTO/FORMULACION DEL PROBLEMA Y JUSTIFICACIÓN";
   tittle5 = "5. OBJETIVO GENERAL Y ESPEFICICOS";
@@ -63,6 +64,9 @@ export class VerAnteproyectoComponent {
     this.getNombreUsuario();
     console.log(this.nombreUsuario + " " + this.rolU);
     this.testMetod();
+    const role = this.loginService.getRoleLocalStorage()
+    this.rolEstablecido = role;
+    console.log("este es el rol:"+ this.rolEstablecido)
   }
 
   openModalDocente() {
@@ -210,8 +214,16 @@ export class VerAnteproyectoComponent {
     if(textoComentario == null || textoComentario == ""){
       this.toastr.error('No se puede agregar un comentario vacio', 'Error');
     }else{
+      if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+          this.rolTempoarl = '[DOCENTE ASESOR]: '
+      }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+        this.rolTempoarl = '[DOCENTE ASESOR]: '
+    }else if(this.rolEstablecido.includes('DOCENTE_ASESOR')){
+      this.rolTempoarl = '[DOCENTE ASESOR]: '
+  }
+      
       const comentario: Comentario = {
-        descripcion: '[COMITE]: ' + textoComentario,
+        descripcion: this.rolTempoarl + textoComentario,
         fechaComentario: new Date(),
         idPersona: parseInt(this.nombreUsuario)
       };
