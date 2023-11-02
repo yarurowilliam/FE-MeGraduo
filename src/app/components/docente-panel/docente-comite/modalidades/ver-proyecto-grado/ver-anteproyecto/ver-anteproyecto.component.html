@@ -200,119 +200,7 @@
                         <strong>LOS JURADOS SE ASIGNAN EN LA FASE 2.</strong>
                       </div>                
                   </div>
-              </div>
-              
-              <!--
- <div class="row mt-4">
-                <div class="col-lg-12 ">
-        
-                    <h1 class="h1-text">{{tittle2}}</h1>
-        
-                    
-                        <div class="container pt-3 ps-md-5 pe-md-5">
-                          <div class="row">
-                            <div class="col-md-9 d-flex m-1">
-                              <label for="inv_line"  class="form-control p-1 flex-grow-0 lblSpecific">Linea de Investigación:</label>
-                              <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="inv_line"
-                                placeholder="Ingrese linea de investigación"
-                                [(ngModel)]="proyecto.lineaInvestigacion" readonly>
-                            </div>
-                          </div>
-        
-                          <div class="row">
-                            <div class="col-md-9 d-flex m-1">
-                              <label for="sub_inv_line" class="form-control  p-1 flex-grow-0 lblSpecific">Sub-Linea de Investigación:</label>
-                              <input type="text" maxlength="90"  class="form-control flex-grow-1 border-secondary" id="sub_inv_line" 
-                              [(ngModel)]="proyecto.subLineaInvestigacion" readonly>
-                            </div>
-                          </div>
-        
-                          <div class="row">
-                            <div class="col-md-9 d-flex m-1">
-                              <label for="tematicArea" maxlength="90"  class="form-control p-1 flex-grow-0 lblSpecific">Área Temática:</label>
-                              <input type="text" maxlength="90" class="form-control flex-grow-1 border-secondary" id="tematicArea" 
-                              [(ngModel)]="proyecto.areaTematica" readonly>
-                            </div>
-                          </div>
-        
-                          <div class="row">
-                            <div class="col-md-9 d-flex m-1">
-                              <label for="inv_group"  class="form-control p-1 flex-grow-0 lblSpecific">Grupo de Investigación:</label>
-                              <input type="text"  class="form-control flex-grow-1 border-secondary" id="inv_group" 
-                              [(ngModel)]="proyecto.grupoInvestigacion" readonly>
-                             </div>
-                          </div>
-                        </div>
-                </div>  
-               </div>
-
-                 <div class="row m4-4">
-        <div class="col-lg-12 ">
-           <h1 class="h1-text">{{tittle3}}</h1>
-           <div class="container pt-3 ps-md-5 pe-md-5">
-            <div class="row">
-              <div class="col-md-9 d-flex m-1">
-                <label for="planteamiento"  class="form-control p-1 flex-grow-0 lblSpecific">Planteamiento y formulacion del problema:</label>
-                <textarea class="form-control me-2 textareaGroup"
-                id="planteamiento" [(ngModel)]="proyecto.planteamientoProblema" readonly
-                ></textarea>
-              </div>
-  
-              <div class="row">
-                <div class="col-md-9 d-flex m-1">
-                  <label for="justificacion"  class="form-control p-1 flex-grow-0 lblSpecific">Justificacion:</label>
-                  <textarea class="form-control me-2 textareaGroup"
-                  id="justificacion" [(ngModel)]="proyecto.justificacion" readonly
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-           </div>
-        </div>
-      </div>
-
-      <div class="row m4-4">
-        <div class="col-lg-12 ">
-           <h1 class="h1-text">{{tittle5}}</h1>
-            <div class="container pt-3 ps-md-5 pe-md-5">
-              <div class="row">
-                <div class="col-md-9 d-flex m-1">
-                  <label for="objetivoGeneral "  class="form-control p-1 flex-grow-0 lblSpecific">Objetivo General:</label>
-                  <textarea class="form-control me-2 textareaGroup" 
-                  id="objetivoGeneral"  [(ngModel)]="proyecto.objetivoGeneral" readonly
-                  ></textarea>
-                </div>
-              </div>
-              
-              <div class="row">
-                <div class="col-md-9 d-flex m-1">
-                  <label for="objetivoEspecifico"  class="form-control p-1 flex-grow-0 lblSpecific">Objetivos Especificos:</label>
-                  <textarea class="form-control me-2 textareaGroup"
-                  id="objetivoEspecifico" [(ngModel)]="proyecto.objetivosEspecificos" readonly
-                 ></textarea>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-  
-      <div class="row m4-4">
-        <div class="col-lg-12 ">
-           <h1 class="h1-text">7. BIBLIOGRAFIA</h1>
-            <div class="container pt-3 ps-md-5 pe-md-5">
-              <div class="row">
-                <div class="col-md-9 d-flex m-1">
-                  <label for="bibliografia"  class="form-control p-1 flex-grow-0 lblSpecific">Bibliografias:</label>
-                  <textarea class="form-control me-2 textareaGroup" id="bibliografia"
-                  [(ngModel)]="proyecto.bibliografia" readonly
-                   ></textarea>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-              -->
-             
+              </div>            
       </div>
   
     
@@ -414,7 +302,7 @@
                       <option value="RECHAZADO">RECHAZADO</option>
                       <option value="CORRECCIONES">CORRECCIONES</option>
                   </select>
-                  <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Gesionar</button>
+                  <button style="color: white; background-color: #70B620;" class="button" (click)="addComentario(descripcion, proyecto.id)">Gestionar</button>
               </div>
               </div>
             </div>

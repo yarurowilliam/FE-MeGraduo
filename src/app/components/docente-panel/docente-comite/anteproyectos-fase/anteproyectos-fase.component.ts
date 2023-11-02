@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { FiltroDocentePipe } from 'src/app/pipes/filtro-docente.pipe';
 
 @Component({
   selector: 'app-anteproyectos-fase',
@@ -9,6 +10,9 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
 export class AnteproyectosFaseComponent {
   listProyectos: any[] = [];
   selectedProyect: any;
+  searchText: string = '';
+  orderBy: string = 'asc';
+  sortKey: string = '';
   tittle1 = "PROYECTOS EN ESTADO DE 'ANTEPROYECTOS'";
   tableComponent: { nombre: string }[] = [
     { nombre: "Título del proyecto" },
@@ -35,8 +39,11 @@ export class AnteproyectosFaseComponent {
      this.proyectoServide.getAllProyectos().subscribe(
       (data: any) => {
         // Filtrar los proyectos con estado "finalizado y en curso"
-        this.listProyectos = data.filter((proyecto: any) => proyecto.estadoProyecto != " ");
+        this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase != " ");
+        //this.listProyectos = data.filter((proyecto: any) => proyecto.tipoFase === "ANTEPROYECTO");
         this.totalItems = this.listProyectos.length; // Actualizar el total de elementos
+        console.log("Listado de proyectos: ", this.listProyectos);
+        
         this.calcularTotalPaginas();
         this.paginarProyectos();
       },
@@ -76,5 +83,31 @@ export class AnteproyectosFaseComponent {
   canShowNext(): boolean {
     // El botón "Next" se habilita si hay más elementos por mostrar en la siguiente página
     return (this.p * this.itemsPerPage) < this.totalItems;
+  }
+
+  sortBy(key: string): void {
+    if (this.sortKey === key) {
+      this.orderBy = this.orderBy === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortKey = key;
+      this.orderBy = 'asc';
+    }
+    this.listProyectos = this.sortTable(
+      this.listProyectos,
+      this.sortKey,
+      this.orderBy
+    );
+  }
+
+  sortTable(data: any[], key: string, order: string): any[] {
+    return data.sort((a, b) => {
+      const valueA = a[key];
+      const valueB = b[key];
+      if (order === 'asc') {
+        return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+      } else {
+        return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+      }
+    });
   }
 }

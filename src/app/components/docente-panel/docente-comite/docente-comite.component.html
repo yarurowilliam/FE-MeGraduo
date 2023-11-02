@@ -7,7 +7,18 @@
                     <!--TABLE-->
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <div class="table-responsive mb-3">
+                            <div class="container mt-2" class="input-group" *ngIf="listProyectos.length != 0" >
+                                <div class="input-group" >
+                                    <div class="input-group-prepend">
+                                        <button type="button" disabled class="btn btn-outline-secondary search-button">
+                                            <i class="fas fa-search search-icon"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" [(ngModel)]="searchText" class="form-control search-input" placeholder="Buscar por Id director o Id integrantes...">
+                                </div>
+                            </div>
+
+                            <div class="table-responsive mb-3 mt-2">
                                 <ng-container *ngIf="listProyectos.length > 0; else noProjects">
                                     <table class="table">
                                         <thead>
@@ -16,30 +27,39 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let list of pagedProyectos">
-                                                <td>{{ list.titulo }}</td>
-                                                <td>{{ list.areaTematica }}</td>
-                                                <td>{{ list.idIntegrante1 }}, {{ list.idIntegrante2 }}, {{ list.idIntegrante3 }}</td>
-                                                <td>{{ list.idDirector }}</td>
-                                                <td>{{ list.fechaCreacion | date:'dd/MM/yyyy' }}</td>
-                                                <td>
-                                                    <a [routerLink]="['/docente-panel/ver-proyecto', list.id]">
-                                                      <i class="fa fa-eye"></i>
-                                                    </a>
-                                                  </td>
+                                            <tr *ngFor="let list of pagedProyectos | filtroDocente:searchText;">
+                                                <ng-container *ngIf="!list.noResults; else noProjects">
+                                                    <td>{{ list.titulo }}</td>
+                                                    <td>{{ list.areaTematica }}</td>
+                                                    <td>{{ list.idIntegrante1 }}, {{ list.idIntegrante2 }}, {{ list.idIntegrante3 }}</td>
+                                                    <td>{{ list.idDirector }}</td>
+                                                    <td>{{ list.fechaCreacion | date:'dd/MM/yyyy' }}</td>
+                                                    <td>
+                                                        <a [routerLink]="['/docente-panel/ver-proyecto', list.id]">
+                                                          <i class="fa fa-eye"></i>
+                                                        </a>
+                                                      </td>
+                                                </ng-container>
+                                               
                                             </tr>
                                         </tbody>
                                     </table>
                                 </ng-container>
                                 <ng-template #noProjects>
-                                    <p>No hay proyectos para mostrar</p>
+                                    <div class="alert alert-info">
+                                        No hay proyectos para mostrar
+                                    </div>
+                                    
                                 </ng-template>
                             </div>
                         </div>
                         <!-- Botones de paginación -->
+                        <div *ngIf="listProyectos.length != 0">
+                            <!-- Botones de paginación -->
                         <p>Página {{ p }} de {{ totalPages }}</p>
                         <button class="btn btn-success me-3" (click)="pageChanged(p - 1)" [disabled]="!canShowPrevious()">Previous</button>
                         <button class="btn btn-success" (click)="pageChanged(p + 1)" [disabled]="!canShowNext()">Next</button>
+                        </div>
                     </div>
                 </div>
             </div>

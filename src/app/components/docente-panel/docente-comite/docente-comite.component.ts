@@ -7,6 +7,9 @@ import { ProyectoService } from 'src/app/services/proyecto.service';
   styleUrls: ['./docente-comite.component.css']
 })
 export class DocenteComiteComponent implements OnInit{
+  searchText: string = '';
+  orderBy: string = 'asc';
+  sortKey: string = '';
   listProyectos: any[] = [];
   selectedProyect: any;
   tittle1 = "INFORMACIÓN GENERAL DE PROYECTOS";

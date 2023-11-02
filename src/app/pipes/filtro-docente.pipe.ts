@@ -6,16 +6,26 @@ import { Docente } from '../models/docenteFullInfo';
   })
   export class FiltroDocentePipe implements PipeTransform {
   
-      transform(docentes: Docente[], searchText: string) {
-          if (searchText == null) return docentes;
-          return docentes.filter(docente =>
-                 docente.identificacion.toString().indexOf(searchText.toLowerCase()) !== -1
-                  ||
-                  docente.primerNombre.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
-                  ||
-                  docente.primerApellido.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
-);
-      }
-  
+      transform(items: any[], searchText: string): any[] {
+        if (!items || !searchText) {
+            return items;
+          }  
+          
+          searchText = searchText.toString();
+
+      
+
+        const filteredItems = items.filter(item => {
+            return (
+              (item.idDirector?.toString()?.includes(searchText)) ||
+              (item.idIntegrante1?.toString()?.includes(searchText)) ||
+              (item.idIntegrante2?.toString()?.includes(searchText)) ||
+              (item.idIntegrante3?.toString()?.includes(searchText))
+            );
+          });
+    
+    // Si no hay resultados, devuelve un array con un objeto que indica "No hay resultados"
+      return filteredItems.length > 0 ? filteredItems : [{ noResults: true }];
+        }
   }
-  
+
