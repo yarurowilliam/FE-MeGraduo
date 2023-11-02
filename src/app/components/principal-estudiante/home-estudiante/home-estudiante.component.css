@@ -809,6 +809,33 @@ body {
  border-radius: 3px;
 }
 
+.modal {
+  z-index: 1050; 
+}
+
+
+.estado-proyecto-container {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2; /* Fondo gris claro */
+  border-left: 5px solid #0c7d45; /* Borde izquierdo azul */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.estado-proyecto-label {
+  font-weight: bold;
+  color: #333; /* Color de texto oscuro */
+  margin-right: 5px;
+}
+
+.estado-proyecto {
+  color: #0c7d45; /* Color azul para resaltar el estado */
+  font-weight: 500;
+}
+
+
 /** =====================
 * Responsive
 ========================*/
