@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { ProyectoGrado } from 'src/app/models/proyectoGrado';
 import { ProyectoService } from 'src/app/services/proyecto.service';
+import { VerDocentesModalComponent } from 'src/app/components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/ver-docentes-modal.component';
+import { Docente } from 'src/app/models/docenteFullInfo';
 
 @Component({
   selector: 'app-proyecto-grado',
@@ -37,6 +39,21 @@ export class ProyectoGradoComponent implements OnInit {
   estadoIntegrante3 = "";
   estudiantePrinciapal: Estudiante;
   loading = false;
+  txtDirector = "";
+  txtAsesor = "";
+  estadoDirector = "";
+
+  lineasInvestigacion = [
+    { nombre: "TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN", sublineas: ["SISTEMAS DE INFORMACIÓN", "INGENIERÍA DE SOFTWARE", "SEGURIDAD DE INFORMACIÓN", "INFORMÁTICA EDUCATIVA", "TELECOMUNICACIONES Y TELEINFORMATICA"] },
+    { nombre: "TRANSFORMACION DIGITAL", sublineas: ["BIG DATA Y ANALITYCS", "SISTEMAS INTELIGENTES", "ROBOTICA Y AUTOMATIZACIÓN", "TECNOLOGIAS EMERGENTES"] }
+  ];
+
+  sublineasSeleccionadas = [];
+
+  onLineaChange(lineaSeleccionada: string) {
+    const linea = this.lineasInvestigacion.find(l => l.nombre === lineaSeleccionada);
+    this.sublineasSeleccionadas = linea ? linea.sublineas : [];
+  }
 
   constructor(private loginService: LoginService, 
     private formBuilder: FormBuilder,
@@ -61,6 +78,8 @@ export class ProyectoGradoComponent implements OnInit {
       txtEstudiante1: [this.identificacion, [Validators.required]],
       txtEstudiante2: [this.identificacion2],
       txtEstudiante3: [this.identificacion3],
+      txtDirector : [this.txtDirector],
+      txtAsesor : [this.txtAsesor],
       inv_line: ['', [Validators.required]],
       sub_inv_line:['', [Validators.required]],
       tematicArea:['', [Validators.required]],
@@ -96,6 +115,10 @@ specificInfoSave() {
     idIntegrante3 : parseInt(this.specificInfo.value.txtEstudiante3) ?? null,
     emailIntegrante3 : this.emailIntegrante3  ?? null,
     estadoIntegrante3 : this.estadoIntegrante3 ?? null,
+    idDirector: parseInt(this.txtDirector) ?? null,
+    estadoDirector : this.estadoDirector ?? null,
+    emailDirector : this.emailDirector ?? null,
+    idAsesor : parseInt(this.txtAsesor) ?? null,
     fechaCreacion : new Date(),
     lineaInvestigacion : this.specificInfo.value.inv_line,
     subLineaInvestigacion : this.specificInfo.value.sub_inv_line,
@@ -106,9 +129,6 @@ specificInfoSave() {
     objetivoGeneral : this.specificInfo.value.objetivoGeneral,
     objetivosEspecificos : this.specificInfo.value.objetivoEspecifico,
     bibliografia : this.specificInfo.value.bibliografia,
-    idDirector : null,
-    emailDirector : null,
-    estadoDirector : null,
     tipoFase : "PROPUESTA",
     estadoProyecto : "PROPUESTA PENDIENTE"
 };
@@ -173,6 +193,42 @@ actualizarEstudiante2(estudiante: Estudiante) {
     this.toastr.success('El estudiante se ha agregado correctamente', 'Éxito');   
     this.specificInfo.controls['txtEstudiante3'].setValue(estudiante.identificacion.toString());
     console.log(this.identificacion2);
+  }
+}
+
+
+openModalDocente() {
+  console.log("click click")
+  this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizarDirector(docente));
+}
+
+actualizarDirector(docente: Docente) {
+  if(this.txtAsesor === docente.identificacion.toString()){
+    this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
+  }else{
+    this.toastr.success('El director se ha agregado correctamente', 'Éxito');
+    this.txtDirector = docente.identificacion.toString();
+    this.emailDirector = docente.email.toString();
+    this.estadoDirector = "PENDIENTE DE ACEPTACION";
+    this.specificInfo.controls['txtDirector'].setValue(docente.identificacion.toString());
+    console.log(this.txtDirector);
+  }
+}
+
+
+openModalDocente2() {
+  console.log("click click")
+  this.modalService.open(VerDocentesModalComponent, { size: 'lg' }).result.then((docente) => this.actualizar2(docente));
+}
+
+actualizar2(docente: Docente) {
+  if(this.txtDirector === docente.identificacion.toString()){
+    this.toastr.error('El docente ya se encuentra registrado en la propuesta', 'Error');
+  }else{
+    this.toastr.success('El asesor se ha agregado correctamente', 'Éxito');
+    this.txtAsesor = docente.identificacion.toString();
+    this.specificInfo.controls['txtAsesor'].setValue(docente.identificacion.toString());
+    console.log(this.txtAsesor);
   }
 }
   

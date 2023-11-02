@@ -47,6 +47,7 @@ import { VerAnteproyectoComponent } from './components/docente-panel/docente-com
 import { DocenteAsesorComponent } from './components/docente-panel/docente-asesor/docente-asesor.component';
 
 
+
 const routes: Routes = [
   
   {path: '', redirectTo: 'home', pathMatch: 'full'},

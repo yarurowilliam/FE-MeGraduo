@@ -11,6 +11,8 @@ import { FileProyectosGrado } from 'src/app/models/FileProyectosGrado';
 import { saveAs } from 'file-saver';
 import { Comentario } from 'src/app/models/comentario';
 import { Persona } from 'src/app/models/persona';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmUploadDialogComponent } from '../../dialogs/confirm-upload-dialog/confirm-upload-dialog.component';
 
 @Component({
   selector: 'app-home-estudiante',
@@ -42,14 +44,31 @@ export class HomeEstudianteComponent implements OnInit{
   tittle7 = "7. BIBLIOGRAFÍA";
   page = 1;
   pageSize = 6;
+  isReadonly: boolean = false; // o false, dependiendo de la lógica que necesites
+  estadoPro = "";
+
+
   constructor(private router: Router,
     private loginService: LoginService,
     private aRoute: ActivatedRoute, 
     private toastr: ToastrService,
     private proyectoService : ProyectoService,
-    private docenteService : DocentesService
+    private docenteService : DocentesService,
+    private dialog: MatDialog
     ) {}
 
+    lineasInvestigacion = [
+      { nombre: "TECNOLOGÍAS DE LA INFORMACIÓN Y LA COMUNICACIÓN", sublineas: ["SISTEMAS DE INFORMACIÓN", "INGENIERÍA DE SOFTWARE", "SEGURIDAD DE INFORMACIÓN", "INFORMÁTICA EDUCATIVA", "TELECOMUNICACIONES Y TELEINFORMATICA"] },
+      { nombre: "TRANSFORMACION DIGITAL", sublineas: ["BIG DATA Y ANALITYCS", "SISTEMAS INTELIGENTES", "ROBOTICA Y AUTOMATIZACIÓN", "TECNOLOGIAS EMERGENTES"] }
+    ];
+  
+    sublineasSeleccionadas = [];
+  
+    onLineaChange(lineaSeleccionada: string) {
+      const linea = this.lineasInvestigacion.find(l => l.nombre === lineaSeleccionada);
+      this.sublineasSeleccionadas = linea ? linea.sublineas : [];
+    }
+    
   ngOnInit(): void {
     this.getNombreUsuario();
     console.log(this.nombreUsuario + " " + this.rolU);
@@ -59,6 +78,7 @@ export class HomeEstudianteComponent implements OnInit{
     this.nombreUsuario = this.loginService.getTokenDecoded().sub;
     this.rolU = this.loginService.getTokenDecoded().sid;
     this.getInfoEstudiante();
+
   }
 
   selectedFile: File = null;
@@ -110,25 +130,61 @@ export class HomeEstudianteComponent implements OnInit{
     });
   }
 
-  uploadFile(idPropuesta: number) {
-    if (this.selectedFile) {
-      this.proyectoService.uploadPdfFile(idPropuesta, this.selectedFile)
-        .subscribe(
+  cambiarEstadoProyecto() {
+    // Verifica si el estado es ANTEPROYECTO y si no hay fecha seleccionada
+
+    if(this.estadoPro.trim() === ''){
+      this.toastr.error('Para continuar debe seleccionar un estado', 'Error')
+    }else{
+      this.proyecto.estadoProyecto = 'PROPUESTA EN COMITE';
+      this.proyecto.tipoFase = 'PROPUESTA';
+        this.proyectoService.cambiarEstadoPropuesta(this.proyecto.id, this.proyecto).subscribe(
           response => {
-            console.log("AQUIIIIIIIIIIIIIIIIIII " + response.message); // Aquí puedes manejar la respuesta del servidor
-            this.toastr.success(response.message, 'Info');
-            this.selectedFile = null;
-            this.loadArchivos(idPropuesta);
-            this.selectedFile = null;
+            this.toastr.success(response.message, 'Éxito');
+            this.loading = false;
+            location.reload();
           },
           error => {
-            console.error('Error al subir el archivo:', error);
+            this.toastr.error('Ha ocurrido un error al guardar la información.', 'Error');
+            this.loading = false;
           }
         );
-    } else {
-      this.toastr.info('No ha seleccionado ningún archivo', 'Info');
+        }
+      // Resto del código para guardar la información...
     }
+
+  uploadFile(idPropuesta: number) {
+    const dialogRef = this.dialog.open(ConfirmUploadDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.selectedFile) {
+          this.proyectoService.uploadPdfFile(idPropuesta, this.selectedFile)
+            .subscribe(
+              response => {
+                console.log("AQUIIIIIIIIIIIIIIIIIII " + response.message); // Aquí puedes manejar la respuesta del servidor
+                this.toastr.success(response.message, 'Info');
+                this.selectedFile = null;
+                if(this.archivos.length === 0){
+                  location.reload();
+                }else{  
+                  this.loadArchivos(idPropuesta);
+                  this.selectedFile = null;
+                }
+              },
+              error => {
+                console.error('Error al subir el archivo:', error);
+              }
+            );
+        } else {
+          this.toastr.info('No ha seleccionado ningún archivo', 'Info');
+        }
+      } else {
+        // Aquí el código en caso de que el usuario cancele la acción
+      }
+    });
   }
+
 
   getInfoEstudiante(): void {
     this.loginService.getEstudianteDeatils(parseInt(this.nombreUsuario)).subscribe(
@@ -267,6 +323,11 @@ export class HomeEstudianteComponent implements OnInit{
         }
         if(this.proyecto.idJurado2 != null){
           this.getInfoDocenteJurado2(this.proyecto.idJurado2);
+        }
+        if(this.proyecto.estadoProyecto === "PROPUESTA CON CORRECCIONES"){
+          this.isReadonly = false;
+        }else{
+          this.isReadonly = true;
         }
         this.loadArchivos(this.proyecto.id);
         console.log('Proyecto:', this.proyecto);

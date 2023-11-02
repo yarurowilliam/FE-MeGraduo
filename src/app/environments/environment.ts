@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  endpoint: 'https://be-megraduo20230831015942.azurewebsites.net'
-  //endpoint: 'https://localhost:44379'
-  
+  //endpoint: 'https://be-megraduo20230831015942.azurewebsites.net'
+  endpoint: 'https://localhost:44379'
+  //endpoint: 'https://be-megraduo20230831015942.azurewebsites.net',
 };
 
 /*

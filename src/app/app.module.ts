@@ -63,7 +63,9 @@ import { VerDocentesModalComponent } from './components/docente-panel/docente-co
 import { DocentesValidadosComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-docentes-modal/docentes-validados/docentes-validados.component';
 import { AnteproyectosFaseComponent } from './components/docente-panel/docente-comite/anteproyectos-fase/anteproyectos-fase.component';
 import { VerAnteproyectoComponent } from './components/docente-panel/docente-comite/modalidades/ver-proyecto-grado/ver-anteproyecto/ver-anteproyecto.component';
-
+import { ConfirmUploadDialogComponent } from './components/dialogs/confirm-upload-dialog/confirm-upload-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes = [
   {
@@ -134,7 +136,7 @@ const routes = [
     DocentesValidadosComponent,
     AnteproyectosFaseComponent,
     VerAnteproyectoComponent,
-    
+    ConfirmUploadDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -152,6 +154,8 @@ const routes = [
     ConfigurationModule,
     ConfigurationEstudianteModule,
     NgbModule,
+    MatIconModule,
+    MatDialogModule
     
   ],
   providers: [],
